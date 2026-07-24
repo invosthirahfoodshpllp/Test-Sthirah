@@ -24,11 +24,11 @@
 
         /* Header Navbar */
         .navbar { position: relative; width: 100%; z-index: 10; padding: 15px 40px; background-color: var(--bg-sage); border-bottom: 1px solid var(--border-light); }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         .logo-img { height: 50px; object-fit: contain; transition: transform 0.3s ease; }
         .logo-img:hover { transform: scale(1.05); }
 
-        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
         .nav-links a { 
             text-decoration: none; 
             color: var(--text-dark); 
@@ -378,6 +378,9 @@
         }
 
         @media (max-width: 850px) {
+            .navbar { padding: 12px 20px; }
+            .nav-container { flex-direction: column; align-items: center; gap: 10px; }
+            .nav-links { justify-content: center; gap: 15px; }
             .product-container { flex-direction: column; }
             .unified-container { flex-direction: column; }
             .footer-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1320,7 +1323,7 @@
                     </ul>
                 </div>
 
-                <!-- Right Column: Logo 2 on top of Brand Name matching image_91888c.png layout (Brand name on top removed) -->
+                <!-- Right Column: Logo 2 on top of Brand Name matching image layout (Brand name on top of Our Product removed) -->
                 <div class="footer-col footer-brand-touch-col">
                     <img src="Logo 2.png" alt="Sthirah Logo" class="footer-brand-logo">
                     <div style="font-size:13px; font-weight:800; color:var(--text-dark); margin-bottom:20px;">INVO STHIRAH FOODS HP LLP</div>
