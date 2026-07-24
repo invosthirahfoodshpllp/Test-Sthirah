@@ -6,7 +6,6 @@
     <title>Sthirah - Quality Ingredients</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         :root {
             --bg-sage: #D2E3B8;
@@ -101,7 +100,7 @@
             display: block;
         }
 
-        /* Unified Content Section (Left: What's not in it, Right: It is still sugar) */
+        /* Unified Content Section */
         .unified-content-section {
             background-color: var(--bg-sage);
             padding: 70px 20px;
@@ -135,9 +134,7 @@
             margin-bottom: 25px;
             color: var(--green-accent);
         }
-        .proof-list {
-            list-style: none;
-        }
+        .proof-list { list-style: none; }
         .proof-list li {
             padding: 14px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -623,109 +620,26 @@
 
     <!-- ================= 3. MY ACCOUNT SUBPAGES ================= -->
     <main id="account-view" class="page-view">
-        <div style="max-width:550px; margin:40px auto; background:white; padding:30px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+        <div style="max-width: 440px; margin: 60px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); text-align: center;">
             <div id="login-box">
-                <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">
-                    <button type="button" id="auth-tab-signin" class="btn-action" style="padding: 8px; font-size: 13px; background: var(--green-accent);" onclick="switchAuthTab('signin')">Sign In</button>
-                    <button type="button" id="auth-tab-signup" class="btn-action" style="padding: 8px; font-size: 13px; background: #64748B;" onclick="switchAuthTab('signup')">Sign Up</button>
+                <div style="margin-bottom: 25px;">
+                    <img src="Logo 2.png" alt="Sthirah Logo" style="height: 45px; object-fit: contain; margin-bottom: 15px;">
+                    <h2 style="font-size: 24px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Welcome to Sthirah</h2>
+                    <p style="font-size: 13.5px; color: var(--text-muted);">Sign in or create an account securely using your Google profile to manage orders and deliveries.</p>
                 </div>
 
-                <!-- SIGN IN FORM -->
-                <div id="signin-container">
-                    <h2>Customer Sign In</h2>
-                    <br>
-                    <!-- Google Sign-In Button Container -->
-                    <div id="g_id_onload"
-                         data-client_id="644023914250-ehkmhflbso8i4o5bit1o21g0elmckrei.apps.googleusercontent.com"
-                         data-callback="handleGoogleResponse"
-                         data-auto_prompt="false">
-                    </div>
-                    <div class="g_id_signin"
-                         data-type="standard"
-                         data-size="large"
-                         data-theme="outline"
-                         data-text="sign_in_with"
-                         data-shape="rectangular"
-                         data-logo_alignment="left"
-                         style="width: 100%; margin-bottom: 20px; display: flex; justify-content: center;">
-                    </div>
-
-                    <div style="text-align: center; margin: 15px 0; color: #666; font-size: 13px; position: relative;">
-                        <span style="background: white; padding: 0 10px; position: relative; z-index: 1;">OR</span>
-                        <hr style="position: absolute; top: 50%; left: 0; width: 100%; border: 0; border-top: 1px solid #ddd; z-index: 0;">
-                    </div>
-
-                    <form onsubmit="event.preventDefault(); handleCustLogin();">
-                        <div class="form-group">
-                            <label>Email ID</label>
-                            <input type="email" id="cust-login-id" placeholder="Enter Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" id="cust-login-pass" placeholder="Password" required>
-                        </div>
-                        <button type="submit" class="btn-action">SIGN IN</button>
-                    </form>
+                <!-- GOOGLE AUTHENTICATION REDESIGNED CARD -->
+                <div style="margin: 30px 0;">
+                    <button type="button" onclick="handleGoogleSignIn()" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; background: #ffffff; color: #3c4043; border: 1px solid #dadce0; padding: 12px 20px; font-size: 15px; font-weight: 600; border-radius: 8px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: all 0.2s ease;">
+                        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.21 21.32 7.32 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.19C.43 8.13 0 9.84 0 12s.43 3.87 1.19 5.39l4.08-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.32 0 3.21 2.68 1.19 6.61l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
+                        Continue with Google
+                    </button>
                 </div>
 
-                <!-- SIGN UP FORM -->
-                <div id="signup-container" style="display:none;">
-                    <h2>Customer Sign Up</h2>
-                    <br>
-                    <form onsubmit="event.preventDefault(); handleCustSignUp();">
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div class="form-group"><label>First Name *</label><input type="text" id="reg-fname" required></div>
-                            <div class="form-group"><label>Last Name *</label><input type="text" id="reg-lname" required></div>
-                        </div>
-                        <div class="form-group"><label>User Name *</label><input type="text" id="reg-username" required></div>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div class="form-group"><label>Mobile Number *</label><input type="tel" id="reg-mobile" pattern="[0-9]{10}" placeholder="10 digits" required></div>
-                            <div class="form-group"><label>Alternative Mobile Number *</label><input type="tel" id="reg-alt-mobile" pattern="[0-9]{10}" required></div>
-                        </div>
-                        <div class="form-group"><label>Email ID *</label><input type="email" id="reg-email" required></div>
-                        <div class="form-group"><label>Password *</label><input type="password" id="reg-pass" required></div>
-                        
-                        <h4 style="margin:15px 0 8px 0; font-size:14px; color:var(--green-accent);">Default Address Details</h4>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div class="form-group"><label>Door No *</label><input type="text" id="reg-door" required></div>
-                            <div class="form-group"><label>Street *</label><input type="text" id="reg-street" required></div>
-                        </div>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div class="form-group"><label>Landmark *</label><input type="text" id="reg-landmark" required></div>
-                            <div class="form-group"><label>Area *</label><input type="text" id="reg-area" required></div>
-                        </div>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div class="form-group"><label>Pincode *</label><input type="text" id="reg-pincode" maxlength="6" required></div>
-                            <div class="form-group">
-                                <label>State *</label>
-                                <select id="reg-state" required>
-                                    <option value="">Select State</option>
-                                    <option value="Tamil Nadu">Tamil Nadu</option>
-                                    <option value="Karnataka">Karnataka</option>
-                                    <option value="Kerala">Kerala</option>
-                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                    <option value="Telangana">Telangana</option>
-                                    <option value="Maharashtra">Maharashtra</option>
-                                    <option value="Gujarat">Gujarat</option>
-                                    <option value="Delhi">Delhi</option>
-                                    <option value="West Bengal">West Bengal</option>
-                                    <option value="Rajasthan">Rajasthan</option>
-                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                    <option value="Punjab">Punjab</option>
-                                    <option value="Haryana">Haryana</option>
-                                    <option value="Bihar">Bihar</option>
-                                    <option value="Odisha">Odisha</option>
-                                    <option value="Assam">Assam</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-action" style="background:#1E293B; margin-top:10px;">REGISTER & CREATE ACCOUNT</button>
-                    </form>
-                </div>
+                <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">By continuing, you agree to Sthirah's <a href="javascript:void(0)" onclick="navigateTo('terms-view')" style="color: var(--green-accent); text-decoration: underline;">Terms & Conditions</a> and <a href="javascript:void(0)" onclick="navigateTo('privacy-policy-view')" style="color: var(--green-accent); text-decoration: underline;">Privacy Policy</a>.</p>
             </div>
             
-            <div id="user-profile" style="display:none;">
+            <div id="user-profile" style="display:none; text-align: left;">
                 <h2>My Account Dashboard</h2>
                 <p style="margin:10px 0;">Welcome back, <strong id="cust-name-val">Customer</strong>!</p>
                 <hr style="margin:15px 0; border:0; border-top:1px solid #eee;">
@@ -1323,7 +1237,7 @@
                     </ul>
                 </div>
 
-                <!-- Right Column: Logo 2 on top of Brand Name matching image layout (Brand name on top of Our Product removed) -->
+                <!-- Right Column: Logo 2 on top of Brand Name matching image layout -->
                 <div class="footer-col footer-brand-touch-col">
                     <img src="Logo 2.png" alt="Sthirah Logo" class="footer-brand-logo">
                     <div style="font-size:13px; font-weight:800; color:var(--text-dark); margin-bottom:20px;">INVO STHIRAH FOODS HP LLP</div>
@@ -1343,6 +1257,33 @@
             </div>
         </div>
     </footer>
+
+    <!-- Firebase SDK Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCN31S0xAkNvxmFncDHEIIE06fjusAyDtY",
+            authDomain: "sthirah-in.firebaseapp.com",
+            projectId: "sthirah-in",
+            storageBucket: "sthirah-in.firebasestorage.app",
+            messagingSenderId: "584005769449",
+            appId: "1:584005769449:web:faaf0da8dda7db98323878",
+            measurementId: "G-37WE5C9Y7Z"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        window.firebaseAuth = auth;
+        window.googleProvider = googleProvider;
+        window.signInWithPopup = signInWithPopup;
+        window.signOut = signOut;
+    </script>
 
     <!-- JavaScript Application Logic -->
     <script>
@@ -1620,107 +1561,34 @@
         }
         updateCustomerNav();
 
-        function switchAuthTab(mode) {
-            const sIn = document.getElementById('signin-container');
-            const sUp = document.getElementById('signup-container');
-            const btnIn = document.getElementById('auth-tab-signin');
-            const btnUp = document.getElementById('auth-tab-signup');
-            if(mode === 'signin') {
-                sIn.style.display = 'block';
-                sUp.style.display = 'none';
-                btnIn.style.background = 'var(--green-accent)';
-                btnUp.style.background = '#64748B';
-            } else {
-                sIn.style.display = 'none';
-                sUp.style.display = 'block';
-                btnIn.style.background = '#64748B';
-                btnUp.style.background = 'var(--green-accent)';
-            }
-        }
-
-        function handleGoogleResponse(response) {
+        async function handleGoogleSignIn() {
             try {
-                const base64Url = response.credential.split('.')[1];
-                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-                const profile = JSON.parse(jsonPayload);
-                
-                currentUser = JSON.parse(localStorage.getItem('sthirah_user_' + profile.email)) || { id: profile.email, name: profile.name, addresses: [], orders: [] };
-                localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
-                localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
-                updateCustomerNav();
-                alert("Successfully logged in with Google!");
-            } catch(e) {
-                alert("Google login failed. Please try again.");
-            }
-        }
-
-        function handleCustLogin() {
-            const id = document.getElementById('cust-login-id').value.trim();
-            const pass = document.getElementById('cust-login-pass').value.trim();
-            if(id && pass) {
-                const storedUser = JSON.parse(localStorage.getItem('sthirah_user_' + id));
-                if(storedUser && storedUser.pass === pass) {
-                    currentUser = storedUser;
-                } else if(id === "1234" && pass === "1234") {
-                    currentUser = JSON.parse(localStorage.getItem('sthirah_user_1234'));
+                if (window.firebaseAuth && window.signInWithPopup && window.googleProvider) {
+                    const result = await window.signInWithPopup(window.firebaseAuth, window.googleProvider);
+                    const user = result.user;
+                    
+                    currentUser = JSON.parse(localStorage.getItem('sthirah_user_' + user.email));
+                    if (!currentUser) {
+                        currentUser = {
+                            id: user.email,
+                            username: user.displayName || user.email.split('@')[0],
+                            name: user.displayName || "Google User",
+                            mobile: user.phoneNumber || "",
+                            addresses: [],
+                            orders: []
+                        };
+                        localStorage.setItem('sthirah_user_' + user.email, JSON.stringify(currentUser));
+                    }
+                    
+                    localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
+                    updateCustomerNav();
+                    alert("Google Sign-In successful!");
                 } else {
-                    alert("Invalid email or password.");
-                    return;
+                    alert("Firebase Auth or Google Provider not initialized properly.");
                 }
-                localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
-                updateCustomerNav();
-                alert("Logged in successfully!");
+            } catch (err) {
+                alert("Google Sign-In error: " + err.message);
             }
-        }
-
-        function handleCustSignUp() {
-            const fname = document.getElementById('reg-fname').value.trim();
-            const lname = document.getElementById('reg-lname').value.trim();
-            const username = document.getElementById('reg-username').value.trim();
-            const mobile = document.getElementById('reg-mobile').value.trim();
-            const altMobile = document.getElementById('reg-alt-mobile').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const pass = document.getElementById('reg-pass').value.trim();
-            
-            const door = document.getElementById('reg-door').value.trim();
-            const street = document.getElementById('reg-street').value.trim();
-            const landmark = document.getElementById('reg-landmark').value.trim();
-            const area = document.getElementById('reg-area').value.trim();
-            const pincode = document.getElementById('reg-pincode').value.trim();
-            const state = document.getElementById('reg-state').value;
-
-            if(!fname || !lname || !username || !mobile || !altMobile || !email || !pass || !door || !street || !landmark || !area || !pincode || !state) {
-                alert("Please fill in all mandatory fields.");
-                return;
-            }
-
-            const fullName = fname + " " + lname;
-            const newAddress = {
-                name: fullName,
-                mobile: mobile,
-                altMobile: altMobile,
-                door: door,
-                street: street,
-                landmark: landmark,
-                area: area,
-                pincode: pincode,
-                state: state
-            };
-
-            currentUser = {
-                id: email,
-                username: username,
-                name: fullName,
-                pass: pass,
-                addresses: [newAddress],
-                orders: []
-            };
-
-            localStorage.setItem('sthirah_user_' + email, JSON.stringify(currentUser));
-            localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
-            updateCustomerNav();
-            alert("Account created successfully!");
         }
 
         function toggleAddressForm(show, editIdx = -1) {
@@ -2164,6 +2032,9 @@
         }
 
         function handleLogout() {
+            if(window.firebaseAuth && window.signOut) {
+                window.signOut(window.firebaseAuth).catch(() => {});
+            }
             if(currentUser) {
                 localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
             }
