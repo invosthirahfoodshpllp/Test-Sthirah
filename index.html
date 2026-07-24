@@ -75,10 +75,15 @@
         .page-view.active-view { display: block; animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Integrated Poster Banner Section */
+        /* Integrated Full Length Poster Banner */
         .poster-hero-banner {
-            width: 100%;
-            max-height: 520px;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            max-height: 650px;
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -89,11 +94,87 @@
         }
         .poster-hero-banner img {
             width: 100%;
-            height: auto;
-            max-height: 520px;
+            height: 100%;
+            max-height: 650px;
             object-fit: cover;
             object-position: center;
             display: block;
+        }
+
+        /* Unified Content Section (Left: It is still sugar, Right: What's not in it) */
+        .unified-content-section {
+            background-color: var(--bg-sage);
+            padding: 70px 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .unified-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        .unified-left-col {
+            flex: 1;
+            min-width: 320px;
+        }
+        .unified-left-col h1 {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+        .unified-left-col p {
+            font-size: 15.5px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .unified-right-col {
+            flex: 1;
+            min-width: 320px;
+        }
+        .unified-right-col .subtitle {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green-accent);
+            margin-bottom: 12px;
+        }
+        .unified-right-col h2 {
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            color: var(--green-accent);
+        }
+        .proof-list {
+            list-style: none;
+        }
+        .proof-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .proof-list .no-label {
+            font-weight: 700;
+            color: var(--green-accent);
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .proof-list .item-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+        .proof-list .item-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-top: 3px;
         }
 
         /* Product Section Layout */
@@ -175,130 +256,6 @@
             transition: background 0.3s ease, transform 0.2s ease; 
         }
         .btn-action:hover { background-color: #0c4d24; transform: translateY(-2px); }
-
-        /* Added Sections Styling (Adapted to website theme font & color palette) */
-        .custom-page-section-1 {
-            background-color: var(--bg-sage);
-            padding: 60px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-light);
-        }
-        .custom-page-section-1 .content-inner {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .custom-page-section-1 h1 {
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1.25;
-            margin-bottom: 20px;
-        }
-        .custom-page-section-1 p {
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
-
-        .custom-page-section-2 {
-            background-color: var(--bg-sage);
-            color: var(--text-dark);
-            padding: 70px 20px;
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-        }
-        .custom-page-section-2 .content-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
-        .custom-page-section-2 .left-col {
-            flex: 1;
-            min-width: 300px;
-        }
-        .custom-page-section-2 .subtitle {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--green-accent);
-            margin-bottom: 12px;
-        }
-        .custom-page-section-2 h2 {
-            font-size: 34px;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 30px;
-            color: var(--green-accent);
-        }
-        .proof-list {
-            list-style: none;
-        }
-        .proof-list li {
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        .proof-list .no-label {
-            font-weight: 700;
-            color: var(--green-accent);
-            font-size: 14px;
-            margin-right: 8px;
-        }
-        .proof-list .item-title {
-            font-weight: 700;
-            font-size: 16px;
-            color: var(--text-dark);
-        }
-        .proof-list .item-desc {
-            font-size: 13.5px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .batch-card {
-            background-color: var(--white);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 25px;
-            width: 420px;
-            max-width: 100%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-        .batch-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-dark);
-        }
-        .batch-card h3 span {
-            color: var(--green-accent);
-            border-bottom: 1px dashed var(--green-accent);
-        }
-        .batch-card p {
-            font-size: 13.5px;
-            line-height: 1.6;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
-        .batch-card .download-btn {
-            display: inline-block;
-            background-color: var(--green-accent);
-            color: var(--white);
-            font-weight: 700;
-            padding: 10px 18px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-        .batch-card .download-btn:hover {
-            background-color: #0c4d24;
-        }
 
         .content-page { max-width: 900px; margin: 40px auto; padding: 35px; background: var(--white); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
         .content-page h1 { font-size: 28px; color: var(--green-accent); margin-bottom: 20px; border-bottom: 2px solid var(--bg-sage); padding-bottom: 10px; }
@@ -418,9 +375,9 @@
 
         @media (max-width: 850px) {
             .product-container { flex-direction: column; }
+            .unified-container { flex-direction: column; }
             .footer-grid { grid-template-columns: repeat(2, 1fr); }
             .product-card { width: 100%; }
-            .custom-page-section-2 .content-inner { flex-direction: column; }
         }
     </style>
 </head>
@@ -448,20 +405,50 @@
     <!-- ================= 1. HOME VIEW ================= -->
     <main id="home-view" class="page-view active-view">
         
-        <!-- INTEGRATED POSTER BANNER (Added on top after the header) -->
+        <!-- INTEGRATED FULL LENGTH POSTER BANNER -->
         <section class="poster-hero-banner">
             <img src="Sthirah Poster 1.png" alt="Sthirah Jaggery Poster">
         </section>
 
-        <!-- PAGE DETAIL CONTENT -->
-        <section class="custom-page-section-1">
-            <div class="content-inner">
-                <h1>It is still sugar.<br>We're not going to tell you otherwise.</h1>
-                <p>Jaggery is roughly 65–85% sucrose. It will raise your blood sugar. Anyone selling it to you as a health food is selling you something else as well.</p>
-                <p>What we can honestly say is this: ours is sugar that hasn't had everything stripped out of it, and nothing chemical put back in. The molasses stays — which is where the colour, the caramel flavour and the trace minerals live. That's the whole pitch.</p>
+        <!-- UNIFIED SECTION: "It is still sugar" on left, "What's not in it" on right -->
+        <section class="unified-content-section">
+            <div class="unified-container">
+                <div class="unified-left-col">
+                    <h1>It is still sugar.<br>We're not going to tell you otherwise.</h1>
+                    <p>Jaggery is roughly 65–85% sucrose. It will raise your blood sugar. Anyone selling it to you as a health food is selling you something else as well.</p>
+                    <p>What we can honestly say is this: ours is sugar that hasn't had everything stripped out of it, and nothing chemical put back in. The molasses stays — which is where the colour, the caramel flavour and the trace minerals live. That's the whole pitch.</p>
+                </div>
+
+                <div class="unified-right-col">
+                    <div class="subtitle">THE PROOF</div>
+                    <h2>What's not in it matters more than what is.</h2>
+                    <ul class="proof-list">
+                        <li>
+                            <div><span class="no-label">NO</span><span class="item-title">Sulphur dioxide</span></div>
+                            <div class="item-desc">The most common jaggery whitener. Tested for, batch by batch.</div>
+                        </li>
+                        <li>
+                            <div><span class="no-label">NO</span><span class="item-title">Sodium hydrosulphite ("hydros")</span></div>
+                            <div class="item-desc">A bleaching agent with no business in food.</div>
+                        </li>
+                        <li>
+                            <div><span class="no-label">NO</span><span class="item-title">Superphosphate</span></div>
+                            <div class="item-desc">Used industrially to clarify juice. Not used here.</div>
+                        </li>
+                        <li>
+                            <div><span class="no-label">NO</span><span class="item-title">Artificial colour</span></div>
+                            <div class="item-desc">The brown is the molasses. That's all it is.</div>
+                        </li>
+                        <li>
+                            <div><span class="no-label">NO</span><span class="item-title">Anti-caking agent</span></div>
+                            <div class="item-desc">Store it dry and it stays loose on its own.</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
 
+        <!-- PRODUCT SECTION (Positioned below the unified section) -->
         <section class="product-section">
             <div class="product-container">
                 
@@ -543,44 +530,6 @@
                     </div>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- PAGE DETAIL 1 CONTENT (Appearing below the product image / product section) -->
-        <section class="custom-page-section-2">
-            <div class="content-inner">
-                <div class="left-col">
-                    <div class="subtitle">THE PROOF</div>
-                    <h2>What's not in it matters more than what is.</h2>
-                    <ul class="proof-list">
-                        <li>
-                            <div><span class="no-label">NO</span><span class="item-title">Sulphur dioxide</span></div>
-                            <div class="item-desc">The most common jaggery whitener. Tested for, batch by batch.</div>
-                        </li>
-                        <li>
-                            <div><span class="no-label">NO</span><span class="item-title">Sodium hydrosulphite ("hydros")</span></div>
-                            <div class="item-desc">A bleaching agent with no business in food.</div>
-                        </li>
-                        <li>
-                            <div><span class="no-label">NO</span><span class="item-title">Superphosphate</span></div>
-                            <div class="item-desc">Used industrially to clarify juice. Not used here.</div>
-                        </li>
-                        <li>
-                            <div><span class="no-label">NO</span><span class="item-title">Artificial colour</span></div>
-                            <div class="item-desc">The brown is the molasses. That's all it is.</div>
-                        </li>
-                        <li>
-                            <div><span class="no-label">NO</span><span class="item-title">Anti-caking agent</span></div>
-                            <div class="item-desc">Store it dry and it stays loose on its own.</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="batch-card">
-                    <h3>Batch <span>[TN-26-XX]</span> · lab report</h3>
-                    <p>Tested at <strong>[NABL LAB NAME]</strong> on <strong>[DATE]</strong> for sulphur dioxide and heavy metals. The batch number is printed on the back of every pack — match it to the report before you trust us.</p>
-                    <p>Ingredients: <strong>sugarcane juice — 100%</strong>. There is no second ingredient.</p>
-                    <a href="javascript:void(0)" onclick="alert('Downloading Lab Report PDF...')" class="download-btn">Download the report (PDF)</a>
-                </div>
             </div>
         </section>
 
