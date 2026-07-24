@@ -6,6 +6,7 @@
     <title>Sthirah - Quality Ingredients</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         :root {
             --bg-sage: #D2E3B8;
@@ -285,7 +286,7 @@
         .admin-table th { background: #F1F5F9; font-weight: 600; color: #475569; }
         .admin-input-sm { padding: 6px 8px; border: 1px solid #CBD5E1; border-radius: 4px; font-size: 13px; width: 100%; }
 
-        /* Global Footer Matching Reference Image 1 layout with Logo & Brand Name on Top of Get In Touch */
+        /* Global Footer */
         .site-footer { background-color: var(--bg-sage); padding: 50px 40px 20px 40px; border-top: 1px solid var(--border-light); margin-top: auto; }
         .footer-container { max-width: 1200px; margin: 0 auto; }
         
@@ -296,12 +297,10 @@
         .footer-col ul li a { text-decoration: none; color: var(--text-dark); font-size: 13px; display: inline-block; transition: color 0.3s, transform 0.2s; }
         .footer-col ul li a:hover { color: var(--green-accent); transform: translateX(4px); }
 
-        /* Footer Right Column containing Logo, Brand Name, and Get In Touch */
         .footer-brand-touch-col { display: flex; flex-direction: column; align-items: flex-start; }
-        .footer-brand-logo { height: 40px; object-fit: contain; margin-bottom: 8px; display: block; }
-        .footer-title { font-size: 16px; font-weight: 800; margin-bottom: 25px; color: var(--text-dark); line-height: 1.3; }
+        .footer-brand-logo { height: 45px; object-fit: contain; margin-bottom: 8px; display: block; background: transparent; mix-blend-mode: multiply; }
         
-        .footer-col.get-in-touch-section h4 { margin-top: 0; }
+        .get-in-touch-section h4 { margin-top: 0; }
         .social-icons-row { display: flex; gap: 15px; font-size: 18px; margin-top: 0; }
         .social-icons-row a { color: var(--text-dark); transition: transform 0.3s, color 0.3s; display: inline-block; }
         .social-icons-row a:hover { color: var(--green-accent); transform: translateY(-3px) scale(1.15); }
@@ -392,7 +391,7 @@
     <header class="navbar">
         <div class="nav-container">
             <div class="logo clickable" onclick="navigateTo('home-view')">
-                <img src="Sthirah DP Logo.jpg" alt="Sthirah Logo" class="logo-img">
+                <img src="Logo 2.png" alt="Sthirah Logo" class="logo-img">
             </div>
             <nav class="nav-links">
                 <a href="javascript:void(0)" id="nav-home" class="active" onclick="navigateTo('home-view')">Home</a>
@@ -410,7 +409,7 @@
     <!-- ================= 1. HOME VIEW ================= -->
     <main id="home-view" class="page-view active-view">
         
-        <!-- INTEGRATED FULL LENGTH POSTER BANNER (Poster 2) -->
+        <!-- INTEGRATED FULL LENGTH POSTER BANNER -->
         <section class="poster-hero-banner">
             <img src="Sthirah Poster 2.png" alt="Sthirah Jaggery Poster 2">
         </section>
@@ -491,7 +490,7 @@
                         <div class="product-thumbnails-row">
                             <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" onclick="changeMainImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
                             <img src="Sthirah Jaggery Powder 500g Back.jpg" class="product-thumb" onclick="changeMainImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
-                            <img src="Sthirah DP Logo.jpg" class="product-thumb" onclick="changeMainImage(this, 'Sthirah DP Logo.jpg')">
+                            <img src="Logo 2.png" class="product-thumb" onclick="changeMainImage(this, 'Logo 2.png')">
                         </div>
                     </div>
                     
@@ -607,19 +606,104 @@
     <main id="account-view" class="page-view">
         <div style="max-width:550px; margin:40px auto; background:white; padding:30px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
             <div id="login-box">
-                <h2>Customer Login</h2>
-                <br>
-                <form onsubmit="event.preventDefault(); handleCustLogin();">
-                    <div class="form-group">
-                        <label>Email or Mobile</label>
-                        <input type="text" id="cust-login-id" autocomplete="username" placeholder="Enter Mobile or Email" required>
+                <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+                    <button type="button" id="auth-tab-signin" class="btn-action" style="padding: 8px; font-size: 13px; background: var(--green-accent);" onclick="switchAuthTab('signin')">Sign In</button>
+                    <button type="button" id="auth-tab-signup" class="btn-action" style="padding: 8px; font-size: 13px; background: #64748B;" onclick="switchAuthTab('signup')">Sign Up</button>
+                </div>
+
+                <!-- SIGN IN FORM -->
+                <div id="signin-container">
+                    <h2>Customer Sign In</h2>
+                    <br>
+                    <!-- Google Sign-In Button Container -->
+                    <div id="g_id_onload"
+                         data-client_id="644023914250-ehkmhflbso8i4o5bit1o21g0elmckrei.apps.googleusercontent.com"
+                         data-callback="handleGoogleResponse"
+                         data-auto_prompt="false">
                     </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" id="cust-login-pass" autocomplete="current-password" placeholder="Password" required>
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-size="large"
+                         data-theme="outline"
+                         data-text="sign_in_with"
+                         data-shape="rectangular"
+                         data-logo_alignment="left"
+                         style="width: 100%; margin-bottom: 20px; display: flex; justify-content: center;">
                     </div>
-                    <button type="submit" class="btn-action">LOGIN</button>
-                </form>
+
+                    <div style="text-align: center; margin: 15px 0; color: #666; font-size: 13px; position: relative;">
+                        <span style="background: white; padding: 0 10px; position: relative; z-index: 1;">OR</span>
+                        <hr style="position: absolute; top: 50%; left: 0; width: 100%; border: 0; border-top: 1px solid #ddd; z-index: 0;">
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); handleCustLogin();">
+                        <div class="form-group">
+                            <label>Email ID</label>
+                            <input type="email" id="cust-login-id" placeholder="Enter Email (Demo: 1234)" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="cust-login-pass" placeholder="Password (Demo: 1234)" required>
+                        </div>
+                        <button type="submit" class="btn-action">SIGN IN</button>
+                    </form>
+                </div>
+
+                <!-- SIGN UP FORM -->
+                <div id="signup-container" style="display:none;">
+                    <h2>Customer Sign Up</h2>
+                    <br>
+                    <form onsubmit="event.preventDefault(); handleCustSignUp();">
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div class="form-group"><label>First Name *</label><input type="text" id="reg-fname" required></div>
+                            <div class="form-group"><label>Last Name *</label><input type="text" id="reg-lname" required></div>
+                        </div>
+                        <div class="form-group"><label>User Name *</label><input type="text" id="reg-username" required></div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div class="form-group"><label>Mobile Number *</label><input type="tel" id="reg-mobile" pattern="[0-9]{10}" placeholder="10 digits" required></div>
+                            <div class="form-group"><label>Alternative Mobile Number *</label><input type="tel" id="reg-alt-mobile" pattern="[0-9]{10}" required></div>
+                        </div>
+                        <div class="form-group"><label>Email ID *</label><input type="email" id="reg-email" required></div>
+                        <div class="form-group"><label>Password *</label><input type="password" id="reg-pass" required></div>
+                        
+                        <h4 style="margin:15px 0 8px 0; font-size:14px; color:var(--green-accent);">Default Address Details</h4>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div class="form-group"><label>Door No *</label><input type="text" id="reg-door" required></div>
+                            <div class="form-group"><label>Street *</label><input type="text" id="reg-street" required></div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div class="form-group"><label>Landmark *</label><input type="text" id="reg-landmark" required></div>
+                            <div class="form-group"><label>Area *</label><input type="text" id="reg-area" required></div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div class="form-group"><label>Pincode *</label><input type="text" id="reg-pincode" maxlength="6" required></div>
+                            <div class="form-group">
+                                <label>State *</label>
+                                <select id="reg-state" required>
+                                    <option value="">Select State</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Assam">Assam</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-action" style="background:#1E293B; margin-top:10px;">REGISTER & CREATE ACCOUNT</button>
+                    </form>
+                </div>
             </div>
             
             <div id="user-profile" style="display:none;">
@@ -638,14 +722,40 @@
                         <div class="form-group"><label>Mobile *</label><input type="tel" id="acc-addr-mobile" required></div>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group"><label>Alt Mobile *</label><input type="tel" id="acc-addr-alt" required></div>
+                        <div class="form-group"><label>Alternative Mobile Number *</label><input type="tel" id="acc-addr-alt" required></div>
                         <div class="form-group"><label>Pincode *</label><input type="text" id="acc-addr-pin" maxlength="6" required></div>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                         <div class="form-group"><label>Door No *</label><input type="text" id="acc-addr-door" required></div>
                         <div class="form-group"><label>Street *</label><input type="text" id="acc-addr-street" required></div>
                     </div>
-                    <div class="form-group"><label>Area *</label><input type="text" id="acc-addr-area" required></div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group"><label>Landmark *</label><input type="text" id="acc-addr-landmark" required></div>
+                        <div class="form-group"><label>Area *</label><input type="text" id="acc-addr-area" required></div>
+                    </div>
+                    <div class="form-group">
+                        <label>State *</label>
+                        <select id="acc-addr-state" required>
+                            <option value="">Select State</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Assam">Assam</option>
+                        </select>
+                    </div>
                     <button class="btn-action" style="padding:8px;" onclick="saveAddressFromAccount()">Save Address</button>
                 </div>
 
@@ -1158,11 +1268,6 @@
     <!-- GLOBAL FOOTER -->
     <footer id="global-footer" class="site-footer">
         <div class="footer-container">
-            <!-- Brand Name at the Top matching Reference Image 1 layout -->
-            <div class="footer-top-brand">
-                <h2 class="footer-title">INVO STHIRAH FOODS HP LLP</h2>
-            </div>
-            
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>Our Product</h4>
@@ -1199,13 +1304,13 @@
                     </ul>
                 </div>
 
-                <!-- Right Column: Logo on top of brand name, with Get In Touch placed below it -->
+                <!-- Right Column: Logo 2 on top of Brand Name matching image_91888c.png layout -->
                 <div class="footer-col footer-brand-touch-col">
-                    <img src="Sthirah DP Logo.jpg" alt="Sthirah Logo" class="footer-brand-logo">
-                    <div style="font-size:14px; font-weight:800; color:var(--text-dark); margin-bottom:20px;">INVO STHIRAH FOODS HP LLP</div>
+                    <img src="Logo 2.png" alt="Sthirah Logo" class="footer-brand-logo">
+                    <div style="font-size:13px; font-weight:800; color:var(--text-dark); margin-bottom:20px;">INVO STHIRAH FOODS HP LLP</div>
                     <div class="get-in-touch-section">
-                        <h4>Get In Touch</h4>
-                        <div class="social-icons-row" style="margin-top: 12px;">
+                        <h4 style="margin-bottom:10px;">Get In Touch</h4>
+                        <div class="social-icons-row">
                             <a href="https://www.facebook.com/invosthirahfoodshpllp" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                             <a href="https://www.instagram.com/invosthirahfoodshpllp" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
                             <a href="mailto:invosthirahfoodshpllp@gmail.com" title="Email"><i class="fa-regular fa-envelope"></i></a>
@@ -1405,6 +1510,28 @@
             setDatesByPreset('reports');
             filterAdminOrders();
             filterAndPrintReport();
+            
+            // Preload Demo Account for Verification
+            if(!localStorage.getItem('sthirah_user_1234')) {
+                const demoUser = {
+                    id: "1234",
+                    name: "Demo User",
+                    pass: "1234",
+                    addresses: [{
+                        name: "Demo User",
+                        mobile: "9876543210",
+                        altMobile: "9123456789",
+                        landmark: "Near Temple",
+                        pincode: "636015",
+                        door: "No 12",
+                        street: "Main Street",
+                        area: "Ashok Nagar",
+                        state: "Tamil Nadu"
+                    }],
+                    orders: []
+                };
+                localStorage.setItem('sthirah_user_1234', JSON.stringify(demoUser));
+            }
         });
 
         function filterAdminOrders() {
@@ -1458,10 +1585,11 @@
 
         function updateCustomerNav() {
             if(currentUser) {
-                document.getElementById('user-nav-label').innerText = "Account (" + currentUser.id.split('@')[0] + ")";
+                const displayName = currentUser.name || currentUser.username || currentUser.id.split('@')[0];
+                document.getElementById('user-nav-label').innerText = displayName;
                 document.getElementById('login-box').style.display = "none";
                 document.getElementById('user-profile').style.display = "block";
-                document.getElementById('cust-name-val').innerText = currentUser.id;
+                document.getElementById('cust-name-val').innerText = displayName;
                 renderSavedAddressesInAccount();
                 renderGlobalOrderHistory();
             } else {
@@ -1472,6 +1600,109 @@
             }
         }
         updateCustomerNav();
+
+        function switchAuthTab(mode) {
+            const sIn = document.getElementById('signin-container');
+            const sUp = document.getElementById('signup-container');
+            const btnIn = document.getElementById('auth-tab-signin');
+            const btnUp = document.getElementById('auth-tab-signup');
+            if(mode === 'signin') {
+                sIn.style.display = 'block';
+                sUp.style.display = 'none';
+                btnIn.style.background = 'var(--green-accent)';
+                btnUp.style.background = '#64748B';
+            } else {
+                sIn.style.display = 'none';
+                sUp.style.display = 'block';
+                btnIn.style.background = '#64748B';
+                btnUp.style.background = 'var(--green-accent)';
+            }
+        }
+
+        function handleGoogleResponse(response) {
+            try {
+                const base64Url = response.credential.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+                const profile = JSON.parse(jsonPayload);
+                
+                currentUser = JSON.parse(localStorage.getItem('sthirah_user_' + profile.email)) || { id: profile.email, name: profile.name, addresses: [], orders: [] };
+                localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
+                localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
+                updateCustomerNav();
+                alert("Successfully logged in with Google!");
+            } catch(e) {
+                alert("Google login failed. Please try again.");
+            }
+        }
+
+        function handleCustLogin() {
+            const id = document.getElementById('cust-login-id').value.trim();
+            const pass = document.getElementById('cust-login-pass').value.trim();
+            if(id && pass) {
+                const storedUser = JSON.parse(localStorage.getItem('sthirah_user_' + id));
+                if(storedUser && storedUser.pass === pass) {
+                    currentUser = storedUser;
+                } else if(id === "1234" && pass === "1234") {
+                    currentUser = JSON.parse(localStorage.getItem('sthirah_user_1234'));
+                } else {
+                    alert("Invalid email or password.");
+                    return;
+                }
+                localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
+                updateCustomerNav();
+                alert("Logged in successfully!");
+            }
+        }
+
+        function handleCustSignUp() {
+            const fname = document.getElementById('reg-fname').value.trim();
+            const lname = document.getElementById('reg-lname').value.trim();
+            const username = document.getElementById('reg-username').value.trim();
+            const mobile = document.getElementById('reg-mobile').value.trim();
+            const altMobile = document.getElementById('reg-alt-mobile').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const pass = document.getElementById('reg-pass').value.trim();
+            
+            const door = document.getElementById('reg-door').value.trim();
+            const street = document.getElementById('reg-street').value.trim();
+            const landmark = document.getElementById('reg-landmark').value.trim();
+            const area = document.getElementById('reg-area').value.trim();
+            const pincode = document.getElementById('reg-pincode').value.trim();
+            const state = document.getElementById('reg-state').value;
+
+            if(!fname || !lname || !username || !mobile || !altMobile || !email || !pass || !door || !street || !landmark || !area || !pincode || !state) {
+                alert("Please fill in all mandatory fields.");
+                return;
+            }
+
+            const fullName = fname + " " + lname;
+            const newAddress = {
+                name: fullName,
+                mobile: mobile,
+                altMobile: altMobile,
+                door: door,
+                street: street,
+                landmark: landmark,
+                area: area,
+                pincode: pincode,
+                state: state
+            };
+
+            currentUser = {
+                id: email,
+                username: username,
+                name: fullName,
+                pass: pass,
+                addresses: [newAddress],
+                orders: []
+            };
+
+            localStorage.setItem('sthirah_user_' + email, JSON.stringify(currentUser));
+            localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
+            updateCustomerNav();
+            alert("Account created successfully!");
+        }
 
         function toggleAddressForm(show, editIdx = -1) {
             const box = document.getElementById('add-address-form-box');
@@ -1485,20 +1716,24 @@
                     document.getElementById('acc-addr-name').value = addr.name;
                     document.getElementById('acc-addr-mobile').value = addr.mobile;
                     document.getElementById('acc-addr-alt').value = addr.altMobile;
+                    document.getElementById('acc-addr-landmark').value = addr.landmark || "";
                     document.getElementById('acc-addr-pin').value = addr.pincode;
                     document.getElementById('acc-addr-door').value = addr.door;
                     document.getElementById('acc-addr-street').value = addr.street;
                     document.getElementById('acc-addr-area').value = addr.area;
+                    document.getElementById('acc-addr-state').value = addr.state || "";
                 } else {
                     document.getElementById('form-mode-title').innerText = "Add New Address";
                     document.getElementById('edit-address-index').value = -1;
                     document.getElementById('acc-addr-name').value = "";
                     document.getElementById('acc-addr-mobile').value = "";
                     document.getElementById('acc-addr-alt').value = "";
+                    document.getElementById('acc-addr-landmark').value = "";
                     document.getElementById('acc-addr-pin').value = "";
                     document.getElementById('acc-addr-door').value = "";
                     document.getElementById('acc-addr-street').value = "";
                     document.getElementById('acc-addr-area').value = "";
+                    document.getElementById('acc-addr-state').value = "";
                 }
             } else {
                 box.style.display = "none";
@@ -1514,13 +1749,15 @@
                 name: document.getElementById('acc-addr-name').value,
                 mobile: document.getElementById('acc-addr-mobile').value,
                 altMobile: document.getElementById('acc-addr-alt').value,
+                landmark: document.getElementById('acc-addr-landmark').value,
                 pincode: document.getElementById('acc-addr-pin').value,
                 door: document.getElementById('acc-addr-door').value,
                 street: document.getElementById('acc-addr-street').value,
-                area: document.getElementById('acc-addr-area').value
+                area: document.getElementById('acc-addr-area').value,
+                state: document.getElementById('acc-addr-state').value
             };
 
-            if(!newAddr.name || !newAddr.mobile || !newAddr.altMobile || !newAddr.pincode || !newAddr.door || !newAddr.street || !newAddr.area) {
+            if(!newAddr.name || !newAddr.mobile || !newAddr.altMobile || !newAddr.landmark || !newAddr.pincode || !newAddr.door || !newAddr.street || !newAddr.area || !newAddr.state) {
                 alert("Please fill in all mandatory address fields.");
                 return;
             }
@@ -1577,8 +1814,8 @@
             addrs.forEach((a, idx) => {
                 html += `
                     <div style="background:#fafafa; border:1px solid #ddd; padding:10px; border-radius:6px; margin-bottom:8px; font-size:13px;">
-                        <strong>${a.name}</strong> (${a.mobile}, Alt: ${a.altMobile})<br>
-                        Door ${a.door}, ${a.street}, ${a.area} - ${a.pincode}<br>
+                        <strong>${a.name}</strong> (Mobile: ${a.mobile}, Alternative Mobile Number: ${a.altMobile})<br>
+                        Door ${a.door}, ${a.street}, Landmark: ${a.landmark}, ${a.area}, ${a.state} - ${a.pincode}<br>
                         <button class="btn-secondary" style="margin-top:5px; padding:4px 8px;" onclick="navigateTo('address-view');">Edit</button>
                         <button class="cart-remove-btn" style="margin-top:5px; padding:4px 8px;" onclick="deleteAddress(${idx})">Delete</button>
                     </div>
@@ -1586,8 +1823,8 @@
                 subHtml += `
                     <div style="background:#fafafa; border:1px solid #ddd; padding:15px; border-radius:6px; margin-bottom:12px;">
                         <strong>Address #${idx + 1}: ${a.name}</strong><br>
-                        Contact: ${a.mobile} (Alternate: ${a.altMobile})<br>
-                        Location: Door ${a.door}, ${a.street}, ${a.area} - ${a.pincode}<br>
+                        Mobile: ${a.mobile} | Alternative Mobile Number: ${a.altMobile}<br>
+                        Location: Door ${a.door}, ${a.street}, Landmark: ${a.landmark}, ${a.area}, ${a.state} - ${a.pincode}<br>
                         <button class="btn-action" style="width:auto; padding:6px 14px; font-size:12px; margin-top:10px;" onclick="navigateTo('account-view'); toggleAddressForm(true, ${idx});">Edit Address</button>
                     </div>
                 `;
@@ -1705,8 +1942,8 @@
                     addHtml += `
                         <label style="display:block; background:#fafafa; border:1px solid #ddd; padding:10px; border-radius:6px; margin-bottom:8px; cursor:pointer;">
                             <input type="radio" name="selected_checkout_addr" value="${idx}" ${idx === 0 ? 'checked' : ''}>
-                            <strong>${addr.name}</strong> (${addr.mobile}, Alt: ${addr.altMobile})<br>
-                            Door ${addr.door}, ${addr.street}, ${addr.area} - ${addr.pincode}
+                            <strong>${addr.name}</strong> (Mobile: ${addr.mobile}, Alternative Mobile Number: ${addr.altMobile})<br>
+                            Door ${addr.door}, ${addr.street}, Landmark: ${addr.landmark}, ${addr.area}, ${addr.state} - ${addr.pincode}
                         </label>
                     `;
                 });
@@ -1738,7 +1975,7 @@
 
             const addrIdx = parseInt(selectedRadio.value);
             const chosenAddr = currentUser.addresses[addrIdx];
-            const fullAddress = `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area} - ${chosenAddr.pincode}`;
+            const fullAddress = `Door ${chosenAddr.door}, ${chosenAddr.street}, Landmark: ${chosenAddr.landmark}, ${chosenAddr.area}, ${chosenAddr.state} - ${chosenAddr.pincode}`;
             
             const prefix = document.getElementById('adm-prefix-input').value || "STH/2026/";
             const invoiceId = prefix + Math.floor(100 + Math.random() * 900);
@@ -1766,7 +2003,7 @@
                 <td><input type="checkbox" class="order-select-chk"></td>
                 <td>${invoiceId}</td>
                 <td>${todayStr}</td>
-                <td>${chosenAddr.name}<br><small>Mob: ${chosenAddr.mobile}</small></td>
+                <td>${chosenAddr.name}<br><small>Mobile: ${chosenAddr.mobile}</small></td>
                 <td>${fullAddress}</td>
                 <td>Cart Order (₹220)</td>
                 <td>
@@ -1779,7 +2016,7 @@
                     </select>
                 </td>
                 <td>
-                    <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px;" onclick="generateQRPreview('${invoiceId}', '${chosenAddr.name}', '${chosenAddr.mobile}', '${chosenAddr.altMob || ''}', '${fullAddress}')">QR Label</button>
+                    <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px;" onclick="generateQRPreview('${invoiceId}', '${chosenAddr.name}', '${chosenAddr.mobile}', '${chosenAddr.altMobile || ''}', '${fullAddress}')">QR Label</button>
                     <button class="btn-action" style="padding:4px 8px; font-size:11px; background:#475569;" onclick="printIndividualGSTInvoice('${invoiceId}', '${chosenAddr.name}', '${chosenAddr.mobile}', '${fullAddress}', 'Cart Items', 220)">GST Invoice</button>
                 </td>
             `;
@@ -1824,7 +2061,7 @@
             document.getElementById('gst-print-inv-no').innerText = "Invoice No: " + inv;
             document.getElementById('gst-print-inv-date').innerText = "Date: " + new Date().toLocaleDateString();
             document.getElementById('gst-print-cust-name').innerText = name;
-            document.getElementById('gst-print-cust-phone').innerText = "Contact: " + mob;
+            document.getElementById('gst-print-cust-phone').innerText = "Mobile: " + mob;
             document.getElementById('gst-print-cust-addr').innerText = addr;
 
             document.getElementById('gst-print-item-desc').innerText = item;
@@ -1907,18 +2144,6 @@
             window.print();
         }
 
-        function handleCustLogin() {
-            const id = document.getElementById('cust-login-id').value;
-            const pass = document.getElementById('cust-login-pass').value;
-            if(id && pass) {
-                currentUser = JSON.parse(localStorage.getItem('sthirah_user_' + id)) || { id: id, addresses: [], orders: [] };
-                localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
-                updateCustomerNav();
-            } else {
-                alert("Please enter mobile/email and password.");
-            }
-        }
-
         function handleLogout() {
             if(currentUser) {
                 localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
@@ -1975,7 +2200,7 @@
         function generateQRPreview(inv, name, mob, altMob, addr) {
             document.getElementById('qr-display-box').style.display = "block";
             document.getElementById('qr-cust-name').innerText = "Invoice: " + inv + " - " + name;
-            document.getElementById('qr-cust-phone').innerText = "Mobile: " + mob + (altMob ? " | Alt: " + altMob : "");
+            document.getElementById('qr-cust-phone').innerText = "Mobile: " + mob + (altMob ? " | Alternative Mobile Number: " + altMob : "");
             document.getElementById('qr-cust-addr').innerText = "Address: " + addr;
 
             const qrData = `INVOICE: ${inv}\nNAME: ${name}\nMOBILE: ${mob}\nALT: ${altMob}\nADDRESS: ${addr}`;
