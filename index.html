@@ -75,7 +75,7 @@
         .page-view.active-view { display: block; animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Integrated Full Length Poster Banner (Poster 2 fitted properly in landscape) */
+        /* Integrated Full Length Poster Banner (Poster 2 perfectly fitted to fill entire landscape space with cover) */
         .poster-hero-banner {
             width: 100vw;
             position: relative;
@@ -95,10 +95,9 @@
         .poster-hero-banner img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             object-position: center;
             display: block;
-            background-color: #1a2e18;
         }
 
         /* Unified Content Section (Left: It is still sugar, Right: What's not in it) */
@@ -405,7 +404,7 @@
     <!-- ================= 1. HOME VIEW ================= -->
     <main id="home-view" class="page-view active-view">
         
-        <!-- INTEGRATED FULL LENGTH POSTER BANNER (Poster 2 fitted properly in landscape) -->
+        <!-- INTEGRATED FULL LENGTH POSTER BANNER (Poster 2 properly aligned and filled to landscape) -->
         <section class="poster-hero-banner">
             <img src="Sthirah Poster 2.png" alt="Sthirah Jaggery Poster 2">
         </section>
