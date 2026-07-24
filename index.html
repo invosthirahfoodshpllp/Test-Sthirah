@@ -101,7 +101,7 @@
             display: block;
         }
 
-        /* Unified Content Section (Left: It is still sugar, Right: What's not in it) */
+        /* Unified Content Section (Left: What's not in it, Right: It is still sugar) */
         .unified-content-section {
             background-color: var(--bg-sage);
             padding: 70px 20px;
@@ -120,25 +120,7 @@
             flex: 1;
             min-width: 320px;
         }
-        .unified-left-col h1 {
-            font-size: 34px;
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1.25;
-            margin-bottom: 20px;
-        }
-        .unified-left-col p {
-            font-size: 15.5px;
-            line-height: 1.7;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
-
-        .unified-right-col {
-            flex: 1;
-            min-width: 320px;
-        }
-        .unified-right-col .subtitle {
+        .unified-left-col .subtitle {
             font-size: 13px;
             font-weight: 700;
             text-transform: uppercase;
@@ -146,7 +128,7 @@
             color: var(--green-accent);
             margin-bottom: 12px;
         }
-        .unified-right-col h2 {
+        .unified-left-col h2 {
             font-size: 30px;
             font-weight: 800;
             line-height: 1.2;
@@ -175,6 +157,24 @@
             font-size: 13.5px;
             color: var(--text-muted);
             margin-top: 3px;
+        }
+
+        .unified-right-col {
+            flex: 1;
+            min-width: 320px;
+        }
+        .unified-right-col h1 {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+        .unified-right-col p {
+            font-size: 15.5px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 15px;
         }
 
         /* Product Section Layout */
@@ -414,16 +414,10 @@
             <img src="Sthirah Poster 2.png" alt="Sthirah Jaggery Poster 2">
         </section>
 
-        <!-- UNIFIED SECTION: "It is still sugar" on left, "What's not in it" on right -->
+        <!-- UNIFIED SECTION: "What's not in it" on left, "It is still sugar" on right -->
         <section class="unified-content-section">
             <div class="unified-container">
                 <div class="unified-left-col">
-                    <h1>It is still sugar.<br>We're not going to tell you otherwise.</h1>
-                    <p>Jaggery is roughly 65–85% sucrose. It will raise your blood sugar. Anyone selling it to you as a health food is selling you something else as well.</p>
-                    <p>What we can honestly say is this: ours is sugar that hasn't had everything stripped out of it, and nothing chemical put back in. The molasses stays — which is where the colour, the caramel flavour and the trace minerals live. That's the whole pitch.</p>
-                </div>
-
-                <div class="unified-right-col">
                     <div class="subtitle">THE PROOF</div>
                     <h2>What's not in it matters more than what is.</h2>
                     <ul class="proof-list">
@@ -448,6 +442,12 @@
                             <div class="item-desc">Store it dry and it stays loose on its own.</div>
                         </li>
                     </ul>
+                </div>
+
+                <div class="unified-right-col">
+                    <h1>It is still sugar.<br>We're not going to tell you otherwise.</h1>
+                    <p>Jaggery is roughly 65–85% sucrose. It will raise your blood sugar. Anyone selling it to you as a health food is selling you something else as well.</p>
+                    <p>What we can honestly say is this: ours is sugar that hasn't had everything stripped out of it, and nothing chemical put back in. The molasses stays — which is where the colour, the caramel flavour and the trace minerals live. That's the whole pitch.</p>
                 </div>
             </div>
         </section>
@@ -566,9 +566,25 @@
                         <span style="color:#555; font-size:12px; margin-left:5px;">(4.9 / 5 based on 128 verified reviews)</span>
                     </div>
                     <p style="color:var(--green-accent); font-weight:700; font-size:20px; margin:10px 0;" id="shop-product-price">₹110.00 – ₹1,100.00</p>
-                    <p style="font-size:14px; line-height:1.6; margin-bottom:20px;">
+                    <p style="font-size:14px; line-height:1.6; margin-bottom:15px;">
                         Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped in individual 500g unit packaging.
                     </p>
+
+                    <!-- NUTRITION TABLE & STORAGE SECTION -->
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:15px; margin-bottom:20px; font-size:13px;">
+                        <h4 style="color:var(--green-accent); margin-bottom:8px; font-size:14px;">Nutrition Information (Approximate Values per 100g)</h4>
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:4px 0;"><strong>Calories</strong></td><td style="text-align:right;">380 kcal</td></tr>
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:4px 0;">Total Carbohydrates</td><td style="text-align:right;">95g (35% DV)</td></tr>
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:4px 0;">Total Sugars (0g Added Sugars)</td><td style="text-align:right;">97g</td></tr>
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:4px 0;">Protein / Total Fat</td><td style="text-align:right;">0g</td></tr>
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:4px 0;">Iron</td><td style="text-align:right;">15.96mg (90% DV)</td></tr>
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:4px 0;">Magnesium</td><td style="text-align:right;">106.66mg (25% DV)</td></tr>
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:4px 0;">Calcium</td><td style="text-align:right;">64mg (4% DV)</td></tr>
+                        </table>
+                        <p style="font-weight:600; color:var(--text-dark); margin-top:8px;">Storage Instructions:</p>
+                        <p style="color:#555; margin-top:2px;">Once opened, transfer to an airtight container to preserve farm-fresh quality and prevent moisture.</p>
+                    </div>
                     
                     <div class="size-selector">
                         <label for="prod-size-select">Select Package Size (Min 1KG):</label>
@@ -639,11 +655,11 @@
                     <form onsubmit="event.preventDefault(); handleCustLogin();">
                         <div class="form-group">
                             <label>Email ID</label>
-                            <input type="email" id="cust-login-id" placeholder="Enter Email (Demo: 1234)" required>
+                            <input type="email" id="cust-login-id" placeholder="Enter Email" required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" id="cust-login-pass" placeholder="Password (Demo: 1234)" required>
+                            <input type="password" id="cust-login-pass" placeholder="Password" required>
                         </div>
                         <button type="submit" class="btn-action">SIGN IN</button>
                     </form>
@@ -1002,7 +1018,7 @@
                                 <td><input type="checkbox" class="order-select-chk"></td>
                                 <td>STH/2026/090</td>
                                 <td>2026-06-10</td>
-                                <td>Old Order Customer<br><small>Mob: 9876543210</small></td>
+                                <td>Old Order Customer<br><small>Mobile: 9876543210</small></td>
                                 <td>Salem, TN</td>
                                 <td>2KG Jaggery Powder (₹220)</td>
                                 <td>
@@ -1023,7 +1039,7 @@
                                 <td><input type="checkbox" class="order-select-chk"></td>
                                 <td>STH/2026/101</td>
                                 <td>2026-07-15</td>
-                                <td>Ramesh Kumar<br><small>Mob: 9876543210</small></td>
+                                <td>Ramesh Kumar<br><small>Mobile: 9876543210</small></td>
                                 <td>Door 12, Main Street, Salem, TN - 636015</td>
                                 <td>2KG Jaggery Powder (₹220)</td>
                                 <td>
@@ -1304,7 +1320,7 @@
                     </ul>
                 </div>
 
-                <!-- Right Column: Logo 2 on top of Brand Name matching image_91888c.png layout -->
+                <!-- Right Column: Logo 2 on top of Brand Name matching image_91888c.png layout (Brand name on top removed) -->
                 <div class="footer-col footer-brand-touch-col">
                     <img src="Logo 2.png" alt="Sthirah Logo" class="footer-brand-logo">
                     <div style="font-size:13px; font-weight:800; color:var(--text-dark); margin-bottom:20px;">INVO STHIRAH FOODS HP LLP</div>
