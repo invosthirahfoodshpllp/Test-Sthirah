@@ -549,12 +549,11 @@
                 <div class="product-card">
                     <div class="image-wrapper">
                         <span class="badge-sale">SALE</span>
-                        <img id="main-product-img" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder 500g" class="product-pack-img clickable" onclick="navigateTo('product-view')">
+                        <img id="main-product-img" src="Sthirah Jaggery Powder Front.png" alt="Sthirah Jaggery Powder Front" class="product-pack-img clickable" onclick="navigateTo('product-view')">
                         
                         <div class="product-thumbnails-row">
-                            <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" onclick="changeMainImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
-                            <img src="Sthirah Jaggery Powder 500g Back.jpg" class="product-thumb" onclick="changeMainImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
-                            <img src="Logo 2.png" class="product-thumb" onclick="changeMainImage(this, 'Logo 2.png')">
+                            <img src="Sthirah Jaggery Powder Front.png" class="product-thumb active-thumb" onclick="changeMainImage(this, 'Sthirah Jaggery Powder Front.png')">
+                            <img src="Sthirah Jaggery Powder Back.png" class="product-thumb" onclick="changeMainImage(this, 'Sthirah Jaggery Powder Back.png')">
                         </div>
                     </div>
                     
@@ -619,10 +618,10 @@
             <div class="product-container" style="align-items: stretch; margin-bottom: 30px;">
                 <!-- LEFT COLUMN: PRODUCT PHOTO -->
                 <div style="flex: 1; text-align: center; background: white; padding: 30px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                    <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" style="max-height: 380px; width: 100%; object-fit: contain;">
+                    <img id="shop-pimg-display" src="Sthirah Jaggery Powder Front.png" alt="Sthirah Jaggery Powder Front" style="max-height: 380px; width: 100%; object-fit: contain;">
                     <div style="display: flex; justify-content: center; gap: 8px; margin-top: 15px;" id="shop-thumbs-container">
-                        <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
-                        <img src="Sthirah Jaggery Powder 500g Back.jpg" class="product-thumb" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
+                        <img src="Sthirah Jaggery Powder Front.png" class="product-thumb active-thumb" onclick="changeShopImage(this, 'Sthirah Jaggery Powder Front.png')">
+                        <img src="Sthirah Jaggery Powder Back.png" class="product-thumb" onclick="changeShopImage(this, 'Sthirah Jaggery Powder Back.png')">
                     </div>
                 </div>
 
@@ -1217,7 +1216,7 @@
                                 <td>
                                     <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
                                         <div style="display:flex; gap:3px;" class="admin-multi-img-preview-box">
-                                            <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="sku-img-preview" style="width:30px; height:30px; object-fit:contain; border:1px solid #ccc;">
+                                            <img src="Sthirah Jaggery Powder Front.png" class="sku-img-preview" style="width:30px; height:30px; object-fit:contain; border:1px solid #ccc;">
                                         </div>
                                         <input type="file" accept="image/*" multiple style="font-size:10px; width:130px;" onchange="previewMultipleProductImages(this)">
                                     </div>
@@ -1450,7 +1449,7 @@
         let adminTimer = null;
         let currentUser = JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
 
-        const defaultProductImg = "Sthirah Jaggery Powder 500g Front.jpeg";
+        const defaultProductImg = "Sthirah Jaggery Powder Front.png";
 
         const indianStates = [
             { name: "Tamil Nadu", rate: 40, days: "2-3 Days" },
