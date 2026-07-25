@@ -628,7 +628,6 @@
         <section class="product-section">
             <div class="product-container">
                 
-                <!-- Updated info block replacing family farm content -->
                 <div class="info-block">
                     <h2>Why Choose Cane Jaggery Powder?</h2>
                     <p>
@@ -658,7 +657,6 @@
                     </ul>
                 </div>
 
-                <!-- Home Product Card with Bold Product Name & *Shipped In Individual 500G Unit Packets -->
                 <div class="product-card">
                     <div class="product-gallery-side-container">
                         <div class="side-thumbnails-col">
@@ -685,7 +683,6 @@
 
                         <p style="font-size:13px; color:var(--text-dark); margin-bottom:10px; text-align:center;"><strong>*Shipped In Individual 500G Unit Packets</strong></p>
 
-                        <!-- Quantity Stepper Widget with Capital KG -->
                         <div class="quantity-stepper-box">
                             <label>Quantity (KG):</label>
                             <div class="stepper-controls">
@@ -703,11 +700,11 @@
                                 <option value="Kerala" data-days="3-4 Days">Kerala (₹60 Shipping)</option>
                                 <option value="Andhra Pradesh" data-days="4-5 Days">Andhra Pradesh (₹70 Shipping)</option>
                                 <option value="Maharashtra" data-days="5-6 Days">Maharashtra (₹90 Shipping)</option>
-                                <option value="Other States" data-days="5-7 Days">Other States (₹110 Shipping)</option>
+                                <option value="Other States" data-days="5-7 Days" selected>Other States (₹110 Shipping)</option>
                             </select>
                         </div>
 
-                        <p id="delivery-estimate-tag" style="font-size:12px; font-weight:600; color:var(--green-accent); margin-bottom:15px;">Estimated Delivery: 2-3 Days</p>
+                        <p id="delivery-estimate-tag" style="font-size:12px; font-weight:600; color:var(--green-accent); margin-bottom:15px;">Estimated Delivery: 5-7 Days</p>
 
                         <button class="btn-action" onclick="addToCart()">ADD TO CART</button>
                     </div>
@@ -727,7 +724,7 @@
         </div>
     </main>
 
-    <!-- ================= 2. PRODUCT SHOP VIEW (Refactored with Large Image on Top and Thumbnails on Bottom) ================= -->
+    <!-- ================= 2. PRODUCT SHOP VIEW ================= -->
     <main id="product-view" class="page-view">
         <div class="product-section">
             <div class="shop-page-layout">
@@ -746,7 +743,7 @@
                     </div>
                 </div>
 
-                <!-- SECTION 2: Product Details Box with Stepper Quantity Selector -->
+                <!-- SECTION 2: Product Details Box exactly matching reference image -->
                 <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
                     <div>
                         <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;" id="shop-product-title"><strong>Sthirah Cane Jaggery Powder</strong></h1>
@@ -754,14 +751,14 @@
                             <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                             <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
                         </div>
-                        <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price">₹110.00 per KG</p>
+                        <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price">₹110.00 – ₹1,100.00</p>
                         
                         <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
-                            Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. <strong>*Shipped In Individual 500G Unit Packets</strong>
+                            Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped In Individual 500g unit packaging.
                         </p>
                         
-                        <!-- Callout box matching Reference Image 1 -->
-                        <div style="background:rgba(255,255,255,0.6); border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
+                        <!-- Callout box matching reference image exactly -->
+                        <div style="background:#F2F7EC; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
                             <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
                                 <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
                             </strong>
@@ -770,13 +767,13 @@
                             </p>
                         </div>
 
-                        <!-- Key Product Highlights matching Reference Image 1 -->
+                        <!-- Key Product Highlights matching reference image exactly -->
                         <div style="margin-bottom:20px;">
                             <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
                             <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
                                 <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
                                 <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
-                                <li>Packed in convenient moisture-resistant <strong>*Shipped In Individual 500G Unit Packets</strong> to ensure long shelf life.</li>
+                                <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
                             </ul>
                         </div>
                     </div>
@@ -828,7 +825,7 @@
         </div>
     </main>
 
-    <!-- ================= 3. MY ACCOUNT SUBPAGES (AMAZON-STYLE DASHBOARD MATCHING REFERENCE IMAGE 1 - 3 NEAT TILES) ================= -->
+    <!-- ================= 3. MY ACCOUNT SUBPAGES ================= -->
     <main id="account-view" class="page-view">
         <div class="content-page" style="max-width:900px;">
             <div id="login-box" style="text-align: center; max-width:440px; margin:0 auto;">
@@ -836,7 +833,6 @@
                 <h2 style="font-size: 22px; font-weight: 700; color: var(--green-accent); margin-bottom: 8px;">Welcome to Sthirah</h2>
                 <p style="font-size: 13px; color: #475569; margin-bottom: 30px;">Sign in securely with Google or Mobile OTP</p>
 
-                <!-- Firebase Google Sign In Button -->
                 <button type="button" onclick="firebaseGoogleLogin()" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; background: #FFFFFF; color: #1E293B; border: 1px solid #CBD5E1; padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s, box-shadow 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 15px;">
                     <i class="fa-brands fa-google" style="color: #EA4335; font-size: 16px;"></i> Continue with Google
                 </button>
@@ -847,7 +843,6 @@
                     <div style="flex: 1; border-bottom: 1px solid rgba(0,0,0,0.15);"></div>
                 </div>
 
-                <!-- Firebase Mobile OTP Form -->
                 <div id="phone-login-container">
                     <div class="form-group" style="text-align: left;">
                         <label style="font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;">Mobile Number</label>
@@ -872,7 +867,6 @@
             <div id="user-profile" style="display:none;">
                 <h1 style="color: var(--green-accent); border-bottom: 2px solid var(--green-accent); padding-bottom: 10px;">Your Account</h1>
                 
-                <!-- 3 Neat Tiles matching Reference Image 1 (Login & Security removed) -->
                 <div class="account-cards-grid">
                     <div class="account-card-box" onclick="navigateTo('history-view')">
                         <div class="account-card-icon"><i class="fa-solid fa-box-open"></i></div>
@@ -906,7 +900,7 @@
         </div>
     </main>
 
-    <!-- PROFILE EDITING SUBPAGE (Editable Name & Mobile, Fixed Email) -->
+    <!-- PROFILE EDITING SUBPAGE -->
     <main id="profile-edit-view" class="page-view">
         <div class="content-page" style="max-width:600px;">
             <h1>Profile Details</h1>
@@ -929,7 +923,7 @@
         </div>
     </main>
 
-    <!-- ADDRESS SUBPAGE structured strictly as requested: Full name, Mobile number, Alternative mobile number, Door no, Street, Area, Pincode -->
+    <!-- ADDRESS SUBPAGE -->
     <main id="address-view" class="page-view">
         <div class="content-page">
             <h1>My Saved Addresses</h1>
@@ -985,17 +979,15 @@
         </div>
     </main>
 
-    <!-- CART VIEW WITH AMAZON-STYLE SIDE CHECKOUT AND BRAND TRANSPARENT DESIGN -->
+    <!-- CART VIEW -->
     <main id="cart-view" class="page-view">
         <div class="content-page" style="max-width:1200px;">
             <h1 style="margin-bottom:25px;">Shopping Cart & Secure Checkout</h1>
             <div class="cart-layout-grid">
-                <!-- Left Column: Item Details and Quantity Editing -->
                 <div>
                     <div id="cart-list">Cart is empty.</div>
                 </div>
 
-                <!-- Right Column: Subtotal and Checkout Summary -->
                 <div id="cart-summary-col" style="background:rgba(255,255,255,0.6); border:2px solid var(--green-accent); border-radius:12px; padding:25px; display:none;">
                     <h3 style="font-size:18px; font-weight:800; color:var(--text-dark); margin-bottom:12px;">Subtotal (<span id="cart-item-count-lbl">0</span> items): <span id="cart-subtotal-lbl" style="color:var(--green-accent);">₹0.00</span></h3>
                     <p style="font-size:12px; color:#555; margin-bottom:20px;">(Incl. all taxes & shipping)</p>
@@ -1094,7 +1086,7 @@
         </div>
     </main>
 
-    <!-- ================= 4. REDESIGNED ADMIN CONSOLE MATCHING REFERENCE IMAGES ================= -->
+    <!-- ================= 4. ADMIN CONSOLE ================= -->
     <main id="admin-view" class="page-view">
         <div id="admin-login-screen" style="max-width:400px; margin:60px auto; background:white; padding:30px; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
             <h2>Admin / Billing Software Login</h2>
@@ -1114,7 +1106,6 @@
         </div>
 
         <div id="admin-console-screen" class="admin-dashboard-layout" style="display:none;">
-            <!-- Sidebar matching reference layouts -->
             <aside class="admin-sidebar">
                 <div>
                     <div class="admin-sidebar-top-logo">
@@ -1159,7 +1150,6 @@
                 </div>
             </aside>
 
-            <!-- Main Content Area -->
             <div class="admin-main-content">
                 <div class="admin-topbar-header">
                     <h1 id="admin-header-title">Dashboard</h1>
@@ -1173,7 +1163,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 1: DASHBOARD -->
                 <div id="tab-dash" class="admin-panel-tab active-tab">
                     <div class="admin-stats-row">
                         <div class="admin-stat-card">
@@ -1233,7 +1222,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 2: ORDER MANAGEMENT -->
                 <div id="tab-orders" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
                         <div class="filter-bar-widget">
@@ -1362,7 +1350,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 3: CUSTOMERS -->
                 <div id="tab-customers" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Customer Directory</h2>
@@ -1384,7 +1371,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 4: CATEGORIES -->
                 <div id="tab-categories" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:600px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Product Categories Management</h2>
@@ -1394,7 +1380,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 5: TRANSACTION -->
                 <div id="tab-transaction" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Transaction Logs & Payment Gateway Ledgers</h2>
@@ -1417,7 +1402,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 6: BRAND / COMPANY -->
                 <div id="tab-company" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:700px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Company Details & Legal Profile Management</h2>
@@ -1435,7 +1419,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 7: ADD PRODUCT -->
                 <div id="tab-add-product" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:700px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Add New Product Wizard</h2>
@@ -1453,7 +1436,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 8: PRODUCT LIST -->
                 <div id="tab-products" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
@@ -1501,7 +1483,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 9: SHIPPING MATRIX -->
                 <div id="tab-rates" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">All-State Shipping Rates & Delivery Timelines</h2>
@@ -1516,7 +1497,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 10: ADMIN ROLE -->
                 <div id="tab-admin-role" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:700px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Admin Roles & Profile Settings</h2>
@@ -1527,7 +1507,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 11: REPORTS -->
                 <div id="tab-reports" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:800px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Sales & Reports Configuration</h2>
@@ -1625,7 +1604,7 @@
         </div>
     </div>
 
-    <!-- GLOBAL FOOTER matching Reference Image precisely -->
+    <!-- GLOBAL FOOTER -->
     <footer id="global-footer" class="site-footer">
         <div class="footer-container">
             <div class="footer-grid-img3">
@@ -1978,7 +1957,6 @@
                 document.getElementById('user-nav-label').innerText = "Account (" + (currentUser.name || currentUser.id ? (currentUser.name || currentUser.id).split('@')[0] : 'User') + ")";
                 document.getElementById('login-box').style.display = "none";
                 document.getElementById('user-profile').style.display = "block";
-                document.getElementById('cust-name-val').innerText = currentUser.name || currentUser.id || currentUser.phone;
                 document.getElementById('edit-profile-name').value = currentUser.name || currentUser.id || "";
                 document.getElementById('edit-profile-email').value = currentUser.email || currentUser.id || "";
                 document.getElementById('edit-profile-mobile').value = currentUser.mobile || "";
@@ -2009,7 +1987,6 @@
             updateCustomerNav();
         }
 
-        /* Firebase Auth Simulation Handlers */
         function firebaseGoogleLogin() {
             const googleEmail = "user_" + Math.floor(1000 + Math.random() * 9000) + "@gmail.com";
             currentUser = JSON.parse(localStorage.getItem('sthirah_user_' + googleEmail)) || { id: googleEmail, email: googleEmail, name: "Google Customer", addresses: [], orders: [] };
@@ -2142,31 +2119,17 @@
         }
 
         function renderSavedAddressesInAccount() {
-            const container = document.getElementById('saved-addresses-list');
             const subpageContainer = document.getElementById('subpage-addresses-container');
-            const countSpan = document.getElementById('address-count');
-            
             if(!currentUser) return;
             const addrs = currentUser.addresses || [];
-            if(countSpan) countSpan.innerText = addrs.length;
 
             if(addrs.length === 0) {
-                if(container) container.innerHTML = "<p style='font-size:13px; color:#666;'>No addresses saved yet. Add up to 5 delivery addresses.</p>";
                 if(subpageContainer) subpageContainer.innerHTML = "<p>No addresses saved yet. Use the button below to add your delivery location.</p>";
                 return;
             }
 
-            let html = "";
             let subHtml = "";
             addrs.forEach((a, idx) => {
-                html += `
-                    <div style="background:#fafafa; border:1px solid #ddd; padding:10px; border-radius:6px; margin-bottom:8px; font-size:13px;">
-                        <strong>${a.name}</strong> (${a.mobile}, Alt: ${a.altMobile})<br>
-                        Door ${a.door}, ${a.street}, ${a.area} - ${a.pincode}<br>
-                        <button class="btn-secondary" style="margin-top:5px; padding:4px 8px;" onclick="navigateTo('address-view');">Edit</button>
-                        <button class="cart-remove-btn" style="margin-top:5px; padding:4px 8px;" onclick="deleteAddress(${idx})">Delete</button>
-                    </div>
-                `;
                 subHtml += `
                     <div style="background:rgba(255,255,255,0.7); border:1px solid var(--green-accent); padding:15px; border-radius:6px; margin-bottom:12px;">
                         <strong>Address #${idx + 1}: ${a.name}</strong><br>
@@ -2177,7 +2140,6 @@
                     </div>
                 `;
             });
-            if(container) container.innerHTML = html;
             if(subpageContainer) subpageContainer.innerHTML = subHtml;
         }
 
@@ -2361,7 +2323,6 @@
             
             let totalAmt = cart.reduce((acc, item) => acc + item.price, 0);
 
-            // Automatically open payment gateway view
             document.getElementById('gateway-amount-display').innerText = "Amount: ₹" + totalAmt + ".00";
             navigateTo('gateway-view');
         }
