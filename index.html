@@ -115,16 +115,14 @@
 
         .product-card { width: 48%; min-width: 320px; flex: 1; display: flex; flex-direction: column; align-items: center; background: transparent; border: 2px solid var(--green-accent); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); justify-content: space-between; }
         
-        /* Lens & Magnifier Zoom Container Styling */
-        .image-zoom-container {
+        /* Robust Image Zoom & Magnifier Styling */
+        .img-zoom-container {
             position: relative;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             background: transparent;
-            overflow: hidden;
-            border-radius: 8px;
         }
         .product-pack-img { 
             max-width: 100%; 
@@ -133,14 +131,12 @@
             object-fit: contain; 
             display: block;
         }
-        
-        /* Floating Zoom Window Spec */
         .img-zoom-lens {
             position: absolute;
             border: 2px solid var(--green-accent);
-            background: rgba(17, 107, 50, 0.15);
-            width: 90px;
-            height: 90px;
+            background: rgba(17, 107, 50, 0.2);
+            width: 100px;
+            height: 100px;
             display: none;
             pointer-events: none;
             border-radius: 4px;
@@ -149,14 +145,14 @@
             position: absolute;
             left: 102%;
             top: 0;
-            width: 340px;
-            height: 340px;
+            width: 380px;
+            height: 380px;
             border: 2px solid var(--green-accent);
             background-repeat: no-repeat;
             display: none;
             z-index: 100;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             background-color: white;
         }
 
@@ -530,7 +526,6 @@
             min-height: 360px;
             border-radius: 8px;
             width: 100%;
-            overflow: hidden;
         }
 
         @media print, (max-width: 900px) {
@@ -715,7 +710,7 @@
                             <img src="Sthirah Jaggery Powder 500g Back.jpg" class="side-thumb" onmouseover="changeHomeImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')" onclick="changeHomeImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
                             <img src="Sthirah Jaggery Powder Nutrition Information .png" class="side-thumb" onmouseover="changeHomeImage(this, 'Sthirah Jaggery Powder Nutrition Information .png')" onclick="changeHomeImage(this, 'Sthirah Jaggery Powder Nutrition Information .png')">
                         </div>
-                        <div class="main-image-preview-wrapper image-wrapper" id="home-zoom-container" onmousemove="imageZoom('home-main-product-img', 'home-zoom-lens', 'home-zoom-result', event)" onmouseenter="showZoom('home-zoom-lens', 'home-zoom-result')" onmouseleave="hideZoom('home-zoom-lens', 'home-zoom-result')">
+                        <div class="main-image-preview-wrapper img-zoom-container" id="home-zoom-container" onmousemove="imageZoom('home-main-product-img', 'home-zoom-lens', 'home-zoom-result', event)" onmouseenter="showZoom('home-zoom-lens', 'home-zoom-result')" onmouseleave="hideZoom('home-zoom-lens', 'home-zoom-result')">
                             <span class="badge-sale">SALE</span>
                             <img id="home-main-product-img" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder 500g" class="product-pack-img clickable" onclick="navigateTo('product-view')" style="max-height:380px;">
                             <div id="home-zoom-lens" class="img-zoom-lens"></div>
@@ -790,7 +785,7 @@
                             <img src="Sthirah Jaggery Powder 500g Back.jpg" class="side-thumb" onmouseover="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
                             <img src="Sthirah Jaggery Powder Nutrition Information .png" class="side-thumb" onmouseover="changeShopImage(this, 'Sthirah Jaggery Powder Nutrition Information .png')" onclick="changeShopImage(this, 'Sthirah Jaggery Powder Nutrition Information .png')">
                         </div>
-                        <div class="main-image-preview-wrapper image-wrapper" id="shop-zoom-container" onmousemove="imageZoom('shop-pimg-display', 'shop-zoom-lens', 'shop-zoom-result', event)" onmouseenter="showZoom('shop-zoom-lens', 'shop-zoom-result')" onmouseleave="hideZoom('shop-zoom-lens', 'shop-zoom-result')">
+                        <div class="main-image-preview-wrapper img-zoom-container" id="shop-zoom-container" onmousemove="imageZoom('shop-pimg-display', 'shop-zoom-lens', 'shop-zoom-result', event)" onmouseenter="showZoom('shop-zoom-lens', 'shop-zoom-result')" onmouseleave="hideZoom('shop-zoom-lens', 'shop-zoom-result')">
                             <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" style="max-height:400px; max-width:100%; object-fit:contain;">
                             <div id="shop-zoom-lens" class="img-zoom-lens"></div>
                             <div id="shop-zoom-result" class="img-zoom-result"></div>
@@ -1795,7 +1790,7 @@
             thumbEl.classList.add('active-thumb');
         }
 
-        /* Magnifier Zoom Logic */
+        /* Fully Working Smooth Magnifier Zoom Logic */
         function showZoom(lensId, resultId) {
             document.getElementById(lensId).style.display = "block";
             document.getElementById(resultId).style.display = "block";
@@ -1818,7 +1813,7 @@
             let cx = result.offsetWidth / lens.offsetWidth;
             let cy = result.offsetHeight / lens.offsetHeight;
             
-            result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+            result.style.backgroundSize = (img.naturalWidth * cx) + "px " + (img.naturalHeight * cy) + "px";
 
             let pos = getCursorPos(e, img);
             let x = pos.x - (lens.offsetWidth / 2);
@@ -1832,7 +1827,10 @@
             lens.style.left = x + "px";
             lens.style.top = y + "px";
 
-            result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+            let ratioX = img.naturalWidth / img.width;
+            let ratioY = img.naturalHeight / img.height;
+
+            result.style.backgroundPosition = "-" + (x * ratioX * cx) + "px -" + (y * ratioY * cy) + "px";
         }
 
         function getCursorPos(e, img) {
@@ -2432,7 +2430,7 @@
                 html += `
                     <div class="cart-item-row">
                         <div class="cart-item-left">
-                            <div class="cart-item-img-wrapper" id="cart-zoom-box-${index}" onmousemove="imageZoom('cart-img-${index}', 'cart-lens-${index}', 'cart-result-${index}', event)" onmouseenter="showZoom('cart-lens-${index}', 'cart-result-${index}')" onmouseleave="hideZoom('cart-lens-${index}', 'cart-result-${index}')">
+                            <div class="cart-item-img-wrapper img-zoom-container" id="cart-zoom-box-${index}" onmousemove="imageZoom('cart-img-${index}', 'cart-lens-${index}', 'cart-result-${index}', event)" onmouseenter="showZoom('cart-lens-${index}', 'cart-result-${index}')" onmouseleave="hideZoom('cart-lens-${index}', 'cart-result-${index}')">
                                 <img src="${item.img}" alt="${item.name}" class="cart-item-img" id="cart-img-${index}">
                                 <div id="cart-lens-${index}" class="img-zoom-lens"></div>
                                 <div id="cart-result-${index}" class="img-zoom-result"></div>
