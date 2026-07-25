@@ -227,7 +227,7 @@
         .admin-table th { background: #F8FAFC; font-weight: 600; color: #475569; }
         .admin-input-sm { padding: 6px 10px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 13px; width: 100%; outline: none; }
 
-        /* Global Footer matching Image 3 precisely */
+        /* Global Footer matching Reference Image precisely */
         .site-footer { background-color: var(--bg-sage); padding: 50px 40px 20px 40px; border-top: 1px solid var(--border-light); margin-top: auto; }
         .footer-container { max-width: 1200px; margin: 0 auto; }
         .footer-grid-img3 { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
@@ -237,10 +237,10 @@
         .footer-col-img3 ul li a { text-decoration: none; color: var(--text-dark); font-size: 13px; display: inline-block; transition: color 0.3s, transform 0.2s; }
         .footer-col-img3 ul li a:hover { color: var(--green-accent); transform: translateX(4px); }
 
-        .footer-brand-col img { height: 45px; object-fit: contain; margin-bottom: 10px; }
-        .footer-brand-col .company-name-txt { font-weight: 800; font-size: 13px; color: var(--text-dark); margin-bottom: 15px; letter-spacing: 0.5px; }
+        .footer-brand-col img { height: 40px; object-fit: contain; margin-bottom: 6px; }
+        .footer-brand-col .company-name-txt { font-weight: 800; font-size: 12.5px; color: var(--text-dark); margin-bottom: 12px; letter-spacing: 0.3px; }
 
-        .social-icons-row { display: flex; gap: 15px; font-size: 18px; }
+        .social-icons-row { display: flex; gap: 12px; font-size: 16px; }
         .social-icons-row a { color: var(--text-dark); transition: transform 0.3s, color 0.3s; display: inline-block; }
         .social-icons-row a:hover { color: var(--green-accent); transform: translateY(-4px) scale(1.15); }
 
@@ -339,7 +339,7 @@
     <header class="navbar">
         <div class="nav-container">
             <div class="logo clickable" onclick="navigateTo('home-view')">
-                <img src="Sthirah DP Logo.jpg" alt="Sthirah Logo" class="logo-img">
+                <img src="Logo 2.png" alt="Sthirah Logo" class="logo-img">
             </div>
             <nav class="nav-links">
                 <a href="javascript:void(0)" id="nav-home" class="active" onclick="navigateTo('home-view')">Home</a>
@@ -528,136 +528,130 @@
         </div>
     </main>
 
-    <!-- ================= 2. PRODUCT SHOP VIEW (Exact Reference Styling) ================= -->
+    <!-- ================= 2. PRODUCT SHOP VIEW (Four Sections in 2x2 Grid Layout: Image, Details, Nutrition, Reviews) ================= -->
     <main id="product-view" class="page-view">
         <div class="product-section">
-            <div class="product-container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
                 
-                <!-- Left Column: Product Photo & Nutritional Table Side-by-Side (Stacked) -->
-                <div style="flex:1; display:flex; flex-direction:column; gap:25px; min-width:280px;">
-                    <!-- Product Photo Box -->
-                    <div style="text-align:center; background:white; padding:30px; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.03);">
-                        <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" style="max-height:380px; max-width:100%; object-fit:contain;">
-                        <div style="display:flex; justify-content:center; gap:8px; margin-top:15px;" id="shop-thumbs-container">
-                            <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
-                            <img src="Sthirah Jaggery Powder 500g Back.jpg" class="product-thumb" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
-                        </div>
-                    </div>
-
-                    <!-- Nutritional Information Table (Exact reference styling matching image 2) -->
-                    <div style="background:white; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #CBD5E1;">
-                        <h3 style="color:var(--green-accent); font-size:20px; font-weight:800; margin-bottom:4px;">Nutrition Information</h3>
-                        <p style="font-size:12.5px; color:#475569; margin-bottom:16px;">125 servings per pack | Serving Size (4g)</p>
-                        
-                        <div style="display:flex; justify-content:space-between; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; padding:14px 16px; border-radius:8px; margin-bottom:18px; box-shadow:0 1px 2px rgba(0,0,0,0.02);">
-                            <div>
-                                <div style="font-size:15px; font-weight:700; color:#0F172A;">Calories</div>
-                                <div style="font-size:11px; color:#64748B;">(Amount per 100g)</div>
-                            </div>
-                            <div style="font-size:24px; font-weight:800; color:var(--green-accent);">380</div>
-                        </div>
-
-                        <div style="display:flex; justify-content:space-between; font-weight:700; font-size:13px; color:#334155; padding-bottom:8px; border-bottom:2px solid #334155; margin-bottom:10px;">
-                            <span>Nutrient Breakdown</span>
-                            <span>% Daily Value*</span>
-                        </div>
-
-                        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-                            <tbody>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Total Fat 0g</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">0%</td></tr>
-                                <tr style="border-bottom:1px solid #F1F5F9;"><td style="padding:7px 0 7px 16px; color:#475569;">Saturated Fat 0g</td><td style="padding:7px 0; text-align:right; color:#475569; font-weight:600;">0%</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:7px 0 7px 16px; color:#475569;">Trans Fat 0g</td><td style="padding:7px 0; text-align:right; color:#94A3B8;">—</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Cholesterol 0mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">0%</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Total Carbohydrates 95g</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">35%</td></tr>
-                                <tr style="border-bottom:1px solid #F1F5F9;"><td style="padding:7px 0 7px 16px; color:#475569;">Dietary Fibre 0g</td><td style="padding:7px 0; text-align:right; color:#475569; font-weight:600;">0%</td></tr>
-                                <tr style="border-bottom:1px solid #F1F5F9;"><td style="padding:7px 0 7px 16px; color:#475569;">Total Sugars 97g</td><td style="padding:7px 0; text-align:right; color:#94A3B8;">—</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:7px 0 7px 28px; color:#64748B;">includes 0g Added Sugars</td><td style="padding:7px 0; text-align:right; color:#64748B; font-weight:600;">0%</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Protein 0g</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">0%</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Calcium 64mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">4%</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Iron 15.96mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">90%</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Potassium 0mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">0%</td></tr>
-                                <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Magnesium 106.66mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">25%</td></tr>
-                            </tbody>
-                        </table>
-                        <p style="font-size:11px; color:#64748B; margin-top:14px; line-height:1.4; border-bottom:1px dashed #CBD5E1; padding-bottom:12px;">* The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
-                        
-                        <div style="margin-top:12px;">
-                            <strong style="font-size:13px; color:#0F172A; display:block; margin-bottom:4px;">Storage Instructions:</strong>
-                            <p style="font-size:12.5px; color:#475569; line-height:1.4;">Once opened, transfer to an airtight container to preserve farm-fresh quality and prevent moisture.</p>
-                        </div>
+                <!-- Section 1: Product Image Box -->
+                <div style="background:white; padding:40px 30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" style="max-height:420px; max-width:100%; object-fit:contain;">
+                    <div style="display:flex; justify-content:center; gap:10px; margin-top:20px;" id="shop-thumbs-container">
+                        <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" style="width:55px; height:55px; border-radius:6px;" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
+                        <img src="Sthirah Jaggery Powder 500g Back.jpg" class="product-thumb" style="width:55px; height:55px; border-radius:6px;" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
                     </div>
                 </div>
 
-                <!-- Right Column: Product Detail (Exact Reference Image 1) & Customer Reviews Side-by-Side -->
-                <div style="flex:1; display:flex; flex-direction:column; gap:25px; min-width:280px;">
-                    <!-- Product Details Box matching Reference Image 1 exactly -->
-                    <div style="background:white; padding:30px; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.03);">
-                        <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;">Sthirah Cane Jaggery Powder</h1>
-                        <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
-                            <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
-                        </div>
-                        <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price">₹110.00 – ₹1,100.00</p>
-                        
-                        <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
-                            Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped in individual 500g unit packaging.
+                <!-- Section 2: Product Details Box -->
+                <div style="background:white; padding:30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0;">
+                    <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;">Sthirah Cane Jaggery Powder</h1>
+                    <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
+                        <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
+                    </div>
+                    <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price">₹110.00 – ₹1,100.00</p>
+                    
+                    <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
+                        Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped in individual 500g unit packaging.
+                    </p>
+                    
+                    <!-- Callout box matching Reference Image 1 -->
+                    <div style="background:#F6FBF6; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
+                        <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                            <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
+                        </strong>
+                        <p style="font-size:13.5px; color:#334155; line-height:1.5;">
+                            Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
                         </p>
-                        
-                        <!-- Callout box matching Reference Image 1 -->
-                        <div style="background:#F6FBF6; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
-                            <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                                <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
-                            </strong>
-                            <p style="font-size:13.5px; color:#334155; line-height:1.5;">
-                                Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
-                            </p>
-                        </div>
-
-                        <!-- Key Product Highlights matching Reference Image 1 -->
-                        <div style="margin-bottom:20px;">
-                            <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
-                            <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
-                                <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
-                                <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
-                                <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
-                            </ul>
-                        </div>
-
-                        <div class="size-selector">
-                            <label for="prod-size-select">Select Package Size (Min 1KG):</label>
-                            <select id="prod-size-select">
-                                <option value="1KG" data-price="110">1KG (2 x 500g packs) - ₹110.00</option>
-                                <option value="1.5KG" data-price="165">1.5KG (3 x 500g packs) - ₹165.00</option>
-                                <option value="2KG" data-price="220">2KG (4 x 500g packs) - ₹220.00</option>
-                                <option value="5KG" data-price="550">5KG (10 x 500g packs) - ₹550.00</option>
-                                <option value="10KG" data-price="1100">10KG (20 x 500g packs) - ₹1100.00</option>
-                            </select>
-                        </div>
-
-                        <button class="btn-action" onclick="addToCartFromShop()">ADD TO CART</button>
                     </div>
 
-                    <!-- Customer Reviews Section -->
-                    <div style="background:white; padding:25px; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.03); border:1px solid #E2E8F0;">
-                        <h3 style="color:var(--green-accent); font-size:18px; font-weight:700; margin-bottom:15px; border-bottom:2px solid var(--bg-sage); padding-bottom:8px;">Customer Reviews & Ratings</h3>
-                        
-                        <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
-                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <strong>Karthik R.</strong> <span style="font-size:12px; color:#777;">— June 12, 2026</span>
-                            <p style="font-size:13.5px; margin-top:5px; color:#334155;">Absolute top quality jaggery! Gives my morning coffee the best caramel flavor without any artificial aftertaste.</p>
-                        </div>
+                    <!-- Key Product Highlights matching Reference Image 1 -->
+                    <div style="margin-bottom:20px;">
+                        <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
+                        <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
+                            <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
+                            <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
+                            <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
+                        </ul>
+                    </div>
 
-                        <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
-                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <strong>Priya S.</strong> <span style="font-size:12px; color:#777;">— June 18, 2026</span>
-                            <p style="font-size:13.5px; margin-top:5px; color:#334155;">Clean packaging in 500g packets. Very authentic taste and fast shipping across Tamil Nadu.</p>
-                        </div>
+                    <div class="size-selector">
+                        <label for="prod-size-select">Select Package Size (Min 1KG):</label>
+                        <select id="prod-size-select">
+                            <option value="1KG" data-price="110">1KG (2 x 500g packs) - ₹110.00</option>
+                            <option value="1.5KG" data-price="165">1.5KG (3 x 500g packs) - ₹165.00</option>
+                            <option value="2KG" data-price="220">2KG (4 x 500g packs) - ₹220.00</option>
+                            <option value="5KG" data-price="550">5KG (10 x 500g packs) - ₹550.00</option>
+                            <option value="10KG" data-price="1100">10KG (20 x 500g packs) - ₹1100.00</option>
+                        </select>
+                    </div>
 
+                    <button class="btn-action" onclick="addToCartFromShop()">ADD TO CART</button>
+                </div>
+
+                <!-- Section 3: Nutritional Information Table (Transparent Background matching reference image) -->
+                <div style="background:transparent; padding:25px; border-radius:12px; border:2px solid var(--green-accent);">
+                    <h3 style="color:var(--green-accent); font-size:20px; font-weight:800; margin-bottom:4px;">Nutrition Information</h3>
+                    <p style="font-size:12.5px; color:#475569; margin-bottom:16px;">125 servings per pack | Serving Size (4g)</p>
+                    
+                    <div style="display:flex; justify-content:space-between; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; padding:14px 16px; border-radius:8px; margin-bottom:18px; box-shadow:0 1px 2px rgba(0,0,0,0.02);">
                         <div>
-                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <strong>Rajesh M.</strong> <span style="font-size:12px; color:#777;">— July 02, 2026</span>
-                            <p style="font-size:13.5px; margin-top:5px; color:#334155;">Replaced refined sugar completely with Sthirah powder. Highly recommended!</p>
+                            <div style="font-size:15px; font-weight:700; color:#0F172A;">Calories</div>
+                            <div style="font-size:11px; color:#64748B;">(Amount per 100g)</div>
                         </div>
+                        <div style="font-size:24px; font-weight:800; color:var(--green-accent);">380</div>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; font-weight:700; font-size:13px; color:#334155; padding-bottom:8px; border-bottom:2px solid #334155; margin-bottom:10px;">
+                        <span>Nutrient Breakdown</span>
+                        <span>% Daily Value*</span>
+                    </div>
+
+                    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                        <tbody>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Total Fat 0g</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">0%</td></tr>
+                            <tr style="border-bottom:1px solid #F1F5F9;"><td style="padding:7px 0 7px 16px; color:#475569;">Saturated Fat 0g</td><td style="padding:7px 0; text-align:right; color:#475569; font-weight:600;">0%</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:7px 0 7px 16px; color:#475569;">Trans Fat 0g</td><td style="padding:7px 0; text-align:right; color:#94A3B8;">—</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Cholesterol 0mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">0%</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Total Carbohydrates 95g</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">35%</td></tr>
+                            <tr style="border-bottom:1px solid #F1F5F9;"><td style="padding:7px 0 7px 16px; color:#475569;">Dietary Fibre 0g</td><td style="padding:7px 0; text-align:right; color:#475569; font-weight:600;">0%</td></tr>
+                            <tr style="border-bottom:1px solid #F1F5F9;"><td style="padding:7px 0 7px 16px; color:#475569;">Total Sugars 97g</td><td style="padding:7px 0; text-align:right; color:#94A3B8;">—</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:7px 0 7px 28px; color:#64748B;">includes 0g Added Sugars</td><td style="padding:7px 0; text-align:right; color:#64748B; font-weight:600;">0%</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Protein 0g</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">0%</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Calcium 64mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">4%</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Iron 15.96mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">90%</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Potassium 0mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">0%</td></tr>
+                            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:9px 0; font-weight:600; color:#0F172A;">Magnesium 106.66mg</td><td style="padding:9px 0; text-align:right; font-weight:700; color:#0F172A;">25%</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size:11px; color:#64748B; margin-top:14px; line-height:1.4; border-bottom:1px dashed #CBD5E1; padding-bottom:12px;">* The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
+                    
+                    <div style="margin-top:12px;">
+                        <strong style="font-size:13px; color:#0F172A; display:block; margin-bottom:4px;">Storage Instructions:</strong>
+                        <p style="font-size:12.5px; color:#475569; line-height:1.4;">Once opened, transfer to an airtight container to preserve farm-fresh quality and prevent moisture.</p>
+                    </div>
+                </div>
+
+                <!-- Section 4: Customer Reviews Section -->
+                <div style="background:white; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0;">
+                    <h3 style="color:var(--green-accent); font-size:18px; font-weight:700; margin-bottom:15px; border-bottom:2px solid var(--bg-sage); padding-bottom:8px;">Customer Reviews & Ratings</h3>
+                    
+                    <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
+                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <strong>Karthik R.</strong> <span style="font-size:12px; color:#777;">— June 12, 2026</span>
+                        <p style="font-size:13.5px; margin-top:5px; color:#334155;">Absolute top quality jaggery! Gives my morning coffee the best caramel flavor without any artificial aftertaste.</p>
+                    </div>
+
+                    <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
+                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <strong>Priya S.</strong> <span style="font-size:12px; color:#777;">— June 18, 2026</span>
+                        <p style="font-size:13.5px; margin-top:5px; color:#334155;">Clean packaging in 500g packets. Very authentic taste and fast shipping across Tamil Nadu.</p>
+                    </div>
+
+                    <div>
+                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <strong>Rajesh M.</strong> <span style="font-size:12px; color:#777;">— July 02, 2026</span>
+                        <p style="font-size:13.5px; margin-top:5px; color:#334155;">Replaced refined sugar completely with Sthirah powder. Highly recommended!</p>
                     </div>
                 </div>
 
@@ -899,7 +893,7 @@
             <aside class="admin-sidebar">
                 <div>
                     <div class="admin-sidebar-top-logo">
-                        <img src="Sthirah DP Logo.jpg" alt="Sthirah Logo">
+                        <img src="Logo 2.png" alt="Sthirah Logo">
                         <span style="font-weight: 700; font-size: 16px; color: var(--green-accent);">STHIRAH</span>
                     </div>
 
@@ -929,7 +923,7 @@
 
                 <div style="border-top:1px solid #E2E8F0; padding-top:15px; margin-top:15px;">
                     <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-                        <img src="Sthirah DP Logo.jpg" style="width:32px; height:32px; border-radius:50%; object-fit:contain; border:1px solid #ccc;">
+                        <img src="Logo 2.png" style="width:32px; height:32px; border-radius:50%; object-fit:contain; border:1px solid #ccc;">
                         <div style="font-size:12px; overflow:hidden;">
                             <strong>Sthirah Admin</strong><br>
                             <span style="color:#64748B; font-size:11px;">invosthirah...</span>
@@ -950,7 +944,7 @@
                             <input type="text" placeholder="Search data, users, or reports">
                         </div>
                         <i class="fa-regular fa-bell" style="font-size:18px; color:#64748B; cursor:pointer;"></i>
-                        <img src="Sthirah DP Logo.jpg" style="width:36px; height:36px; border-radius:50%; object-fit:contain; border:1px solid #ccc;">
+                        <img src="Logo 2.png" style="width:36px; height:36px; border-radius:50%; object-fit:contain; border:1px solid #ccc;">
                     </div>
                 </div>
 
@@ -1406,7 +1400,7 @@
         </div>
     </div>
 
-    <!-- GLOBAL FOOTER matching Image 3 precisely -->
+    <!-- GLOBAL FOOTER matching Reference Image precisely -->
     <footer id="global-footer" class="site-footer">
         <div class="footer-container">
             <div class="footer-grid-img3">
