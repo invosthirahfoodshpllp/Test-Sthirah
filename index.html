@@ -111,20 +111,19 @@
         .info-block-benefits li { position: relative; padding-left: 28px; margin-bottom: 16px; font-size: 14.5px; line-height: 1.6; }
         .info-block-benefits li i { position: absolute; left: 0; top: 3px; color: var(--green-accent); font-size: 16px; }
 
-        .product-card { width: 380px; max-width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .product-card { width: 380px; max-width: 100%; display: flex; flex-direction: column; align-items: center; background: transparent; border: 2px solid var(--green-accent); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
         .image-wrapper {
             position: relative;
             width: 100%;
-            background-color: var(--white);
+            background-color: transparent;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             border-radius: 8px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .image-wrapper:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+        .image-wrapper:hover { transform: translateY(-4px); }
         .product-pack-img { max-width: 100%; height: auto; max-height: 300px; object-fit: contain; }
         
         .product-thumbnails-row { display: flex; gap: 8px; margin-top: 12px; }
@@ -462,15 +461,15 @@
                     </ul>
                 </div>
 
+                <!-- Home Product Card with transparent background, green outline, and hover-to-switch image without brand logo thumb -->
                 <div class="product-card">
                     <div class="image-wrapper">
                         <span class="badge-sale">SALE</span>
-                        <img id="main-product-img" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder 500g" class="product-pack-img clickable" onclick="navigateTo('product-view')">
+                        <img id="home-main-product-img" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder 500g" class="product-pack-img clickable" onclick="navigateTo('product-view')">
                         
                         <div class="product-thumbnails-row">
-                            <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" onclick="changeMainImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
-                            <img src="Sthirah Jaggery Powder 500g Back.jpg" class="product-thumb" onclick="changeMainImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
-                            <img src="Logo 2.png" class="product-thumb" onclick="changeMainImage(this, 'Logo 2.png')">
+                            <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" style="background:white; padding:2px;" onmouseover="changeHomeImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')" onclick="changeHomeImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
+                            <img src="Sthirah Jaggery Powder 500g Back.jpg" class="product-thumb" style="background:white; padding:2px;" onmouseover="changeHomeImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')" onclick="changeHomeImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
                         </div>
                     </div>
                     
@@ -528,69 +527,75 @@
         </div>
     </main>
 
-    <!-- ================= 2. PRODUCT SHOP VIEW (Four Sections Side by Side with transparent green outline styling & hover image switch) ================= -->
+    <!-- ================= 2. PRODUCT SHOP VIEW (Four Sections Side by Side with Matched Sizing & Alignment) ================= -->
     <main id="product-view" class="page-view">
         <div class="product-section">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
                 
-                <!-- Section 1: Product Image Box with Transparent Background, Green Outline, and Hover Switch -->
-                <div style="background:transparent; padding:40px 30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                    <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" style="max-height:420px; max-width:100%; object-fit:contain; transition: opacity 0.3s ease;">
+                <!-- Section 1: Product Image Box (Matched sizing with details box) -->
+                <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; align-items:center; justify-content:space-between; height: 100%;">
+                    <div style="flex: 1; display: flex; align-items: center; justify-content: center; width: 100%;">
+                        <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" style="max-height:380px; max-width:100%; object-fit:contain; transition: opacity 0.3s ease;">
+                    </div>
                     <div style="display:flex; justify-content:center; gap:10px; margin-top:20px;" id="shop-thumbs-container">
                         <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" style="width:55px; height:55px; border-radius:6px; background:white; padding:2px;" onmouseover="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
                         <img src="Sthirah Jaggery Powder 500g Back.jpg" class="product-thumb" style="width:55px; height:55px; border-radius:6px; background:white; padding:2px;" onmouseover="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
                     </div>
                 </div>
 
-                <!-- Section 2: Product Details Box -->
-                <div style="background:white; padding:30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0;">
-                    <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;">Sthirah Cane Jaggery Powder</h1>
-                    <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
-                        <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
-                    </div>
-                    <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price">₹110.00 – ₹1,100.00</p>
-                    
-                    <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
-                        Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped in individual 500g unit packaging.
-                    </p>
-                    
-                    <!-- Callout box matching Reference Image 1 -->
-                    <div style="background:#F6FBF6; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
-                        <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                            <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
-                        </strong>
-                        <p style="font-size:13.5px; color:#334155; line-height:1.5;">
-                            Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
+                <!-- Section 2: Product Details Box (Matched sizing) -->
+                <div style="background:white; padding:30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0; display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
+                    <div>
+                        <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;">Sthirah Cane Jaggery Powder</h1>
+                        <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
+                            <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
+                        </div>
+                        <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price">₹110.00 – ₹1,100.00</p>
+                        
+                        <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
+                            Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped in individual 500g unit packaging.
                         </p>
+                        
+                        <!-- Callout box matching Reference Image 1 -->
+                        <div style="background:#F6FBF6; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
+                            <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
+                            </strong>
+                            <p style="font-size:13.5px; color:#334155; line-height:1.5;">
+                                Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
+                            </p>
+                        </div>
+
+                        <!-- Key Product Highlights matching Reference Image 1 -->
+                        <div style="margin-bottom:20px;">
+                            <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
+                            <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
+                                <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
+                                <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
+                                <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <!-- Key Product Highlights matching Reference Image 1 -->
-                    <div style="margin-bottom:20px;">
-                        <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
-                        <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
-                            <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
-                            <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
-                            <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
-                        </ul>
-                    </div>
+                    <div>
+                        <div class="size-selector">
+                            <label for="prod-size-select">Select Package Size (Min 1KG):</label>
+                            <select id="prod-size-select">
+                                <option value="1KG" data-price="110">1KG (2 x 500g packs) - ₹110.00</option>
+                                <option value="1.5KG" data-price="165">1.5KG (3 x 500g packs) - ₹165.00</option>
+                                <option value="2KG" data-price="220">2KG (4 x 500g packs) - ₹220.00</option>
+                                <option value="5KG" data-price="550">5KG (10 x 500g packs) - ₹550.00</option>
+                                <option value="10KG" data-price="1100">10KG (20 x 500g packs) - ₹1100.00</option>
+                            </select>
+                        </div>
 
-                    <div class="size-selector">
-                        <label for="prod-size-select">Select Package Size (Min 1KG):</label>
-                        <select id="prod-size-select">
-                            <option value="1KG" data-price="110">1KG (2 x 500g packs) - ₹110.00</option>
-                            <option value="1.5KG" data-price="165">1.5KG (3 x 500g packs) - ₹165.00</option>
-                            <option value="2KG" data-price="220">2KG (4 x 500g packs) - ₹220.00</option>
-                            <option value="5KG" data-price="550">5KG (10 x 500g packs) - ₹550.00</option>
-                            <option value="10KG" data-price="1100">10KG (20 x 500g packs) - ₹1100.00</option>
-                        </select>
+                        <button class="btn-action" onclick="addToCartFromShop()">ADD TO CART</button>
                     </div>
-
-                    <button class="btn-action" onclick="addToCartFromShop()">ADD TO CART</button>
                 </div>
 
                 <!-- Section 3: Nutritional Information Table (Transparent Background with Green Outline matching Reference Image) -->
-                <div style="background:transparent; padding:25px; border-radius:12px; border:2px solid var(--green-accent);">
+                <div style="background:transparent; padding:25px; border-radius:12px; border:2px solid var(--green-accent); height: 100%;">
                     <h3 style="color:var(--green-accent); font-size:20px; font-weight:800; margin-bottom:4px;">Nutrition Information</h3>
                     <p style="font-size:12.5px; color:#475569; margin-bottom:16px;">125 servings per pack | Serving Size (4g)</p>
                     
@@ -632,26 +637,28 @@
                     </div>
                 </div>
 
-                <!-- Section 4: Customer Reviews Section -->
-                <div style="background:white; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0;">
-                    <h3 style="color:var(--green-accent); font-size:18px; font-weight:700; margin-bottom:15px; border-bottom:2px solid var(--bg-sage); padding-bottom:8px;">Customer Reviews & Ratings</h3>
-                    
-                    <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
-                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <strong>Karthik R.</strong> <span style="font-size:12px; color:#777;">— June 12, 2026</span>
-                        <p style="font-size:13.5px; margin-top:5px; color:#334155;">Absolute top quality jaggery! Gives my morning coffee the best caramel flavor without any artificial aftertaste.</p>
-                    </div>
-
-                    <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
-                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <strong>Priya S.</strong> <span style="font-size:12px; color:#777;">— June 18, 2026</span>
-                        <p style="font-size:13.5px; margin-top:5px; color:#334155;">Clean packaging in 500g packets. Very authentic taste and fast shipping across Tamil Nadu.</p>
-                    </div>
-
+                <!-- Section 4: Customer Reviews Section (Matched sizing to align properly with Nutrition Info) -->
+                <div style="background:white; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <strong>Rajesh M.</strong> <span style="font-size:12px; color:#777;">— July 02, 2026</span>
-                        <p style="font-size:13.5px; margin-top:5px; color:#334155;">Replaced refined sugar completely with Sthirah powder. Highly recommended!</p>
+                        <h3 style="color:var(--green-accent); font-size:18px; font-weight:700; margin-bottom:15px; border-bottom:2px solid var(--bg-sage); padding-bottom:8px;">Customer Reviews & Ratings</h3>
+                        
+                        <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
+                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <strong>Karthik R.</strong> <span style="font-size:12px; color:#777;">— June 12, 2026</span>
+                            <p style="font-size:13.5px; margin-top:5px; color:#334155;">Absolute top quality jaggery! Gives my morning coffee the best caramel flavor without any artificial aftertaste.</p>
+                        </div>
+
+                        <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
+                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <strong>Priya S.</strong> <span style="font-size:12px; color:#777;">— June 18, 2026</span>
+                            <p style="font-size:13.5px; margin-top:5px; color:#334155;">Clean packaging in 500g packets. Very authentic taste and fast shipping across Tamil Nadu.</p>
+                        </div>
+
+                        <div>
+                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <strong>Rajesh M.</strong> <span style="font-size:12px; color:#777;">— July 02, 2026</span>
+                            <p style="font-size:13.5px; margin-top:5px; color:#334155;">Replaced refined sugar completely with Sthirah powder. Highly recommended!</p>
+                        </div>
                     </div>
                 </div>
 
@@ -1508,9 +1515,15 @@
             thumbEl.classList.add('active-thumb');
         }
 
+        function changeHomeImage(thumbEl, imgPath) {
+            document.getElementById('home-main-product-img').src = imgPath;
+            thumbEl.parentElement.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active-thumb'));
+            thumbEl.classList.add('active-thumb');
+        }
+
         function changeShopImage(thumbEl, imgPath) {
             document.getElementById('shop-pimg-display').src = imgPath;
-            document.querySelectorAll('#product-view .product-thumb').forEach(t => t.classList.remove('active-thumb'));
+            document.querySelectorAll('#shop-thumbs-container .product-thumb').forEach(t => t.classList.remove('active-thumb'));
             thumbEl.classList.add('active-thumb');
         }
 
@@ -1532,6 +1545,7 @@
                         if(i === 0) {
                             document.getElementById('main-product-img').src = e.target.result;
                             document.getElementById('shop-pimg-display').src = e.target.result;
+                            document.getElementById('home-main-product-img').src = e.target.result;
                         }
                     }
                     reader.readAsDataURL(fileInput.files[i]);
