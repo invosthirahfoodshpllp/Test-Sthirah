@@ -99,35 +99,35 @@
         /* Separation Line between sections */
         .section-separator { max-width: 1200px; margin: 40px auto; border: none; border-top: 1px solid rgba(0,0,0,0.15); width: calc(100% - 40px); }
 
-        /* Product Section Layout */
+        /* Product Section Layout with Equal Heights & Alignment */
         .product-section { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-        .product-container { display: flex; justify-content: space-between; align-items: flex-start; gap: 50px; flex-wrap: wrap; }
+        .product-container { display: flex; justify-content: space-between; align-items: stretch; gap: 40px; flex-wrap: wrap; }
 
-        .info-block { flex: 1; min-width: 280px; padding-top: 10px; }
-        .info-block h2 { font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 18px; color: var(--green-accent); }
-        .info-block p { font-size: 15px; line-height: 1.7; color: var(--text-dark); margin-bottom: 20px; }
+        .info-block { flex: 1; min-width: 280px; padding: 25px; background: transparent; border: 2px solid var(--green-accent); border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+        .info-block h2 { font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; color: var(--green-accent); }
+        .info-block p { font-size: 14.5px; line-height: 1.7; color: var(--text-dark); margin-bottom: 16px; }
         
-        .info-block-benefits { list-style: none; margin-top: 15px; }
-        .info-block-benefits li { position: relative; padding-left: 28px; margin-bottom: 16px; font-size: 14.5px; line-height: 1.6; }
+        .info-block-benefits { list-style: none; margin-top: 10px; }
+        .info-block-benefits li { position: relative; padding-left: 28px; margin-bottom: 14px; font-size: 14px; line-height: 1.6; }
         .info-block-benefits li i { position: absolute; left: 0; top: 3px; color: var(--green-accent); font-size: 16px; }
 
-        .product-card { width: 380px; max-width: 100%; display: flex; flex-direction: column; align-items: center; background: transparent; border: 2px solid var(--green-accent); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+        .product-card { width: 380px; max-width: 100%; display: flex; flex-direction: column; align-items: center; background: transparent; border: 2px solid var(--green-accent); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); justify-content: space-between; }
         .image-wrapper {
             position: relative;
             width: 100%;
             background-color: transparent;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .image-wrapper:hover { transform: translateY(-4px); }
-        .product-pack-img { max-width: 100%; height: auto; max-height: 300px; object-fit: contain; }
+        .product-pack-img { max-width: 100%; height: auto; max-height: 260px; object-fit: contain; transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         
         .product-thumbnails-row { display: flex; gap: 8px; margin-top: 12px; }
-        .product-thumb { width: 50px; height: 50px; object-fit: contain; border: 1px solid #ccc; border-radius: 4px; padding: 2px; cursor: pointer; background: #fff; transition: border-color 0.2s; }
+        .product-thumb { width: 45px; height: 45px; object-fit: contain; border: 1px solid #ccc; border-radius: 4px; padding: 2px; cursor: pointer; background: #fff; transition: border-color 0.2s; }
         .product-thumb:hover, .product-thumb.active-thumb { border-color: var(--green-accent); border-width: 2px; }
 
         .badge-sale {
@@ -144,11 +144,11 @@
             border-radius: 2px;
         }
 
-        .product-details { text-align: center; margin-top: 20px; width: 100%; }
+        .product-details { text-align: center; margin-top: 15px; width: 100%; }
         .product-title-link {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text-dark);
             text-decoration: none;
             display: inline-block;
@@ -156,12 +156,12 @@
         }
         .product-title-link:hover { color: var(--green-accent); transform: translateY(-1px); }
 
-        .price { font-size: 15px; font-weight: 600; margin-bottom: 15px; }
-        .benefits-list { text-align: left; font-size: 13px; line-height: 1.6; color: var(--text-dark); margin-bottom: 20px; padding-left: 20px; }
-        .benefits-list li { margin-bottom: 8px; }
+        .price { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+        .benefits-list { text-align: left; font-size: 12.5px; line-height: 1.5; color: var(--text-dark); margin-bottom: 15px; padding-left: 18px; }
+        .benefits-list li { margin-bottom: 6px; }
 
-        .size-selector { display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 15px; }
-        .size-selector label { font-size: 13px; margin-bottom: 6px; font-weight: 600; }
+        .size-selector { display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 12px; }
+        .size-selector label { font-size: 12.5px; margin-bottom: 5px; font-weight: 600; }
         .size-selector select { width: 100%; background: transparent; border: 1px solid #000; padding: 8px; font-size: 13px; outline: none; border-radius: 4px; }
 
         .btn-action { 
@@ -435,33 +435,37 @@
         <section class="product-section">
             <div class="product-container">
                 
+                <!-- Updated info block replacing family farm text with partner with farmers text -->
                 <div class="info-block">
                     <h2>Why Choose Cane Jaggery Powder?</h2>
                     <p>
-                        Jaggery powder is a traditional natural sweetener prepared directly from boiled sugarcane juice. Unlike modern refined white sugar, it retains its natural molasses and inherent minerals, offering a warm caramel flavor that enhances your daily food and drinks.
+                        Jaggery powder is a traditional, unrefined natural sweetener crafted directly from fresh boiled sugarcane juice. Unlike modern white sugar which is stripped of all natural nutrients during heavy industrial chemical processing, our jaggery preserves its natural molasses, offering an authentic, warm caramel depth and robust wholesome flavor profile.
+                    </p>
+                    <p>
+                        We partner with farmers to bring healthy products to you, ensuring Sthirah Jaggery Powder undergoes rigorous batch testing to guarantee zero chemical additives, zero sulphur bleaching, and zero artificial colorings for modern clean-label kitchens.
                     </p>
                     
                     <ul class="info-block-benefits">
                         <li>
                             <i class="fa-solid fa-leaf"></i>
-                            <strong>Essential Mineral Supply:</strong> Contains natural iron, magnesium, potassium, and calcium that help nourish daily metabolic health.
+                            <strong>Essential Mineral Supply:</strong> Naturally rich in bio-available iron, magnesium, potassium, and calcium that support everyday vitality and metabolic balance.
                         </li>
                         <li>
                             <i class="fa-solid fa-seedling"></i>
-                            <strong>Gentle Digestive Support:</strong> Helps stimulate digestive enzymes in the stomach, making it a great traditional after-meal choice.
+                            <strong>Gentle Digestive Support:</strong> Traditionally recognized to stimulate digestive enzymes, making it a soothing, wholesome choice after hearty meals.
                         </li>
                         <li>
                             <i class="fa-solid fa-bolt"></i>
-                            <strong>Sustained Daily Energy:</strong> Made of complex carbohydrates that release energy gradually, preventing sharp sugar spikes.
+                            <strong>Sustained Daily Energy:</strong> Packed with complex natural carbohydrates that digest slowly, supplying smooth and steady energy without sudden sugar crashes.
                         </li>
                         <li>
                             <i class="fa-solid fa-mug-hot"></i>
-                            <strong>Versatile Kitchen Sweetener:</strong> Melts seamlessly into hot tea, coffee, herbal brews, and everyday baking recipes.
+                            <strong>Versatile Kitchen Sweetener:</strong> Dissolves seamlessly into morning coffee, artisanal teas, traditional herbal brews, healthy smoothies, and everyday baking recipes.
                         </li>
                     </ul>
                 </div>
 
-                <!-- Home Product Card with transparent background, green outline, and hover-to-switch image without brand logo thumb -->
+                <!-- Home Product Card with equal heights, transparent background, green outline, smooth transition image switcher -->
                 <div class="product-card">
                     <div class="image-wrapper">
                         <span class="badge-sale">SALE</span>
@@ -530,12 +534,12 @@
     <!-- ================= 2. PRODUCT SHOP VIEW (Four Sections Side by Side with Matched Sizing & Alignment) ================= -->
     <main id="product-view" class="page-view">
         <div class="product-section">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch;">
                 
-                <!-- Section 1: Product Image Box (Matched sizing with details box) -->
+                <!-- Section 1: Product Image Box (Transparent Background with Green Outline, Hover Image Switch, Matched Height & Sizing) -->
                 <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; align-items:center; justify-content:space-between; height: 100%;">
                     <div style="flex: 1; display: flex; align-items: center; justify-content: center; width: 100%;">
-                        <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" style="max-height:380px; max-width:100%; object-fit:contain; transition: opacity 0.3s ease;">
+                        <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" style="max-height:380px; max-width:100%; object-fit:contain; transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
                     </div>
                     <div style="display:flex; justify-content:center; gap:10px; margin-top:20px;" id="shop-thumbs-container">
                         <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="product-thumb active-thumb" style="width:55px; height:55px; border-radius:6px; background:white; padding:2px;" onmouseover="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
@@ -543,7 +547,7 @@
                     </div>
                 </div>
 
-                <!-- Section 2: Product Details Box (Matched sizing) -->
+                <!-- Section 2: Product Details Box (Matched Height & Sizing) -->
                 <div style="background:white; padding:30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0; display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
                     <div>
                         <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;">Sthirah Cane Jaggery Powder</h1>
@@ -594,7 +598,7 @@
                     </div>
                 </div>
 
-                <!-- Section 3: Nutritional Information Table (Transparent Background with Green Outline matching Reference Image) -->
+                <!-- Section 3: Nutritional Information Table (Transparent Background with Green Outline) -->
                 <div style="background:transparent; padding:25px; border-radius:12px; border:2px solid var(--green-accent); height: 100%;">
                     <h3 style="color:var(--green-accent); font-size:20px; font-weight:800; margin-bottom:4px;">Nutrition Information</h3>
                     <p style="font-size:12.5px; color:#475569; margin-bottom:16px;">125 servings per pack | Serving Size (4g)</p>
@@ -637,7 +641,7 @@
                     </div>
                 </div>
 
-                <!-- Section 4: Customer Reviews Section (Matched sizing to align properly with Nutrition Info) -->
+                <!-- Section 4: Customer Reviews Section (Matched Sizing) -->
                 <div style="background:white; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <h3 style="color:var(--green-accent); font-size:18px; font-weight:700; margin-bottom:15px; border-bottom:2px solid var(--bg-sage); padding-bottom:8px;">Customer Reviews & Ratings</h3>
@@ -1510,19 +1514,34 @@
         populateAdminShippingTable();
 
         function changeMainImage(thumbEl, imgPath) {
-            document.getElementById('main-product-img').src = imgPath;
+            const img = document.getElementById('main-product-img');
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = imgPath;
+                img.style.opacity = 1;
+            }, 250);
             document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active-thumb'));
             thumbEl.classList.add('active-thumb');
         }
 
         function changeHomeImage(thumbEl, imgPath) {
-            document.getElementById('home-main-product-img').src = imgPath;
+            const img = document.getElementById('home-main-product-img');
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = imgPath;
+                img.style.opacity = 1;
+            }, 250);
             thumbEl.parentElement.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active-thumb'));
             thumbEl.classList.add('active-thumb');
         }
 
         function changeShopImage(thumbEl, imgPath) {
-            document.getElementById('shop-pimg-display').src = imgPath;
+            const img = document.getElementById('shop-pimg-display');
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = imgPath;
+                img.style.opacity = 1;
+            }, 250);
             document.querySelectorAll('#shop-thumbs-container .product-thumb').forEach(t => t.classList.remove('active-thumb'));
             thumbEl.classList.add('active-thumb');
         }
