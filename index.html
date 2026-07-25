@@ -111,7 +111,7 @@
         .info-block-benefits li { position: relative; padding-left: 28px; margin-bottom: 14px; font-size: 14px; line-height: 1.6; }
         .info-block-benefits li i { position: absolute; left: 0; top: 3px; color: var(--green-accent); font-size: 16px; }
 
-        .product-card { width: 380px; max-width: 100%; display: flex; flex-direction: column; align-items: center; background: transparent; border: 2px solid var(--green-accent); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); justify-content: space-between; }
+        .product-card { width: 48%; min-width: 320px; flex: 1; display: flex; flex-direction: column; align-items: center; background: transparent; border: 2px solid var(--green-accent); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); justify-content: space-between; }
         .image-wrapper {
             position: relative;
             width: 100%;
@@ -148,7 +148,7 @@
         .product-title-link {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: var(--text-dark);
             text-decoration: none;
             display: inline-block;
@@ -156,12 +156,12 @@
         }
         .product-title-link:hover { color: var(--green-accent); transform: translateY(-1px); }
 
-        .price { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
-        .benefits-list { text-align: left; font-size: 12.5px; line-height: 1.5; color: var(--text-dark); margin-bottom: 15px; padding-left: 18px; }
+        .price { font-size: 15px; font-weight: 600; margin-bottom: 15px; }
+        .benefits-list { text-align: left; font-size: 12.5px; line-height: 1.5; color: var(--text-dark); margin-bottom: 20px; padding-left: 18px; }
         .benefits-list li { margin-bottom: 6px; }
 
-        .size-selector { display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 12px; }
-        .size-selector label { font-size: 12.5px; margin-bottom: 5px; font-weight: 600; }
+        .size-selector { display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 15px; }
+        .size-selector label { font-size: 12.5px; margin-bottom: 6px; font-weight: 600; }
         .size-selector select { width: 100%; background: transparent; border: 1px solid #000; padding: 8px; font-size: 13px; outline: none; border-radius: 4px; }
 
         .btn-action { 
@@ -178,9 +178,10 @@
         }
         .btn-action:hover { background-color: #0c4d24; transform: translateY(-2px); }
 
-        .content-page { max-width: 900px; margin: 40px auto; padding: 35px; background: var(--white); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
-        .content-page h1 { font-size: 28px; color: var(--green-accent); margin-bottom: 20px; border-bottom: 2px solid var(--bg-sage); padding-bottom: 10px; }
-        .content-page h2 { font-size: 18px; margin: 20px 0 10px 0; }
+        /* Subpages updated to match Reference Image 2 (transparent with green outline) */
+        .content-page { max-width: 900px; margin: 40px auto; padding: 35px; background: transparent; border: 2px solid var(--green-accent); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+        .content-page h1 { font-size: 28px; color: var(--green-accent); margin-bottom: 20px; border-bottom: 2px solid var(--green-accent); padding-bottom: 10px; }
+        .content-page h2 { font-size: 18px; margin: 20px 0 10px 0; color: var(--text-dark); }
         .content-page p { line-height: 1.7; margin-bottom: 15px; font-size: 15px; color: #333; }
 
         .form-group { margin-bottom: 15px; text-align: left; }
@@ -435,7 +436,7 @@
         <section class="product-section">
             <div class="product-container">
                 
-                <!-- Updated info block replacing family farm text with partner with farmers text -->
+                <!-- Updated info block replacing family farm content -->
                 <div class="info-block">
                     <h2>Why Choose Cane Jaggery Powder?</h2>
                     <p>
@@ -531,7 +532,7 @@
         </div>
     </main>
 
-    <!-- ================= 2. PRODUCT SHOP VIEW (Four Sections Side by Side with Matched Sizing & Alignment) ================= -->
+    <!-- ================= 2. PRODUCT SHOP VIEW (Four Sections Side by Side with Matched Sizing & Alignment, Green Outline Box Design) ================= -->
     <main id="product-view" class="page-view">
         <div class="product-section">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch;">
@@ -547,8 +548,8 @@
                     </div>
                 </div>
 
-                <!-- Section 2: Product Details Box (Matched Height & Sizing) -->
-                <div style="background:white; padding:30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0; display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
+                <!-- Section 2: Product Details Box (Transparent Background with Green Outline matching Reference Image) -->
+                <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
                     <div>
                         <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;">Sthirah Cane Jaggery Powder</h1>
                         <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
@@ -562,7 +563,7 @@
                         </p>
                         
                         <!-- Callout box matching Reference Image 1 -->
-                        <div style="background:#F6FBF6; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
+                        <div style="background:rgba(255,255,255,0.6); border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
                             <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
                                 <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
                             </strong>
@@ -641,26 +642,26 @@
                     </div>
                 </div>
 
-                <!-- Section 4: Customer Reviews Section (Matched Sizing) -->
-                <div style="background:white; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.04); border:1px solid #E2E8F0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Section 4: Customer Reviews Section (Transparent Background with Green Outline matching Reference Image) -->
+                <div style="background:transparent; padding:25px; border-radius:12px; border:2px solid var(--green-accent); height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <h3 style="color:var(--green-accent); font-size:18px; font-weight:700; margin-bottom:15px; border-bottom:2px solid var(--bg-sage); padding-bottom:8px;">Customer Reviews & Ratings</h3>
+                        <h3 style="color:var(--green-accent); font-size:18px; font-weight:700; margin-bottom:15px; border-bottom:2px solid var(--green-accent); padding-bottom:8px;">Customer Reviews & Ratings</h3>
                         
-                        <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
+                        <div style="border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:15px; margin-bottom:15px;">
                             <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <strong>Karthik R.</strong> <span style="font-size:12px; color:#777;">— June 12, 2026</span>
+                            <strong>Karthik R.</strong> <span style="font-size:12px; color:#555;">— June 12, 2026</span>
                             <p style="font-size:13.5px; margin-top:5px; color:#334155;">Absolute top quality jaggery! Gives my morning coffee the best caramel flavor without any artificial aftertaste.</p>
                         </div>
 
-                        <div style="border-bottom:1px solid #F1F5F9; padding-bottom:15px; margin-bottom:15px;">
+                        <div style="border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:15px; margin-bottom:15px;">
                             <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <strong>Priya S.</strong> <span style="font-size:12px; color:#777;">— June 18, 2026</span>
+                            <strong>Priya S.</strong> <span style="font-size:12px; color:#555;">— June 18, 2026</span>
                             <p style="font-size:13.5px; margin-top:5px; color:#334155;">Clean packaging in 500g packets. Very authentic taste and fast shipping across Tamil Nadu.</p>
                         </div>
 
                         <div>
                             <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <strong>Rajesh M.</strong> <span style="font-size:12px; color:#777;">— July 02, 2026</span>
+                            <strong>Rajesh M.</strong> <span style="font-size:12px; color:#555;">— July 02, 2026</span>
                             <p style="font-size:13.5px; margin-top:5px; color:#334155;">Replaced refined sugar completely with Sthirah powder. Highly recommended!</p>
                         </div>
                     </div>
@@ -672,70 +673,70 @@
 
     <!-- ================= 3. MY ACCOUNT SUBPAGES (MODERN FIREBASE LOGIN) ================= -->
     <main id="account-view" class="page-view">
-        <div style="max-width:440px; margin:50px auto; background:white; padding:40px; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.06);">
+        <div style="max-width:440px; margin:50px auto; background:transparent; padding:40px; border-radius:12px; border:2px solid var(--green-accent); box-shadow:0 10px 25px rgba(0,0,0,0.06);">
             
             <div id="login-box" style="text-align: center;">
                 <img src="Logo 2.png" alt="Sthirah Logo" style="height: 60px; object-fit: contain; margin-bottom: 15px;">
-                <h2 style="font-size: 22px; font-weight: 700; color: #0F172A; margin-bottom: 8px;">Welcome to Sthirah</h2>
-                <p style="font-size: 13px; color: #64748B; margin-bottom: 30px;">Sign in securely with Google or Mobile OTP</p>
+                <h2 style="font-size: 22px; font-weight: 700; color: var(--green-accent); margin-bottom: 8px;">Welcome to Sthirah</h2>
+                <p style="font-size: 13px; color: #475569; margin-bottom: 30px;">Sign in securely with Google or Mobile OTP</p>
 
                 <!-- Firebase Google Sign In Button -->
                 <button type="button" onclick="firebaseGoogleLogin()" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; background: #FFFFFF; color: #1E293B; border: 1px solid #CBD5E1; padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s, box-shadow 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 15px;">
                     <i class="fa-brands fa-google" style="color: #EA4335; font-size: 16px;"></i> Continue with Google
                 </button>
 
-                <div style="display: flex; align-items: center; text-align: center; margin: 20px 0; color: #94A3B8; font-size: 12px;">
-                    <div style="flex: 1; border-bottom: 1px solid #E2E8F0;"></div>
-                    <span style="padding: 0 10px; font-weight: 500;">OR MOBILE OTP</span>
-                    <div style="flex: 1; border-bottom: 1px solid #E2E8F0;"></div>
+                <div style="display: flex; align-items: center; text-align: center; margin: 20px 0; color: #64748B; font-size: 12px;">
+                    <div style="flex: 1; border-bottom: 1px solid rgba(0,0,0,0.15);"></div>
+                    <span style="padding: 0 10px; font-weight: 600;">OR MOBILE OTP</span>
+                    <div style="flex: 1; border-bottom: 1px solid rgba(0,0,0,0.15);"></div>
                 </div>
 
                 <!-- Firebase Mobile OTP Form -->
                 <div id="phone-login-container">
                     <div class="form-group" style="text-align: left;">
-                        <label style="font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px;">Mobile Number</label>
+                        <label style="font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;">Mobile Number</label>
                         <div style="display: flex; gap: 8px;">
-                            <span style="background: #F1F5F9; border: 1px solid #CBD5E1; padding: 10px 12px; border-radius: 6px; font-size: 14px; color: #334155; font-weight: 600;">+91</span>
-                            <input type="tel" id="firebase-phone-input" placeholder="Enter 10-digit mobile number" maxlength="10" style="flex: 1; padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 14px; outline: none;">
+                            <span style="background: rgba(255,255,255,0.7); border: 1px solid #CBD5E1; padding: 10px 12px; border-radius: 6px; font-size: 14px; color: #334155; font-weight: 600;">+91</span>
+                            <input type="tel" id="firebase-phone-input" placeholder="Enter 10-digit mobile number" maxlength="10" style="flex: 1; padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 14px; outline: none; background: rgba(255,255,255,0.7);">
                         </div>
                     </div>
                     
                     <div id="otp-group" class="form-group" style="text-align: left; display: none; margin-top: 15px;">
-                        <label style="font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px;">Enter 6-Digit OTP</label>
-                        <input type="text" id="firebase-otp-input" placeholder="123456" maxlength="6" style="padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 14px; outline: none; letter-spacing: 4px; text-align: center; font-weight: 700;">
+                        <label style="font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;">Enter 6-Digit OTP</label>
+                        <input type="text" id="firebase-otp-input" placeholder="123456" maxlength="6" style="padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 14px; outline: none; letter-spacing: 4px; text-align: center; font-weight: 700; background: rgba(255,255,255,0.7);">
                     </div>
 
                     <button type="button" id="otp-action-btn" class="btn-action" style="margin-top: 10px; background: var(--green-accent);" onclick="handleFirebasePhoneAction()">Send Verification OTP</button>
                     <div id="recaptcha-container"></div>
                 </div>
 
-                <p style="font-size: 11px; color: #94A3B8; margin-top: 25px;">Protected by Firebase Authentication. By continuing, you agree to Sthirah Terms & Privacy Policy.</p>
+                <p style="font-size: 11px; color: #555; margin-top: 25px;">Protected by Firebase Authentication. By continuing, you agree to Sthirah Terms & Privacy Policy.</p>
             </div>
             
             <div id="user-profile" style="display:none;">
-                <h2>My Account Dashboard</h2>
+                <h2 style="color: var(--green-accent);">My Account Dashboard</h2>
                 <p style="margin:10px 0;">Welcome back, <strong id="cust-name-val">Customer</strong>!</p>
-                <hr style="margin:15px 0; border:0; border-top:1px solid #eee;">
+                <hr style="margin:15px 0; border:0; border-top:1px solid rgba(0,0,0,0.15);">
                 
                 <h3>Saved Addresses (<span id="address-count">0</span>/5)</h3>
                 <div id="saved-addresses-list" style="margin:15px 0;"></div>
 
-                <div id="add-address-form-box" style="background:#f9f9f9; padding:15px; border-radius:6px; margin-bottom:15px; display:none;">
+                <div id="add-address-form-box" style="background:rgba(255,255,255,0.5); padding:15px; border-radius:6px; margin-bottom:15px; display:none;">
                     <h4 id="form-mode-title" style="margin-bottom:10px; color:var(--green-accent);">Add New Address</h4>
                     <input type="hidden" id="edit-address-index" value="-1">
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group"><label>Full Name *</label><input type="text" id="acc-addr-name" required></div>
-                        <div class="form-group"><label>Mobile *</label><input type="tel" id="acc-addr-mobile" required></div>
+                        <div class="form-group"><label>Full Name *</label><input type="text" id="acc-addr-name" required style="background:rgba(255,255,255,0.7);"></div>
+                        <div class="form-group"><label>Mobile *</label><input type="tel" id="acc-addr-mobile" required style="background:rgba(255,255,255,0.7);"></div>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group"><label>Alt Mobile *</label><input type="tel" id="acc-addr-alt" required></div>
-                        <div class="form-group"><label>Pincode *</label><input type="text" id="acc-addr-pin" maxlength="6" required></div>
+                        <div class="form-group"><label>Alt Mobile *</label><input type="tel" id="acc-addr-alt" required style="background:rgba(255,255,255,0.7);"></div>
+                        <div class="form-group"><label>Pincode *</label><input type="text" id="acc-addr-pin" maxlength="6" required style="background:rgba(255,255,255,0.7);"></div>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group"><label>Door No *</label><input type="text" id="acc-addr-door" required></div>
-                        <div class="form-group"><label>Street *</label><input type="text" id="acc-addr-street" required></div>
+                        <div class="form-group"><label>Door No *</label><input type="text" id="acc-addr-door" required style="background:rgba(255,255,255,0.7);"></div>
+                        <div class="form-group"><label>Street *</label><input type="text" id="acc-addr-street" required style="background:rgba(255,255,255,0.7);"></div>
                     </div>
-                    <div class="form-group"><label>Area *</label><input type="text" id="acc-addr-area" required></div>
+                    <div class="form-group"><label>Area *</label><input type="text" id="acc-addr-area" required style="background:rgba(255,255,255,0.7);"></div>
                     <button class="btn-action" style="padding:8px;" onclick="saveAddressFromAccount()">Save Address</button>
                 </div>
 
@@ -763,8 +764,8 @@
             <h1>Track Your Order Shipments</h1>
             <p>We know how much you look forward to receiving your farm-fresh package. Enter your unique Order ID and registered mobile number below to see real-time updates regarding your shipment's current transit status, dispatch partner details, and expected delivery arrival date at your doorstep.</p>
             <div style="margin: 25px 0; max-width: 500px;">
-                <div class="form-group"><label>Order ID / Invoice Number</label><input type="text" id="track-id" placeholder="e.g. STH/2026/101"></div>
-                <div class="form-group"><label>Registered Mobile Number</label><input type="tel" placeholder="e.g. 9876543210"></div>
+                <div class="form-group"><label>Order ID / Invoice Number</label><input type="text" id="track-id" placeholder="e.g. STH/2026/101" style="background:rgba(255,255,255,0.7);"></div>
+                <div class="form-group"><label>Registered Mobile Number</label><input type="tel" placeholder="e.g. 9876543210" style="background:rgba(255,255,255,0.7);"></div>
                 <button class="btn-action" style="width:auto;" onclick="alert('Status: Package is safely in transit via our courier partner. Expected delivery within 2-3 business days.')">Track Order Status</button>
             </div>
             <p style="font-size:13px; color:#555;">If you experience any delays or have questions regarding your delivery routing, please reach out directly to our customer care team at invosthirahfoodshpllp@gmail.com.</p>
@@ -797,13 +798,13 @@
 
                 <h2>Select Payment Gateway</h2>
                 <div style="display:flex; gap:15px; margin:15px 0; flex-wrap:wrap;">
-                    <label style="background:#fafafa; border:1px solid #ddd; padding:10px 15px; border-radius:6px; cursor:pointer;">
+                    <label style="background:rgba(255,255,255,0.7); border:1px solid #ddd; padding:10px 15px; border-radius:6px; cursor:pointer;">
                         <input type="radio" name="payment_gateway" value="UPI" checked> UPI / QR Pay
                     </label>
-                    <label style="background:#fafafa; border:1px solid #ddd; padding:10px 15px; border-radius:6px; cursor:pointer;">
+                    <label style="background:rgba(255,255,255,0.7); border:1px solid #ddd; padding:10px 15px; border-radius:6px; cursor:pointer;">
                         <input type="radio" name="payment_gateway" value="Card"> Credit / Debit Card
                     </label>
-                    <label style="background:#fafafa; border:1px solid #ddd; padding:10px 15px; border-radius:6px; cursor:pointer;">
+                    <label style="background:rgba(255,255,255,0.7); border:1px solid #ddd; padding:10px 15px; border-radius:6px; cursor:pointer;">
                         <input type="radio" name="payment_gateway" value="NetBanking"> Net Banking
                     </label>
                 </div>
@@ -863,7 +864,7 @@
             <p>Operated by <strong>INVO STHIRAH FOODS HP LLP</strong> out of Salem, Tamil Nadu, we partner directly with trusted agricultural networks and farmers who cultivate our core ingredients with patience and care. We believe that true quality cannot be rushed in an industrial factory; it begins in fertile soil, under open sunlight, and is nurtured by traditional farming wisdom passed down through generations.</p>
             <h2>The Sthirah Difference</h2>
             <p>Modern commercial food supply chains often strip away natural goodness through heavy chemical refining and industrial processing. At Sthirah, we do things differently. Our flagship cane jaggery powder is extracted from freshly harvested sugarcane, boiled down using traditional, time-honored techniques that preserve its rich mineral profile, natural molasses, and deep caramel aroma.</p>
-            <div class="contact-box" style="background:var(--bg-sage); padding:20px; border-radius:6px; margin-top:25px;">
+            <div class="contact-box" style="background:transparent; border: 2px solid var(--green-accent); padding:20px; border-radius:8px; margin-top:25px;">
                 <strong>INVO STHIRAH FOODS HP LLP</strong><br>
                 No. 620, Ashok Nagar, Sanniyasigundu, Kitchipalyam, Salem, Tamil Nadu - 636015<br>
                 Email: invosthirahfoodshpllp@gmail.com | Phone: +91 93637 02560
