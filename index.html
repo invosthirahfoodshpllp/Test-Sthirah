@@ -99,7 +99,7 @@
         /* Separation Line between sections */
         .section-separator { max-width: 1200px; margin: 40px auto; border: none; border-top: 1px solid rgba(0,0,0,0.15); width: calc(100% - 40px); }
 
-        /* Product Section Layout with Equal Heights & Alignment */
+        /* Product Section Layout */
         .product-section { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
         .product-container { display: flex; justify-content: space-between; align-items: stretch; gap: 40px; flex-wrap: wrap; }
 
@@ -318,8 +318,15 @@
             #printable-invoice-area { position: absolute; left: 0; top: 0; width: 100%; }
         }
 
-        /* Mobile Optimization Media Queries */
-        @media (max-width: 900px) {
+        /* Product page grid layout specifically responsive for mobile view to appear one by one */
+        .product-page-grid {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 30px; 
+            align-items: stretch;
+        }
+
+        @media print, (max-width: 900px) {
             .navbar { padding: 12px 20px; }
             .nav-container { flex-direction: column; gap: 15px; }
             .nav-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
@@ -330,6 +337,10 @@
             .footer-grid-img3 { flex-direction: column; gap: 25px; }
             .product-card { width: 100%; }
             .hero-section { height: 350px; }
+            /* Mobile view: product page sections appear one by one stacked vertically */
+            .product-page-grid {
+                grid-template-columns: 1fr !important;
+            }
         }
     </style>
 </head>
@@ -532,10 +543,10 @@
         </div>
     </main>
 
-    <!-- ================= 2. PRODUCT SHOP VIEW (Four Sections Side by Side with Matched Sizing & Alignment, Green Outline Box Design) ================= -->
+    <!-- ================= 2. PRODUCT SHOP VIEW (Four Sections in Responsive 2x2 Grid Layout, Green Outline Outline Box Design) ================= -->
     <main id="product-view" class="page-view">
         <div class="product-section">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch;">
+            <div class="product-page-grid">
                 
                 <!-- Section 1: Product Image Box (Transparent Background with Green Outline, Hover Image Switch, Matched Height & Sizing) -->
                 <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; align-items:center; justify-content:space-between; height: 100%;">
