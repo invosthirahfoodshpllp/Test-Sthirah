@@ -6,6 +6,7 @@
     <title>Sthirah - Quality Ingredients</title>
     <link rel="icon" type="image/png" href="Logo 2.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
@@ -18,7 +19,7 @@
             --admin-bg: #F8FAFC;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: var(--bg-sage); color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
         .clickable { cursor: pointer; }
 
@@ -205,7 +206,7 @@
             background: rgba(17, 107, 50, 0.1);
         }
         .stepper-input {
-            width: 50px;
+            width: 55px;
             border: none;
             border-left: 1px solid rgba(17, 107, 50, 0.2);
             border-right: 1px solid rgba(17, 107, 50, 0.2);
@@ -628,13 +629,17 @@
         <section class="product-section">
             <div class="product-container">
                 
+                <!-- Expanded info block to match the product section height and detail level -->
                 <div class="info-block">
                     <h2>Why Choose Cane Jaggery Powder?</h2>
                     <p>
                         Jaggery powder is a traditional, unrefined natural sweetener crafted directly from fresh boiled sugarcane juice. Unlike modern white sugar which is stripped of all natural nutrients during heavy industrial chemical processing, our jaggery preserves its natural molasses, offering an authentic, warm caramel depth and robust wholesome flavor profile.
                     </p>
                     <p>
-                        We partner with farmers to bring healthy products to you, ensuring Sthirah Jaggery Powder undergoes rigorous batch testing to guarantee zero chemical additives, zero sulphur bleaching, and zero artificial colorings for modern clean-label kitchens.
+                        We partner with farmers to bring healthy products to you, ensuring Sthirah Jaggery Powder undergoes rigorous batch testing to guarantee zero chemical additives, zero sulphur bleaching, and zero artificial colorings for modern clean-label kitchens. Our traditional preparation methods ensure that every single batch maintains the highest culinary standards, providing an unadulterated sweetness that elevates your daily recipes naturally.
+                    </p>
+                    <p>
+                        Experience the wholesome goodness of authentic farm-fresh sweeteners. Whether you are baking healthy treats, preparing traditional sweets, or sweetening your morning brew, Sthirah Jaggery Powder delivers consistent flavor, rich nutrients, and absolute purity straight from our fields to your table.
                     </p>
                     
                     <ul class="info-block-benefits">
@@ -687,7 +692,7 @@
                             <label>Quantity (KG):</label>
                             <div class="stepper-controls">
                                 <button type="button" class="stepper-btn" onclick="adjustHomeQty(-1)">-</button>
-                                <input type="number" id="home-qty-input" class="stepper-input" value="1" min="1" oninput="onHomeQtyInput(this)">
+                                <input type="number" id="home-qty-input" class="stepper-input" value="1" min="1" max="99" maxlength="3" oninput="onHomeQtyInput(this)" onblur="onHomeQtyBlur(this)">
                                 <button type="button" class="stepper-btn" onclick="adjustHomeQty(1)">+</button>
                             </div>
                         </div>
@@ -743,7 +748,7 @@
                     </div>
                 </div>
 
-                <!-- SECTION 2: Product Details Box exactly matching reference image -->
+                <!-- SECTION 2: Product Details Box -->
                 <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
                     <div>
                         <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;" id="shop-product-title"><strong>Sthirah Cane Jaggery Powder</strong></h1>
@@ -757,7 +762,7 @@
                             Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped In Individual 500g unit packaging.
                         </p>
                         
-                        <!-- Callout box matching reference image exactly -->
+                        <!-- Callout box -->
                         <div style="background:#F2F7EC; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
                             <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
                                 <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
@@ -767,7 +772,7 @@
                             </p>
                         </div>
 
-                        <!-- Key Product Highlights matching reference image exactly -->
+                        <!-- Key Product Highlights -->
                         <div style="margin-bottom:20px;">
                             <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
                             <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
@@ -786,7 +791,7 @@
                             <label>Quantity (KG):</label>
                             <div class="stepper-controls">
                                 <button type="button" class="stepper-btn" onclick="adjustShopQty(-1)">-</button>
-                                <input type="number" id="shop-qty-input" class="stepper-input" value="1" min="1" oninput="onShopQtyInput(this)">
+                                <input type="number" id="shop-qty-input" class="stepper-input" value="1" min="1" max="99" maxlength="3" oninput="onShopQtyInput(this)" onblur="onShopQtyBlur(this)">
                                 <button type="button" class="stepper-btn" onclick="adjustShopQty(1)">+</button>
                             </div>
                         </div>
@@ -1745,13 +1750,33 @@
             let cur = parseInt(input.value) || 1;
             cur += val;
             if(cur < 1) cur = 1;
+            if(cur > 99) cur = 99;
             input.value = cur;
             document.getElementById('home-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
         }
 
         function onHomeQtyInput(input) {
+            let valStr = input.value;
+            if(valStr.length > 3) {
+                valStr = valStr.slice(0, 3);
+                input.value = valStr;
+            }
+            let cur = parseInt(valStr);
+            if(!isNaN(cur)) {
+                if(cur > 99) {
+                    cur = 99;
+                    input.value = "99";
+                }
+                if(cur < 1) cur = 1;
+                document.getElementById('home-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
+            }
+        }
+
+        function onHomeQtyBlur(input) {
             let cur = parseInt(input.value);
             if(isNaN(cur) || cur < 1) cur = 1;
+            if(cur > 99) cur = 99;
+            input.value = cur;
             document.getElementById('home-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
         }
 
@@ -1760,13 +1785,33 @@
             let cur = parseInt(input.value) || 1;
             cur += val;
             if(cur < 1) cur = 1;
+            if(cur > 99) cur = 99;
             input.value = cur;
             document.getElementById('shop-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
         }
 
         function onShopQtyInput(input) {
+            let valStr = input.value;
+            if(valStr.length > 3) {
+                valStr = valStr.slice(0, 3);
+                input.value = valStr;
+            }
+            let cur = parseInt(valStr);
+            if(!isNaN(cur)) {
+                if(cur > 99) {
+                    cur = 99;
+                    input.value = "99";
+                }
+                if(cur < 1) cur = 1;
+                document.getElementById('shop-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
+            }
+        }
+
+        function onShopQtyBlur(input) {
             let cur = parseInt(input.value);
             if(isNaN(cur) || cur < 1) cur = 1;
+            if(cur > 99) cur = 99;
+            input.value = cur;
             document.getElementById('shop-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
         }
 
@@ -2220,14 +2265,48 @@
             let item = cart[index];
             item.qty += val;
             if(item.qty < 1) item.qty = 1;
+            if(item.qty > 99) item.qty = 99;
             item.size = item.qty + " KG";
             item.price = item.qty * unitPricePerKg;
             renderCart();
         }
 
         function onCartItemQtyInput(index, input) {
+            let valStr = input.value;
+            if(valStr.length > 3) {
+                valStr = valStr.slice(0, 3);
+                input.value = valStr;
+            }
+            let qty = parseInt(valStr);
+            if(!isNaN(qty)) {
+                if(qty > 99) {
+                    qty = 99;
+                    input.value = "99";
+                }
+                if(qty < 1) qty = 1;
+                let item = cart[index];
+                item.qty = qty;
+                item.size = qty + " KG";
+                item.price = qty * unitPricePerKg;
+                
+                const subtotalLbl = document.getElementById('cart-subtotal-lbl');
+                const itemCountLbl = document.getElementById('cart-item-count-lbl');
+                let total = 0;
+                let totalItems = 0;
+                cart.forEach(i => {
+                    total += parseInt(i.price);
+                    totalItems += i.qty;
+                });
+                if(subtotalLbl) subtotalLbl.innerText = "₹" + total + ".00";
+                if(itemCountLbl) itemCountLbl.innerText = totalItems;
+            }
+        }
+
+        function onCartItemQtyBlur(index, input) {
             let qty = parseInt(input.value);
             if(isNaN(qty) || qty < 1) qty = 1;
+            if(qty > 99) qty = 99;
+            input.value = qty;
             let item = cart[index];
             item.qty = qty;
             item.size = qty + " KG";
@@ -2268,7 +2347,7 @@
                                 <label style="margin-right:8px; font-size:12px;">Qty (KG):</label>
                                 <div class="stepper-controls">
                                     <button type="button" class="stepper-btn" style="width:28px; height:28px; font-size:14px;" onclick="adjustCartItemQty(${index}, -1)">-</button>
-                                    <input type="number" class="stepper-input" style="width:40px; font-size:13px;" value="${item.qty}" min="1" oninput="onCartItemQtyInput(${index}, this)">
+                                    <input type="number" class="stepper-input" style="width:55px; font-size:13px;" value="${item.qty}" min="1" max="99" maxlength="3" oninput="onCartItemQtyInput(${index}, this)" onblur="onCartItemQtyBlur(${index}, this)">
                                     <button type="button" class="stepper-btn" style="width:28px; height:28px; font-size:14px;" onclick="adjustCartItemQty(${index}, 1)">+</button>
                                 </div>
                             </div>
@@ -2459,7 +2538,7 @@
                     <td><input type="number" class="admin-input-sm sku-price" value="100"></td>
                     <td><input type="number" class="admin-input-sm sku-tax" value="5"></td>
                     <td><input type="text" class="admin-input-sm sku-hsn" value="17011490"></td>
-                    <td><input type="number" class="admin-input-sm sku-stock" value="50"></td>
+                    <td><input type="number" class="admin-input-sm sku-stock" value="480"></td>
                     <td>
                         <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px; width:auto;" onclick="saveProductRow(this)">Save</button>
                         <button class="btn-secondary" style="padding:4px 8px; font-size:11px; margin-bottom:3px; background:#475569; color:white; border:none; border-radius:4px; cursor:pointer;" onclick="toggleHideProduct(this)">Hide/Show</button>
