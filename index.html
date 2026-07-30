@@ -872,35 +872,11 @@
             <div id="login-box" style="text-align: center; max-width:440px; margin:0 auto;">
                 <img src="Logo 2.png" alt="Sthirah Logo" style="height: 60px; object-fit: contain; margin-bottom: 15px;">
                 <h2 style="font-size: 22px; font-weight: 700; color: var(--green-accent); margin-bottom: 8px;">Welcome to Sthirah</h2>
-                <p style="font-size: 13px; color: #475569; margin-bottom: 30px;">Sign in securely with Google or Mobile OTP</p>
+                <p style="font-size: 13px; color: #475569; margin-bottom: 30px;">Sign in securely with Google</p>
 
                 <button type="button" onclick="firebaseGoogleLogin()" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; background: #FFFFFF; color: #1E293B; border: 1px solid #CBD5E1; padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s, box-shadow 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 15px;">
                     <i class="fa-brands fa-google" style="color: #EA4335; font-size: 16px;"></i> Continue with Google
                 </button>
-
-                <div style="display: flex; align-items: center; text-align: center; margin: 20px 0; color: #64748B; font-size: 12px;">
-                    <div style="flex: 1; border-bottom: 1px solid rgba(0,0,0,0.15);"></div>
-                    <span style="padding: 0 10px; font-weight: 600;">OR MOBILE OTP</span>
-                    <div style="flex: 1; border-bottom: 1px solid rgba(0,0,0,0.15);"></div>
-                </div>
-
-                <div id="phone-login-container">
-                    <div class="form-group" style="text-align: left;">
-                        <label style="font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;">Mobile Number</label>
-                        <div style="display: flex; gap: 8px;">
-                            <span style="background: rgba(255,255,255,0.7); border: 1px solid #CBD5E1; padding: 10px 12px; border-radius: 6px; font-size: 14px; color: #334155; font-weight: 600;">+91</span>
-                            <input type="tel" id="firebase-phone-input" placeholder="Enter 10-digit mobile number" maxlength="10" style="flex: 1; padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 14px; outline: none; background: rgba(255,255,255,0.7);">
-                        </div>
-                    </div>
-                    
-                    <div id="otp-group" class="form-group" style="text-align: left; display: none; margin-top: 15px;">
-                        <label style="font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;">Enter 6-Digit OTP</label>
-                        <input type="text" id="firebase-otp-input" placeholder="123456" maxlength="6" style="padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 14px; outline: none; letter-spacing: 4px; text-align: center; font-weight: 700; background: rgba(255,255,255,0.7);">
-                    </div>
-
-                    <button type="button" id="otp-action-btn" class="btn-action" style="margin-top: 10px; background: var(--green-accent);" onclick="handleFirebasePhoneAction()">Send Verification OTP</button>
-                    <div id="recaptcha-container"></div>
-                </div>
 
                 <p style="font-size: 11px; color: #555; margin-top: 25px;">Protected by Firebase Authentication. By continuing, you agree to Sthirah Terms & Privacy Policy.</p>
             </div>
@@ -1130,8 +1106,8 @@
     <!-- ================= 4. ADMIN CONSOLE ================= -->
     <main id="admin-view" class="page-view">
         <div id="admin-login-screen" style="max-width:400px; margin:60px auto; background:white; padding:30px; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
-            <h2>Admin / Billing Software Login</h2>
-            <p style="font-size:12px; color:#666; margin-bottom:15px;">Authorized personnel login only.</p>
+            <h2 style="font-size:22px; font-weight:700; color:#111; margin-bottom:5px;">Admin Console</h2>
+            <p style="font-size:13px; color:#666; margin-bottom:20px;">Authorized person only</p>
 
             <form id="admin-login-form" autocomplete="off" onsubmit="event.preventDefault(); loginAdmin();">
                 <div class="form-group">
@@ -1173,6 +1149,7 @@
 
                     <div class="admin-menu-section-title" style="margin-top:20px;">Admin</div>
                     <ul class="admin-nav-list">
+                        <li><a href="javascript:void(0)" class="admin-nav-item" onclick="switchAdminTab('tab-admin-users', this)"><i class="fa-solid fa-user-gear"></i> User Management</a></li>
                         <li><a href="javascript:void(0)" class="admin-nav-item" onclick="switchAdminTab('tab-admin-role', this)"><i class="fa-solid fa-user-shield"></i> Admin Role</a></li>
                         <li><a href="javascript:void(0)" class="admin-nav-item" onclick="switchAdminTab('tab-reports', this)"><i class="fa-solid fa-chart-line"></i> Reports & Billing</a></li>
                     </ul>
@@ -1463,17 +1440,17 @@
                 <div id="tab-add-product" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:700px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Add New Product Wizard</h2>
-                        <div class="form-group"><label>Product Name</label><input type="text" placeholder="e.g. Organic Jaggery Powder"></div>
+                        <div class="form-group"><label>Product Name</label><input type="text" id="new-prod-name" placeholder="e.g. Organic Jaggery Powder" value="Sthirah Cane Jaggery Powder"></div>
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
-                            <div class="form-group"><label>Base Price (₹)</label><input type="number" placeholder="110"></div>
+                            <div class="form-group"><label>Base Price (₹)</label><input type="number" id="new-prod-price" placeholder="110" value="110"></div>
                             <div class="form-group"><label>Tax Rate (%)</label><input type="number" value="5"></div>
                         </div>
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
                             <div class="form-group"><label>HSN Code</label><input type="text" value="17011490"></div>
                             <div class="form-group"><label>Initial Stock Units</label><input type="number" value="480"></div>
                         </div>
-                        <div class="form-group"><label>Product Images</label><input type="file" multiple accept="image/*"></div>
-                        <button class="btn-action" onclick="alert('New product added to store catalog successfully!')">Publish Product</button>
+                        <div class="form-group"><label>Product Description / Benefits</label><textarea id="new-prod-desc" rows="3">Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped In Individual 500g unit packaging.</textarea></div>
+                        <button class="btn-action" onclick="addNewProductFromWizard()">Publish Product</button>
                     </div>
                 </div>
 
@@ -1481,7 +1458,7 @@
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
                             <h2 style="font-size:18px; color:#0F172A;">Product Catalog & Advanced Billing Details (HSN, Tax)</h2>
-                            <button class="btn-action" style="width:auto; padding:8px 15px;" onclick="addNewSkuRow()">+ Add New Product</button>
+                            <button class="btn-action" style="width:auto; padding:8px 15px;" onclick="switchAdminTab('tab-add-product', document.querySelector('[onclick*=\'tab-add-product\']'))">+ Add New Product</button>
                         </div>
 
                         <div class="admin-table-responsive">
@@ -1513,9 +1490,8 @@
                                         <td><input type="text" class="admin-input-sm sku-hsn" value="17011490"></td>
                                         <td><input type="number" class="admin-input-sm sku-stock" value="480"></td>
                                         <td>
-                                            <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px; width:auto;" onclick="saveProductRow(this)">Save</button>
-                                            <button class="btn-secondary" style="padding:4px 8px; font-size:11px; margin-bottom:3px; background:#475569; color:white; border:none; border-radius:4px; cursor:pointer;" onclick="toggleHideProduct(this)">Hide/Show</button>
-                                            <button class="cart-remove-btn" style="padding:4px 8px; font-size:11px; width:auto;" onclick="deleteProductRow(this)">Delete</button>
+                                            <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px; width:auto;" onclick="saveProductRowByIndex(0, this)">Save</button>
+                                            <button class="cart-remove-btn" style="padding:4px 8px; font-size:11px; width:auto;" onclick="deleteProductRowByIndex(0)">Delete</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1538,10 +1514,41 @@
                     </div>
                 </div>
 
+                <div id="tab-admin-users" class="admin-panel-tab">
+                    <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:800px;">
+                        <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Admin User Management</h2>
+                        <p style="font-size:13px; color:#64748B; margin-bottom:20px;">Only users listed below with valid credentials are allowed to log into the admin console.</p>
+                        
+                        <div style="background:#F8FAFC; padding:15px; border-radius:8px; border:1px solid #E2E8F0; margin-bottom:20px;">
+                            <h4 style="font-size:14px; margin-bottom:10px; color:var(--green-accent);">Add New Admin User</h4>
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+                                <input type="text" id="new-admin-user" class="admin-input-sm" placeholder="Admin Username / Email">
+                                <input type="password" id="new-admin-pass" class="admin-input-sm" placeholder="Password">
+                            </div>
+                            <button class="btn-action" style="width:auto; padding:8px 16px;" onclick="addNewAdminUser()">Add Authorized Admin</button>
+                        </div>
+
+                        <div class="admin-table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr><th>Username / Email</th><th>Role</th><th>Action</th></tr>
+                                </thead>
+                                <tbody id="admin-users-table-body">
+                                    <tr>
+                                        <td>Pradheep</td>
+                                        <td>Super Admin</td>
+                                        <td><span style="color:#10B981; font-weight:600;">Default</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="tab-admin-role" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:700px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Admin Roles & Profile Settings</h2>
-                        <div class="form-group"><label>Admin Name</label><input type="text" value="Sthirah Admin"></div>
+                        <div class="form-group"><label>Admin Name</label><input type="text" value="Pradheep"></div>
                         <div class="form-group"><label>Email Address</label><input type="email" value="invosthirahfoodshpllp@gmail.com"></div>
                         <div class="form-group"><label>Phone Number</label><input type="text" value="+91 93637 02560"></div>
                         <button class="btn-action" onclick="alert('Admin profile updated successfully!')">Save Changes</button>
@@ -1702,15 +1709,112 @@
         </div>
     </footer>
 
+    <!-- Firebase SDK Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCN31S0xAkNvxmFncDHEIIE06fjusAyDtY",
+            authDomain: "sthirah-in.firebaseapp.com",
+            projectId: "sthirah-in",
+            storageBucket: "sthirah-in.firebasestorage.app",
+            messagingSenderId: "584005769449",
+            appId: "1:584005769449:web:faaf0da8dda7db98323878",
+            measurementId: "G-37WE5C9Y7Z"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        setPersistence(auth, browserLocalPersistence).catch((error) => {
+            console.error("Auth persistence error:", error);
+        });
+
+        const provider = new GoogleAuthProvider();
+
+        window.firebaseGoogleLogin = function() {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    const userData = {
+                        id: user.uid,
+                        email: user.email,
+                        name: user.displayName || "Google Customer",
+                        mobile: user.phoneNumber || "",
+                        addresses: JSON.parse(localStorage.getItem('sthirah_user_' + user.uid))?.addresses || [],
+                        orders: JSON.parse(localStorage.getItem('sthirah_user_' + user.uid))?.orders || []
+                    };
+                    localStorage.setItem('sthirah_logged_customer', JSON.stringify(userData));
+                    localStorage.setItem('sthirah_user_' + user.uid, JSON.stringify(userData));
+                    window.currentUser = userData;
+                    updateCustomerNav();
+                })
+                .catch((error) => {
+                    console.error("Firebase Login Error:", error);
+                    alert("Google Login failed: " + error.message);
+                });
+        };
+
+        window.handleLogout = function() {
+            signOut(auth).then(() => {
+                localStorage.removeItem('sthirah_logged_customer');
+                window.currentUser = null;
+                updateCustomerNav();
+            }).catch((error) => {
+                console.error("Logout Error:", error);
+            });
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                let existing = JSON.parse(localStorage.getItem('sthirah_user_' + user.uid));
+                const userData = {
+                    id: user.uid,
+                    email: user.email,
+                    name: user.displayName || existing?.name || "Google Customer",
+                    mobile: user.phoneNumber || existing?.mobile || "",
+                    addresses: existing?.addresses || [],
+                    orders: existing?.orders || []
+                };
+                window.currentUser = userData;
+                localStorage.setItem('sthirah_logged_customer', JSON.stringify(userData));
+                localStorage.setItem('sthirah_user_' + user.uid, JSON.stringify(userData));
+            } else {
+                if(!window.currentUser || !window.currentUser.email) {
+                    window.currentUser = null;
+                }
+            }
+            updateCustomerNav();
+        });
+    </script>
+
     <!-- JavaScript Application Logic -->
     <script>
         let cart = [];
         let adminTimer = null;
         let currentUser = JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
-        let otpSentState = false;
+        window.currentUser = currentUser;
+
+        let productCatalog = JSON.parse(localStorage.getItem('sthirah_product_catalog')) || [
+            {
+                id: 0,
+                name: "Sthirah Cane Jaggery Powder",
+                price: 110,
+                tax: 5,
+                hsn: "17011490",
+                stock: 480,
+                description: "Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped In Individual 500g unit packaging.",
+                img: "Sthirah Jaggery Powder 500g Front.jpeg"
+            }
+        ];
+
+        let authorizedAdmins = JSON.parse(localStorage.getItem('sthirah_authorized_admins')) || [
+            { user: "Pradheep", pass: "Sthirah" }
+        ];
 
         const defaultProductImg = "Sthirah Jaggery Powder 500g Front.jpeg";
-        let unitPricePerKg = 110;
+        let unitPricePerKg = productCatalog.length > 0 ? productCatalog[0].price : 110;
 
         const indianStates = [
             { name: "Tamil Nadu", rate: 40, days: "2-3 Days" },
@@ -1734,6 +1838,7 @@
 
         function populateAdminShippingTable() {
             const tbody = document.getElementById('admin-shipping-table-body');
+            if(!tbody) return;
             tbody.innerHTML = "";
             indianStates.forEach(st => {
                 const tr = document.createElement('tr');
@@ -1748,8 +1853,279 @@
         }
         populateAdminShippingTable();
 
+        function renderAdminUsersTable() {
+            const tbody = document.getElementById('admin-users-table-body');
+            if(!tbody) return;
+            tbody.innerHTML = "";
+            authorizedAdmins.forEach((adm, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${adm.user}</td>
+                    <td>Admin</td>
+                    <td>${idx === 0 ? '<span style="color:#10B981; font-weight:600;">Default</span>' : `<button class="cart-remove-btn" style="padding:4px 8px; font-size:11px;" onclick="removeAdminUser(${idx})">Revoke</button>`}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        renderAdminUsersTable();
+
+        function addNewAdminUser() {
+            const uInput = document.getElementById('new-admin-user').value.trim();
+            const pInput = document.getElementById('new-admin-pass').value.trim();
+            if(!uInput || !pInput) {
+                alert("Please enter both username and password for the new admin.");
+                return;
+            }
+            if(authorizedAdmins.some(a => a.user === uInput)) {
+                alert("An admin with this username already exists.");
+                return;
+            }
+            authorizedAdmins.push({ user: uInput, pass: pInput });
+            localStorage.setItem('sthirah_authorized_admins', JSON.stringify(authorizedAdmins));
+            document.getElementById('new-admin-user').value = "";
+            document.getElementById('new-admin-pass').value = "";
+            renderAdminUsersTable();
+            alert("New authorized admin user added successfully!");
+        }
+
+        function removeAdminUser(idx) {
+            if(idx === 0) {
+                alert("Cannot remove the primary super admin.");
+                return;
+            }
+            if(confirm("Are you sure you want to revoke admin access for this user?")) {
+                authorizedAdmins.splice(idx, 1);
+                localStorage.setItem('sthirah_authorized_admins', JSON.stringify(authorizedAdmins));
+                renderAdminUsersTable();
+            }
+        }
+
+        function renderStorefrontCatalog() {
+            const shopContainer = document.getElementById('dynamic-shop-catalog-container');
+            if(shopContainer) {
+                let shopHtml = "";
+                productCatalog.forEach((prod, idx) => {
+                    shopHtml += `
+                        <div class="shop-page-layout">
+                            
+                            <!-- SECTION 1: Product Photo Box with Large Image Top & Thumbnails Bottom exactly matching image -->
+                            <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
+                                <div class="product-gallery-side-container">
+                                    <div class="side-thumbnails-col" id="shop-thumbs-container-${idx}">
+                                        <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="side-thumb active-thumb" onmouseover="changeDynamicShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg', ${idx})" onclick="changeDynamicShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg', ${idx})">
+                                        <img src="Sthirah Jaggery Powder 500g Back.jpg" class="side-thumb" onmouseover="changeDynamicShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg', ${idx})" onclick="changeDynamicShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg', ${idx})">
+                                        <img src="Sthirah Jaggery Powder Nutrition Information .png" class="side-thumb" onmouseover="changeDynamicShopImage(this, 'Sthirah Jaggery Powder Nutrition Information .png', ${idx})" onclick="changeDynamicShopImage(this, 'Sthirah Jaggery Powder Nutrition Information .png', ${idx})">
+                                    </div>
+                                    <div class="main-image-preview-wrapper img-zoom-container" id="shop-zoom-container-${idx}" onmousemove="imageZoom('shop-pimg-display-${idx}', 'shop-zoom-result-${idx}', event)" onmouseenter="showZoom('shop-zoom-result-${idx}')" onmouseleave="hideZoom('shop-zoom-result-${idx}')">
+                                        <img id="shop-pimg-display-${idx}" src="${prod.img || defaultProductImg}" alt="${prod.name}" style="max-height:400px; max-width:100%; object-fit:contain;">
+                                        <div id="shop-zoom-result-${idx}" class="img-zoom-result"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SECTION 2: Product Details Box exactly matching image -->
+                            <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
+                                <div>
+                                    <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;" id="shop-product-title-${idx}"><strong>${prod.name}</strong></h1>
+                                    <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
+                                        <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                        <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
+                                    </div>
+                                    <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price-${idx}">₹${prod.price}.00 per KG</p>
+                                    
+                                    <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
+                                        ${prod.description}
+                                    </p>
+                                    
+                                    <!-- Callout box -->
+                                    <div style="background:#F2F7EC; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
+                                        <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                            <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
+                                        </strong>
+                                        <p style="font-size:13.5px; color:#334155; line-height:1.5;">
+                                            Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
+                                        </p>
+                                    </div>
+
+                                    <!-- Key Product Highlights -->
+                                    <div style="margin-bottom:20px;">
+                                        <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
+                                        <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
+                                            <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
+                                            <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
+                                            <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p style="font-size:13px; color:var(--text-dark); margin-bottom:10px; text-align:center;"><strong>*Shipped In Individual 500G Unit Packets</strong></p>
+
+                                    <!-- Quantity Stepper Widget with Capital KG -->
+                                    <div class="quantity-stepper-box">
+                                        <label>Quantity (KG):</label>
+                                        <div class="stepper-controls">
+                                            <button type="button" class="stepper-btn" onclick="adjustCustomQty(${idx}, -1)">-</button>
+                                            <input type="number" id="custom-qty-${idx}" class="stepper-input" value="1" min="1" max="99" maxlength="3">
+                                            <button type="button" class="stepper-btn" onclick="adjustCustomQty(${idx}, 1)">+</button>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-action" onclick="addCatalogItemToCart(${idx})">ADD TO CART</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    `;
+                });
+                shopContainer.innerHTML = shopHtml;
+            }
+
+            const adminTbody = document.getElementById('admin-sku-table-body');
+            if(adminTbody) {
+                let adminHtml = "";
+                productCatalog.forEach((prod, idx) => {
+                    adminHtml += `
+                        <tr id="sku-row-${idx}">
+                            <td>
+                                <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
+                                    <div style="display:flex; gap:3px;">
+                                        <img src="${prod.img || defaultProductImg}" style="width:30px; height:30px; object-fit:contain; border:1px solid #ccc;">
+                                    </div>
+                                    <input type="file" accept="image/*" style="font-size:10px; width:130px;" onchange="updateProductImage(this, ${idx})">
+                                </div>
+                            </td>
+                            <td><input type="text" class="admin-input-sm sku-name" value="${prod.name}"></td>
+                            <td><input type="number" class="admin-input-sm sku-price" value="${prod.price}"></td>
+                            <td><input type="number" class="admin-input-sm sku-tax" value="${prod.tax}"></td>
+                            <td><input type="text" class="admin-input-sm sku-hsn" value="${prod.hsn}"></td>
+                            <td><input type="number" class="admin-input-sm sku-stock" value="${prod.stock}"></td>
+                            <td>
+                                <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px; width:auto;" onclick="saveProductRowByIndex(${idx}, this)">Save</button>
+                                <button class="cart-remove-btn" style="padding:4px 8px; font-size:11px; width:auto;" onclick="deleteProductRowByIndex(${idx})">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                adminTbody.innerHTML = adminHtml;
+            }
+        }
+
+        function changeDynamicShopImage(thumbEl, imgPath, idx) {
+            const img = document.getElementById(`shop-pimg-display-${idx}`);
+            if(!img) return;
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = imgPath;
+                productCatalog[idx].img = imgPath;
+                img.style.opacity = 1;
+            }, 250);
+            thumbEl.parentElement.querySelectorAll('.side-thumb').forEach(t => t.classList.remove('active-thumb'));
+            thumbEl.classList.add('active-thumb');
+        }
+
+        function adjustCustomQty(idx, val) {
+            const input = document.getElementById(`custom-qty-${idx}`);
+            if(!input) return;
+            let cur = parseInt(input.value) || 1;
+            cur += val;
+            if(cur < 1) cur = 1;
+            if(cur > 99) cur = 99;
+            input.value = cur;
+        }
+
+        function addCatalogItemToCart(idx) {
+            const prod = productCatalog[idx];
+            const qtyInput = document.getElementById(`custom-qty-${idx}`);
+            const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+            const size = qty + " KG";
+            const price = qty * prod.price;
+            cart.push({ name: prod.name, qty, size, price, img: prod.img || defaultProductImg });
+            document.getElementById('cart-count').innerText = cart.length;
+            renderCart();
+            navigateTo('cart-view');
+        }
+
+        function updateProductImage(fileInput, idx) {
+            if(fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    productCatalog[idx].img = e.target.result;
+                    localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
+                    renderStorefrontCatalog();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        function saveProductRowByIndex(idx, btn) {
+            const row = document.getElementById(`sku-row-${idx}`);
+            if(!row) return;
+            const name = row.querySelector('.sku-name').value;
+            const price = parseFloat(row.querySelector('.sku-price').value) || 110;
+            const tax = parseFloat(row.querySelector('.sku-tax').value) || 5;
+            const hsn = row.querySelector('.sku-hsn').value;
+            const stock = parseInt(row.querySelector('.sku-stock').value) || 100;
+
+            productCatalog[idx].name = name;
+            productCatalog[idx].price = price;
+            productCatalog[idx].tax = tax;
+            productCatalog[idx].hsn = hsn;
+            productCatalog[idx].stock = stock;
+
+            localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
+            renderStorefrontCatalog();
+
+            btn.style.background = "#0c4d24";
+            btn.innerText = "Saved ✓";
+            setTimeout(() => {
+                btn.style.background = "var(--green-accent)";
+                btn.innerText = "Save";
+            }, 2000);
+        }
+
+        function deleteProductRowByIndex(idx) {
+            if(confirm("Are you sure you want to delete this product from the catalog?")) {
+                productCatalog.splice(idx, 1);
+                localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
+                renderStorefrontCatalog();
+                alert("Product deleted successfully.");
+            }
+        }
+
+        function addNewProductFromWizard() {
+            const name = document.getElementById('new-prod-name').value || "New Product";
+            const price = parseFloat(document.getElementById('new-prod-price').value) || 100;
+            const desc = document.getElementById('new-prod-desc').value || "Prepared directly from sugarcane juice harvested on our farm in Salem.";
+            
+            productCatalog.push({
+                id: Date.now(),
+                name: name,
+                price: price,
+                tax: 5,
+                hsn: "17011490",
+                stock: 250,
+                description: desc,
+                img: defaultProductImg
+            });
+
+            localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
+            renderStorefrontCatalog();
+            alert("New product published successfully and synced to Shop page!");
+            switchAdminTab('tab-products', document.querySelector('[onclick*=\'tab-products\']'));
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderStorefrontCatalog();
+            setDatesByPreset('orders');
+            setDatesByPreset('reports');
+            filterAdminOrders();
+            filterAndPrintReport();
+        });
+
         function changeMainImage(thumbEl, imgPath) {
             const img = document.getElementById('main-product-img');
+            if(!img) return;
             img.style.opacity = 0;
             setTimeout(() => {
                 img.src = imgPath;
@@ -1761,6 +2137,7 @@
 
         function changeHomeImage(thumbEl, imgPath) {
             const img = document.getElementById('home-main-product-img');
+            if(!img) return;
             img.style.opacity = 0;
             setTimeout(() => {
                 img.src = imgPath;
@@ -1770,54 +2147,38 @@
             thumbEl.classList.add('active-thumb');
         }
 
-        function changeShopImage(thumbEl, imgPath) {
-            const img = document.getElementById('shop-pimg-display');
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = imgPath;
-                img.style.opacity = 1;
-            }, 250);
-            document.querySelectorAll('#shop-thumbs-container .side-thumb').forEach(t => t.classList.remove('active-thumb'));
-            thumbEl.classList.add('active-thumb');
-        }
-
-        /* Fixed Natural Magnifier Zoom Logic without Green Box Lens Indicator */
         function showZoom(resultId) {
-            document.getElementById(resultId).style.display = "block";
+            const el = document.getElementById(resultId);
+            if(el) el.style.display = "block";
         }
 
         function hideZoom(resultId) {
-            document.getElementById(resultId).style.display = "none";
+            const el = document.getElementById(resultId);
+            if(el) el.style.display = "none";
         }
 
         function imageZoom(imgId, resultId, e) {
             const img = document.getElementById(imgId);
             const result = document.getElementById(resultId);
-            
             if(!img || !result) return;
-
             result.style.backgroundImage = `url('${img.src}')`;
-            
             let zoomFactor = 1.8;
             result.style.backgroundSize = (img.width * zoomFactor) + "px " + (img.height * zoomFactor) + "px";
-
             let rect = img.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
-
             let xPercent = (x / img.width) * 100;
             let yPercent = (y / img.height) * 100;
-
             if (xPercent > 100) xPercent = 100;
             if (xPercent < 0) xPercent = 0;
             if (yPercent > 100) yPercent = 100;
             if (yPercent < 0) yPercent = 0;
-
             result.style.backgroundPosition = xPercent + "% " + yPercent + "%";
         }
 
         function adjustHomeQty(val) {
             const input = document.getElementById('home-qty-input');
+            if(!input) return;
             let cur = parseInt(input.value) || 1;
             cur += val;
             if(cur < 1) cur = 1;
@@ -1834,10 +2195,7 @@
             }
             let cur = parseInt(valStr);
             if(!isNaN(cur)) {
-                if(cur > 99) {
-                    cur = 99;
-                    input.value = "99";
-                }
+                if(cur > 99) { cur = 99; input.value = "99"; }
                 if(cur < 1) cur = 1;
                 document.getElementById('home-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
             }
@@ -1851,67 +2209,6 @@
             document.getElementById('home-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
         }
 
-        function adjustShopQty(val) {
-            const input = document.getElementById('shop-qty-input');
-            let cur = parseInt(input.value) || 1;
-            cur += val;
-            if(cur < 1) cur = 1;
-            if(cur > 99) cur = 99;
-            input.value = cur;
-            document.getElementById('shop-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
-        }
-
-        function onShopQtyInput(input) {
-            let valStr = input.value;
-            if(valStr.length > 3) {
-                valStr = valStr.slice(0, 3);
-                input.value = valStr;
-            }
-            let cur = parseInt(valStr);
-            if(!isNaN(cur)) {
-                if(cur > 99) {
-                    cur = 99;
-                    input.value = "99";
-                }
-                if(cur < 1) cur = 1;
-                document.getElementById('shop-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
-            }
-        }
-
-        function onShopQtyBlur(input) {
-            let cur = parseInt(input.value);
-            if(isNaN(cur) || cur < 1) cur = 1;
-            if(cur > 99) cur = 99;
-            input.value = cur;
-            document.getElementById('shop-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
-        }
-
-        function previewMultipleProductImages(fileInput) {
-            if(fileInput.files && fileInput.files.length > 0) {
-                const previewBox = fileInput.previousElementSibling;
-                previewBox.innerHTML = "";
-                for(let i=0; i<fileInput.files.length; i++) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.width = "30px";
-                        img.style.height = "30px";
-                        img.style.objectFit = "contain";
-                        img.style.border = "1px solid #ccc";
-                        previewBox.appendChild(img);
-
-                        if(i === 0) {
-                            document.getElementById('main-product-img').src = e.target.result;
-                            document.getElementById('shop-pimg-display').src = e.target.result;
-                            document.getElementById('home-main-product-img').src = e.target.result;
-                        }
-                    }
-                    reader.readAsDataURL(fileInput.files[i]);
-                }
-            }
-        }
-
         function checkOrderCancellationRule(selectEl) {
             if(selectEl.value === "Cancelled") {
                 alert("Restriction: Orders cannot be cancelled after shipping, and food product returns are not accepted.");
@@ -1919,48 +2216,10 @@
             }
         }
 
-        function saveProductRow(btn) {
-            if(confirm("Are you sure you want to save this product and sync changes to storefront?")) {
-                const row = btn.closest('tr');
-                const name = row.querySelector('.sku-name').value;
-                const price = row.querySelector('.sku-price').value;
-                unitPricePerKg = parseFloat(price) || 110;
-                
-                document.getElementById('home-product-title').innerHTML = `<strong>${name}</strong>`;
-                document.getElementById('home-product-price').innerText = `₹${unitPricePerKg * parseInt(document.getElementById('home-qty-input').value)}.00`;
-                document.getElementById('shop-product-title').innerHTML = `<strong>${name}</strong>`;
-                document.getElementById('shop-product-price').innerText = `₹${unitPricePerKg * parseInt(document.getElementById('shop-qty-input').value)}.00`;
-
-                btn.style.background = "#0c4d24";
-                btn.innerText = "Saved ✓";
-                setTimeout(() => {
-                    btn.style.background = "var(--green-accent)";
-                    btn.innerText = "Save";
-                }, 2000);
-            }
-        }
-
-        function toggleHideProduct(btn) {
-            const row = btn.closest('tr');
-            if(row.style.opacity === "0.4") {
-                row.style.opacity = "1";
-                alert("Product is now visible on storefront.");
-            } else {
-                row.style.opacity = "0.4";
-                alert("Product is now hidden from storefront.");
-            }
-        }
-
-        function deleteProductRow(btn) {
-            if(confirm("Are you sure you want to delete this product from the item list?")) {
-                const row = btn.closest('tr');
-                row.remove();
-                alert("Product deleted successfully.");
-            }
-        }
-
         function setDatesByPreset(prefix) {
-            const preset = document.getElementById(prefix + '-preset-filter').value;
+            const presetEl = document.getElementById(prefix + '-preset-filter');
+            if(!presetEl) return;
+            const preset = presetEl.value;
             if(preset === 'custom') return;
 
             const now = new Date();
@@ -1990,8 +2249,10 @@
                 to = new Date();
             }
 
-            document.getElementById(prefix + '-from-date').value = from.toISOString().split('T')[0];
-            document.getElementById(prefix + '-to-date').value = to.toISOString().split('T')[0];
+            const fromDateEl = document.getElementById(prefix + '-from-date');
+            const toDateEl = document.getElementById(prefix + '-to-date');
+            if(fromDateEl) fromDateEl.value = from.toISOString().split('T')[0];
+            if(toDateEl) toDateEl.value = to.toISOString().split('T')[0];
         }
 
         function onPresetFilterChange(prefix) {
@@ -2004,7 +2265,8 @@
         }
 
         function onDateManualChange(prefix) {
-            document.getElementById(prefix + '-preset-filter').value = 'custom';
+            const presetEl = document.getElementById(prefix + '-preset-filter');
+            if(presetEl) presetEl.value = 'custom';
             if(prefix === 'orders') {
                 filterAdminOrders();
             } else {
@@ -2012,17 +2274,13 @@
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            setDatesByPreset('orders');
-            setDatesByPreset('reports');
-            filterAdminOrders();
-            filterAndPrintReport();
-        });
-
         function filterAdminOrders() {
-            const fromDate = document.getElementById('orders-from-date').value;
-            const toDate = document.getElementById('orders-to-date').value;
-            const filterVal = document.getElementById('admin-order-filter').value;
+            const fromDateEl = document.getElementById('orders-from-date');
+            const toDateEl = document.getElementById('orders-to-date');
+            const fromDate = fromDateEl ? fromDateEl.value : '';
+            const toDate = toDateEl ? toDateEl.value : '';
+            const filterEl = document.getElementById('admin-order-filter');
+            const filterVal = filterEl ? filterEl.value : 'ALL';
             const rows = document.querySelectorAll('#admin-orders-table-body tr');
             
             let totalSales = 0;
@@ -2043,13 +2301,16 @@
                 }
             });
 
-            document.getElementById('orders-total-sales-val').innerText = "₹" + totalSales.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            const salesValEl = document.getElementById('orders-total-sales-val');
+            if(salesValEl) salesValEl.innerText = "₹" + totalSales.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         }
 
         function filterAndPrintReport() {
             setDatesByPreset('reports');
-            const from = document.getElementById('reports-from-date').value;
-            const to = document.getElementById('reports-to-date').value;
+            const fromEl = document.getElementById('reports-from-date');
+            const toEl = document.getElementById('reports-to-date');
+            const from = fromEl ? fromEl.value : '';
+            const to = toEl ? toEl.value : '';
 
             const rows = document.querySelectorAll('#admin-orders-table-body tr');
             let sales = 0;
@@ -2061,7 +2322,8 @@
                 }
             });
 
-            document.getElementById('reports-total-sales-val').innerText = "₹" + sales.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            const repValEl = document.getElementById('reports-total-sales-val');
+            if(repValEl) repValEl.innerText = "₹" + sales.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         }
 
         function printReportExplicit() {
@@ -2069,6 +2331,7 @@
         }
 
         function updateCustomerNav() {
+            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
             if(currentUser) {
                 document.getElementById('user-nav-label').innerText = "Account (" + (currentUser.name || currentUser.id ? (currentUser.name || currentUser.id).split('@')[0] : 'User') + ")";
                 document.getElementById('login-box').style.display = "none";
@@ -2082,12 +2345,14 @@
                 document.getElementById('user-nav-label').innerText = "My Account";
                 document.getElementById('user-profile').style.display = "none";
                 document.getElementById('login-box').style.display = "block";
-                document.getElementById('subpage-addresses-container').innerHTML = "<p>Please log in to view and edit your saved delivery locations.</p>";
+                const addrCont = document.getElementById('subpage-addresses-container');
+                if(addrCont) addrCont.innerHTML = "<p>Please log in via Google to view and edit your saved delivery locations.</p>";
             }
         }
         updateCustomerNav();
 
         function saveProfileDetails() {
+            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
             if(!currentUser) return;
             const mob = document.getElementById('edit-profile-mobile').value;
             if(mob && mob.length !== 10) {
@@ -2098,52 +2363,15 @@
             currentUser.mobile = mob;
             localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
             localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
+            window.currentUser = currentUser;
             alert("Profile details updated successfully!");
             navigateTo('account-view');
             updateCustomerNav();
         }
 
-        function firebaseGoogleLogin() {
-            const googleEmail = "user_" + Math.floor(1000 + Math.random() * 9000) + "@gmail.com";
-            currentUser = JSON.parse(localStorage.getItem('sthirah_user_' + googleEmail)) || { id: googleEmail, email: googleEmail, name: "Google Customer", addresses: [], orders: [] };
-            localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
-            updateCustomerNav();
-        }
-
-        function handleFirebasePhoneAction() {
-            const phoneInput = document.getElementById('firebase-phone-input').value;
-            const otpInput = document.getElementById('firebase-otp-input').value;
-            const otpGroup = document.getElementById('otp-group');
-            const actionBtn = document.getElementById('otp-action-btn');
-
-            if(!otpSentState) {
-                if(!phoneInput || phoneInput.length !== 10) {
-                    alert("Please enter a valid 10-digit mobile number.");
-                    return;
-                }
-                otpSentState = true;
-                otpGroup.style.display = "block";
-                document.getElementById('firebase-phone-input').disabled = true;
-                actionBtn.innerText = "Verify OTP & Sign In";
-            } else {
-                if(!otpInput || otpInput.length < 6) {
-                    alert("Please enter the 6-digit OTP code.");
-                    return;
-                }
-                const phoneId = "+91 " + phoneInput;
-                currentUser = JSON.parse(localStorage.getItem('sthirah_user_phone_' + phoneInput)) || { id: phoneId, email: phoneId + "@sthirah.in", mobile: phoneInput, name: "Mobile Customer", addresses: [], orders: [] };
-                localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
-                otpSentState = false;
-                document.getElementById('firebase-phone-input').disabled = false;
-                otpGroup.style.display = "none";
-                document.getElementById('firebase-otp-input').value = "";
-                actionBtn.innerText = "Send Verification OTP";
-                updateCustomerNav();
-            }
-        }
-
         function toggleAddressForm(show, editIdx = -1) {
             const box = document.getElementById('add-address-form-box');
+            if(!box) return;
             if(show) {
                 box.style.display = "block";
                 if(editIdx >= 0) {
@@ -2174,6 +2402,8 @@
         }
 
         function saveAddressFromAccount() {
+            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
+            if(!currentUser) { alert("Please log in first via Google."); return; }
             if(!currentUser.addresses) currentUser.addresses = [];
             const editIdx = parseInt(document.getElementById('edit-address-index').value);
 
@@ -2218,6 +2448,7 @@
 
             localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
             localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
+            window.currentUser = currentUser;
             toggleAddressForm(false);
             renderSavedAddressesInAccount();
             renderCart();
@@ -2225,22 +2456,26 @@
         }
 
         function deleteAddress(idx) {
+            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
+            if(!currentUser) return;
             if(confirm("Are you sure you want to delete this address?")) {
                 currentUser.addresses.splice(idx, 1);
                 localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
                 localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
+                window.currentUser = currentUser;
                 renderSavedAddressesInAccount();
                 renderCart();
             }
         }
 
         function renderSavedAddressesInAccount() {
+            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
             const subpageContainer = document.getElementById('subpage-addresses-container');
-            if(!currentUser) return;
+            if(!currentUser || !subpageContainer) return;
             const addrs = currentUser.addresses || [];
 
             if(addrs.length === 0) {
-                if(subpageContainer) subpageContainer.innerHTML = "<p>No addresses saved yet. Use the button below to add your delivery location.</p>";
+                subpageContainer.innerHTML = "<p>No addresses saved yet. Use the button below to add your delivery location.</p>";
                 return;
             }
 
@@ -2256,12 +2491,13 @@
                     </div>
                 `;
             });
-            if(subpageContainer) subpageContainer.innerHTML = subHtml;
+            subpageContainer.innerHTML = subHtml;
         }
 
         function renderGlobalOrderHistory() {
+            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
             const box = document.getElementById('global-order-history-box');
-            if(!currentUser) return;
+            if(!currentUser || !box) return;
             const history = currentUser.orders || [];
             if(history.length === 0) {
                 box.innerHTML = "<p>No past orders recorded in this account yet.</p>";
@@ -2286,16 +2522,20 @@
             const target = document.getElementById(viewId);
             if(target) target.classList.add('active-view');
 
-            document.getElementById('nav-home').classList.remove('active');
-            document.getElementById('nav-shop').classList.remove('active');
-            if(viewId === 'home-view') document.getElementById('nav-home').classList.add('active');
-            if(viewId === 'product-view') document.getElementById('nav-shop').classList.add('active');
+            const navHome = document.getElementById('nav-home');
+            const navShop = document.getElementById('nav-shop');
+            if(navHome) navHome.classList.remove('active');
+            if(navShop) navShop.classList.remove('active');
+            if(viewId === 'home-view' && navHome) navHome.classList.add('active');
+            if(viewId === 'product-view' && navShop) navShop.classList.add('active');
 
             const footer = document.getElementById('global-footer');
-            if(viewId === 'admin-view') {
-                footer.style.display = "none";
-            } else {
-                footer.style.display = "block";
+            if(footer) {
+                if(viewId === 'admin-view') {
+                    footer.style.display = "none";
+                } else {
+                    footer.style.display = "block";
+                }
             }
 
             if(viewId === 'account-view') {
@@ -2305,366 +2545,17 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function calculateShippingState() {
-            const select = document.getElementById('state-select');
-            const days = select.options[select.selectedIndex].getAttribute('data-days');
-            document.getElementById('delivery-estimate-tag').innerText = "Estimated Delivery: " + days;
-        }
-
-        function addToCart() {
-            const qty = parseInt(document.getElementById('home-qty-input').value) || 1;
-            const size = qty + " KG";
-            const price = qty * unitPricePerKg;
-            cart.push({ name: "Sthirah Cane Jaggery Powder", qty, size, price, img: defaultProductImg });
-            document.getElementById('cart-count').innerText = cart.length;
-            renderCart();
-            navigateTo('cart-view');
-        }
-
-        function addToCartFromShop() {
-            const qty = parseInt(document.getElementById('shop-qty-input').value) || 1;
-            const size = qty + " KG";
-            const price = qty * unitPricePerKg;
-            const currentImg = document.getElementById('shop-pimg-display').src;
-            cart.push({ name: "Sthirah Cane Jaggery Powder", qty, size, price, img: currentImg });
-            document.getElementById('cart-count').innerText = cart.length;
-            renderCart();
-            navigateTo('cart-view');
-        }
-
-        function adjustCartItemQty(index, val) {
-            let item = cart[index];
-            item.qty += val;
-            if(item.qty < 1) item.qty = 1;
-            if(item.qty > 99) item.qty = 99;
-            item.size = item.qty + " KG";
-            item.price = item.qty * unitPricePerKg;
-            renderCart();
-        }
-
-        function onCartItemQtyInput(index, input) {
-            let valStr = input.value;
-            if(valStr.length > 3) {
-                valStr = valStr.slice(0, 3);
-                input.value = valStr;
-            }
-            let qty = parseInt(valStr);
-            if(!isNaN(qty)) {
-                if(qty > 99) {
-                    qty = 99;
-                    input.value = "99";
-                }
-                if(qty < 1) qty = 1;
-                let item = cart[index];
-                item.qty = qty;
-                item.size = qty + " KG";
-                item.price = qty * unitPricePerKg;
-                
-                const subtotalLbl = document.getElementById('cart-subtotal-lbl');
-                const itemCountLbl = document.getElementById('cart-item-count-lbl');
-                let total = 0;
-                let totalItems = 0;
-                cart.forEach(i => {
-                    total += parseInt(i.price);
-                    totalItems += i.qty;
-                });
-                if(subtotalLbl) subtotalLbl.innerText = "₹" + total + ".00";
-                if(itemCountLbl) itemCountLbl.innerText = totalItems;
-            }
-        }
-
-        function onCartItemQtyBlur(index, input) {
-            let qty = parseInt(input.value);
-            if(isNaN(qty) || qty < 1) qty = 1;
-            if(qty > 99) qty = 99;
-            input.value = qty;
-            let item = cart[index];
-            item.qty = qty;
-            item.size = qty + " KG";
-            item.price = qty * unitPricePerKg;
-            renderCart();
-        }
-
-        function renderCart() {
-            const list = document.getElementById('cart-list');
-            const summaryCol = document.getElementById('cart-summary-col');
-            const itemCountLbl = document.getElementById('cart-item-count-lbl');
-            const subtotalLbl = document.getElementById('cart-subtotal-lbl');
-
-            if(cart.length === 0) {
-                list.innerHTML = "<p style='font-size:15px; color:#333;'>Your shopping cart is currently empty.</p>";
-                summaryCol.style.display = "none";
-                return;
-            }
-
-            let html = "";
-            let total = 0;
-            let totalItems = 0;
-            cart.forEach((item, index) => {
-                total += parseInt(item.price);
-                totalItems += item.qty;
-                html += `
-                    <div class="cart-item-row">
-                        <div class="cart-item-left">
-                            <div class="cart-item-img-wrapper img-zoom-container" id="cart-zoom-box-${index}" onmousemove="imageZoom('cart-img-${index}', 'cart-result-${index}', event)" onmouseenter="showZoom('cart-result-${index}')" onmouseleave="hideZoom('cart-result-${index}')">
-                                <img src="${item.img}" alt="${item.name}" class="cart-item-img" id="cart-img-${index}">
-                                <div id="cart-result-${index}" class="img-zoom-result"></div>
-                            </div>
-                            <div>
-                                <h4 style="font-size:16px; font-weight:700; color:var(--text-dark);">${item.name} (${item.size})</h4>
-                                <p style="font-size:15px; color:var(--green-accent); font-weight:800; margin-top:4px;">₹${item.price}.00</p>
-                                <p style="font-size:12px; color:var(--text-muted); margin-top:4px;"><strong>*Shipped In Individual 500G Unit Packets</strong></p>
-                            </div>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:15px; flex-wrap:wrap;">
-                            <div class="quantity-stepper-box" style="margin-bottom:0; width:auto; padding:6px 12px;">
-                                <label style="margin-right:8px; font-size:12px;">Qty (KG):</label>
-                                <div class="stepper-controls">
-                                    <button type="button" class="stepper-btn" style="width:28px; height:28px; font-size:14px;" onclick="adjustCartItemQty(${index}, -1)">-</button>
-                                    <input type="number" class="stepper-input" style="width:55px; font-size:13px;" value="${item.qty}" min="1" max="99" maxlength="3" oninput="onCartItemQtyInput(${index}, this)" onblur="onCartItemQtyBlur(${index}, this)">
-                                    <button type="button" class="stepper-btn" style="width:28px; height:28px; font-size:14px;" onclick="adjustCartItemQty(${index}, 1)">+</button>
-                                </div>
-                            </div>
-                            <button class="cart-remove-btn" onclick="removeFromCart(${index})">
-                                <i class="fa-solid fa-trash"></i> Remove
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            list.innerHTML = html;
-
-            itemCountLbl.innerText = totalItems;
-            subtotalLbl.innerText = "₹" + total + ".00";
-            summaryCol.style.display = "block";
-
-            const addressSelectionBox = document.getElementById('checkout-saved-addresses-selection');
-            if(!currentUser || !currentUser.addresses || currentUser.addresses.length === 0) {
-                addressSelectionBox.innerHTML = "<p style='color:red; font-size:12px;'>Please log in and add at least one address in 'My Account' to proceed.</p>";
-            } else {
-                let addHtml = "";
-                currentUser.addresses.forEach((addr, idx) => {
-                    addHtml += `
-                        <label style="display:block; background:rgba(255,255,255,0.7); border:1px solid var(--green-accent); padding:10px; border-radius:6px; margin-bottom:6px; cursor:pointer;">
-                            <input type="radio" name="selected_checkout_addr" value="${idx}" ${idx === 0 ? 'checked' : ''}>
-                            <strong>${addr.name}</strong> (${addr.mobile})<br>
-                            Door ${addr.door}, ${addr.street}, ${addr.area} - ${addr.pincode}
-                        </label>
-                    `;
-                });
-                addressSelectionBox.innerHTML = addHtml;
-            }
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            document.getElementById('cart-count').innerText = cart.length;
-            renderCart();
-        }
-
-        function processCheckoutOrder() {
-            if(!currentUser || !currentUser.addresses || currentUser.addresses.length === 0) {
-                alert("Please add a delivery address in My Account first.");
-                navigateTo('account-view');
-                return;
-            }
-            const selectedRadio = document.querySelector('input[name="selected_checkout_addr"]:checked');
-            if(!selectedRadio) {
-                alert("Please select a delivery address.");
-                return;
-            }
-            
-            let totalAmt = cart.reduce((acc, item) => acc + item.price, 0);
-
-            document.getElementById('gateway-amount-display').innerText = "Amount: ₹" + totalAmt + ".00";
-            navigateTo('gateway-view');
-        }
-
-        function finalizeGatewayPayment() {
-            if(!currentUser || !currentUser.addresses) return;
-            const selectedRadio = document.querySelector('input[name="selected_checkout_addr"]:checked');
-            const addrIdx = selectedRadio ? parseInt(selectedRadio.value) : 0;
-            const chosenAddr = currentUser.addresses[addrIdx];
-            const fullAddress = chosenAddr ? `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area} - ${chosenAddr.pincode}` : "Salem, TN";
-            
-            const prefix = "STH/2026/";
-            const invoiceId = prefix + Math.floor(100 + Math.random() * 900);
-            const todayStr = new Date().toISOString().split('T')[0];
-
-            let totalAmt = cart.reduce((acc, item) => acc + item.price, 0);
-
-            const newOrder = {
-                invoiceId: invoiceId,
-                status: "Processing",
-                date: todayStr,
-                summary: cart.map(i => `${i.size} ${i.name}`).join(', '),
-                address: fullAddress
-            };
-
-            if(!currentUser.orders) currentUser.orders = [];
-            currentUser.orders.push(newOrder);
-            localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
-            localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
-
-            const tbody = document.getElementById('admin-orders-table-body');
-            const tr = document.createElement('tr');
-            tr.setAttribute('data-status', 'Processing');
-            tr.setAttribute('data-date', todayStr);
-            tr.setAttribute('data-amount', totalAmt);
-            tr.innerHTML = `
-                <td><input type="checkbox" class="order-select-chk"></td>
-                <td>${invoiceId}</td>
-                <td>${todayStr}</td>
-                <td>${chosenAddr ? chosenAddr.name : 'Customer'}<br><small>Mob: ${chosenAddr ? chosenAddr.mobile : '9876543210'}</small></td>
-                <td>${fullAddress}</td>
-                <td>Cart Order (₹${totalAmt})</td>
-                <td>
-                    <select class="admin-input-sm" style="padding:4px;" onchange="checkOrderCancellationRule(this)">
-                        <option value="Confirmed">Confirmed</option>
-                        <option value="Processing" selected>Processing</option>
-                        <option value="Dispatched">Dispatched</option>
-                        <option value="Delivered">Delivered</option>
-                        <option value="Cancelled">Cancelled</option>
-                    </select>
-                </td>
-                <td>
-                    <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px; width:auto;" onclick="generateQRPreview('${invoiceId}', '${chosenAddr ? chosenAddr.name : 'Customer'}', '${chosenAddr ? chosenAddr.mobile : '9876543210'}', '', '${fullAddress}')">QR Label</button>
-                    <button class="btn-action" style="padding:4px 8px; font-size:11px; background:#475569; width:auto;" onclick="printIndividualGSTInvoice('${invoiceId}', '${chosenAddr ? chosenAddr.name : 'Customer'}', '${chosenAddr ? chosenAddr.mobile : '9876543210'}', '${fullAddress}', 'Cart Items', ${totalAmt})">GST Invoice</button>
-                </td>
-            `;
-            tbody.appendChild(tr);
-
-            cart = [];
-            document.getElementById('cart-count').innerText = "0";
-            renderCart();
-            renderGlobalOrderHistory();
-            navigateTo('history-view');
-        }
-
-        function saveCompanyDetailsConfirm() {
-            if(confirm("Are you sure you want to update company details and tax profile?")) {
-                alert("Company Legal Details & Tax Profile Saved!");
-            }
-        }
-
-        function resizeStickerBox() {
-            const val = document.getElementById('sticker-size-select').value;
-            const box = document.getElementById('sticker-container-box');
-            if(val === 'compact') {
-                box.style.maxWidth = "350px";
-                box.style.padding = "10px";
-            } else if(val === 'a4') {
-                box.style.maxWidth = "750px";
-                box.style.padding = "30px";
-            } else {
-                box.style.maxWidth = "550px";
-                box.style.padding = "20px";
-            }
-        }
-
-        function printIndividualGSTInvoice(inv, name, mob, addr, item, totalAmt) {
-            document.getElementById('gst-print-comp-name').innerText = document.getElementById('comp-name-input').value;
-            document.getElementById('gst-print-comp-addr').innerText = document.getElementById('comp-addr-input').value;
-            document.getElementById('gst-print-comp-contact').innerText = "Email: " + document.getElementById('comp-email-input').value + " | Tel: " + document.getElementById('comp-phone-input').value;
-            document.getElementById('gst-print-comp-gst').innerText = "GSTIN: " + document.getElementById('comp-gst-input').value;
-            document.getElementById('gst-print-comp-fssai').innerText = "FSSAI Lic No: " + document.getElementById('comp-fssai-input').value;
-
-            document.getElementById('gst-print-inv-no').innerText = "Invoice No: " + inv;
-            document.getElementById('gst-print-inv-date').innerText = "Date: " + new Date().toLocaleDateString();
-            document.getElementById('gst-print-cust-name').innerText = name;
-            document.getElementById('gst-print-cust-phone').innerText = "Contact: " + mob;
-            document.getElementById('gst-print-cust-addr').innerText = addr;
-
-            document.getElementById('gst-print-item-desc').innerText = item;
-            document.getElementById('gst-print-hsn').innerText = "17011490";
-            
-            const total = parseFloat(totalAmt);
-            const taxable = (total / 1.05).toFixed(2);
-            const gstAmount = (total - taxable).toFixed(2);
-            const halfGst = (gstAmount / 2).toFixed(2);
-
-            document.getElementById('gst-print-taxable').innerText = "₹" + taxable;
-            document.getElementById('gst-print-cgst').innerText = "₹" + halfGst;
-            document.getElementById('gst-print-sgst').innerText = "₹" + halfGst;
-            document.getElementById('gst-print-item-total').innerText = "₹" + total.toFixed(2);
-            document.getElementById('gst-print-grand-total').innerText = "₹" + total.toFixed(2);
-
-            const printArea = document.getElementById('printable-invoice-area');
-            printArea.style.display = "block";
-            window.print();
-            printArea.style.display = "none";
-        }
-
-        function addNewSkuRow() {
-            if (confirm("Are you sure you want to add a new product SKU row?")) {
-                const tbody = document.getElementById('admin-sku-table-body');
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>
-                        <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
-                            <div style="display:flex; gap:3px;" class="admin-multi-img-preview-box">
-                                <img src="${defaultProductImg}" class="sku-img-preview" style="width:30px; height:30px; object-fit:contain; border:1px solid #ccc;">
-                            </div>
-                            <input type="file" accept="image/*" multiple style="font-size:10px; width:130px;" onchange="previewMultipleProductImages(this)">
-                        </div>
-                    </td>
-                    <td><input type="text" class="admin-input-sm sku-name" value="New Product"></td>
-                    <td><input type="number" class="admin-input-sm sku-price" value="100"></td>
-                    <td><input type="number" class="admin-input-sm sku-tax" value="5"></td>
-                    <td><input type="text" class="admin-input-sm sku-hsn" value="17011490"></td>
-                    <td><input type="number" class="admin-input-sm sku-stock" value="480"></td>
-                    <td>
-                        <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px; width:auto;" onclick="saveProductRow(this)">Save</button>
-                        <button class="btn-secondary" style="padding:4px 8px; font-size:11px; margin-bottom:3px; background:#475569; color:white; border:none; border-radius:4px; cursor:pointer;" onclick="toggleHideProduct(this)">Hide/Show</button>
-                        <button class="cart-remove-btn" style="padding:4px 8px; font-size:11px; width:auto;" onclick="deleteProductRow(this)">Delete</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            }
-        }
-
-        function toggleSelectAllOrders(masterChk) {
-            document.querySelectorAll('.order-select-chk').forEach(chk => chk.checked = masterChk.checked);
-        }
-
-        function batchUpdateConfirm() {
-            const chks = document.querySelectorAll('.order-select-chk:checked');
-            if (chks.length === 0) {
-                alert("Please select at least one order using the checkboxes.");
-                return;
-            }
-            if (confirm(`Are you sure you want to batch-save and update ${chks.length} selected orders?`)) {
-                alert(`Successfully updated ${chks.length} orders!`);
-            }
-        }
-
-        function batchPrintLabels() {
-            const chks = document.querySelectorAll('.order-select-chk:checked');
-            if (chks.length === 0) {
-                alert("Please select orders to batch print.");
-                return;
-            }
-            window.print();
-        }
-
-        function handleLogout() {
-            if(currentUser) {
-                localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
-            }
-            localStorage.removeItem('sthirah_logged_customer');
-            currentUser = null;
-            updateCustomerNav();
-        }
-
         function loginAdmin() {
-            const id = document.getElementById('adm-id').value;
-            const pass = document.getElementById('adm-pass').value;
-            if(id && pass) {
+            const idInput = document.getElementById('adm-id').value.trim();
+            const passInput = document.getElementById('adm-pass').value.trim();
+            
+            const matchedAdmin = authorizedAdmins.find(a => a.user === idInput && a.pass === passInput);
+            if(matchedAdmin) {
                 document.getElementById('admin-login-screen').style.display = "none";
                 document.getElementById('admin-console-screen').style.display = "flex";
                 startAdminInactivityTimer();
             } else {
-                alert("Please enter admin credentials.");
+                alert("Access Denied: Invalid admin credentials or user is not authorized in User Management.");
             }
         }
 
@@ -2696,8 +2587,9 @@
         function switchAdminTab(tabId, el) {
             document.querySelectorAll('.admin-panel-tab').forEach(t => t.classList.remove('active-tab'));
             document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active-tab');
-            el.classList.add('active');
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) targetTab.classList.add('active-tab');
+            if(el) el.classList.add('active');
 
             const titleMap = {
                 'tab-dash': 'Dashboard',
@@ -2709,22 +2601,12 @@
                 'tab-add-product': 'Add Products',
                 'tab-products': 'Product List',
                 'tab-rates': 'Shipping Matrix',
+                'tab-admin-users': 'User Management',
                 'tab-admin-role': 'Admin Role',
                 'tab-reports': 'Sales & Reports'
             };
-            document.getElementById('admin-header-title').innerText = titleMap[tabId] || 'Dashboard';
-        }
-
-        function generateQRPreview(inv, name, mob, altMob, addr) {
-            document.getElementById('qr-display-box').style.display = "block";
-            document.getElementById('qr-cust-name').innerText = "Invoice: " + inv + " - " + name;
-            document.getElementById('qr-cust-phone').innerText = "Mobile: " + mob + (altMob ? " | Alt: " + altMob : "");
-            document.getElementById('qr-cust-addr').innerText = "Address: " + addr;
-
-            const qrData = `INVOICE: ${inv}\nNAME: ${name}\nMOBILE: ${mob}\nALT: ${altMob}\nADDRESS: ${addr}`;
-            const container = document.getElementById('qrcode-canvas');
-            container.innerHTML = "";
-            new QRCode(container, { text: qrData, width: 120, height: 120 });
+            const headerTitle = document.getElementById('admin-header-title');
+            if(headerTitle) headerTitle.innerText = titleMap[tabId] || 'Dashboard';
         }
     </script>
 </body>
