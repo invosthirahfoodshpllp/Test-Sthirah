@@ -1104,7 +1104,10 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="adm-pass" value="" autocomplete="new-password" required placeholder="Enter Password">
+                    <div style="position:relative;">
+                        <input type="password" id="adm-pass" value="" autocomplete="new-password" required placeholder="Enter Password" style="padding-right: 35px;">
+                        <i id="toggle-password-icon" class="fa-solid fa-eye" onclick="toggleAdminPasswordVisibility()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #64748B; font-size: 14px;"></i>
+                    </div>
                 </div>
                 <button type="submit" class="btn-action">LOGIN TO BILLING SYSTEM</button>
             </form>
@@ -1798,7 +1801,7 @@
         ];
 
         let authorizedAdmins = JSON.parse(localStorage.getItem('sthirah_authorized_admins')) || [
-            { user: "Pradheep", pass: "Sthirah" }
+            { user: "Pradheep", pass: "Sthirah@2026" }
         ];
 
         const defaultProductImg = "Sthirah Jaggery Powder 500g Front.jpeg";
@@ -1885,6 +1888,20 @@
                 authorizedAdmins.splice(idx, 1);
                 localStorage.setItem('sthirah_authorized_admins', JSON.stringify(authorizedAdmins));
                 renderAdminUsersTable();
+            }
+        }
+
+        function toggleAdminPasswordVisibility() {
+            const passInput = document.getElementById('adm-pass');
+            const icon = document.getElementById('toggle-password-icon');
+            if (passInput.type === "password") {
+                passInput.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                passInput.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
             }
         }
 
@@ -2705,111 +2722,6 @@
             item.size = item.qty + " KG";
             item.price = item.qty * unitPricePerKg;
             renderCart();
-        }
-
-        function processCheckoutOrder() {
-            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
-            if(!currentUser || !currentUser.addresses || currentUser.addresses.length === 0) {
-                alert("Please log in with Google and add a delivery address in My Account first.");
-                navigateTo('account-view');
-                return;
-            }
-            const selectedRadio = document.querySelector('input[name="selected_checkout_addr"]:checked');
-            if(!selectedRadio) {
-                alert("Please select a delivery address.");
-                return;
-            }
-            
-            let totalAmt = cart.reduce((acc, item) => acc + item.price, 0);
-            
-            const options = {
-                "key": "rzp_test_TJlbbHuitbZUT0",
-                "amount": totalAmt * 100, // Amount in paise
-                "currency": "INR",
-                "name": "Sthirah",
-                "description": "Cane Jaggery Powder Purchase",
-                "image": "Logo 2.png",
-                "handler": function (response){
-                    alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-                    finalizeRazorpayOrder();
-                },
-                "prefill": {
-                    "name": currentUser.name || "Customer",
-                    "email": currentUser.email || "customer@sthirah.in",
-                    "contact": currentUser.mobile || "9876543210"
-                },
-                "theme": {
-                    "color": "#116B32"
-                }
-            };
-            const rzp1 = new Razorpay(options);
-            rzp1.open();
-        }
-
-        function finalizeRazorpayOrder() {
-            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
-            if(!currentUser || !currentUser.addresses) return;
-            const selectedRadio = document.querySelector('input[name="selected_checkout_addr"]:checked');
-            const addrIdx = selectedRadio ? parseInt(selectedRadio.value) : 0;
-            const chosenAddr = currentUser.addresses[addrIdx];
-            const fullAddress = chosenAddr ? `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area} - ${chosenAddr.pincode}` : "Salem, TN";
-            
-            const prefix = "STH/2026/";
-            const invoiceId = prefix + Math.floor(100 + Math.random() * 900);
-            const todayStr = new Date().toISOString().split('T')[0];
-
-            let totalAmt = cart.reduce((acc, item) => acc + item.price, 0);
-
-            const newOrder = {
-                invoiceId: invoiceId,
-                status: "Processing",
-                date: todayStr,
-                summary: cart.map(i => `${i.size} ${i.name}`).join(', '),
-                address: fullAddress
-            };
-
-            if(!currentUser.orders) currentUser.orders = [];
-            currentUser.orders.push(newOrder);
-            localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
-            localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
-            window.currentUser = currentUser;
-
-            const tbody = document.getElementById('admin-orders-table-body');
-            if(tbody) {
-                const tr = document.createElement('tr');
-                tr.setAttribute('data-status', 'Processing');
-                tr.setAttribute('data-date', todayStr);
-                tr.setAttribute('data-amount', totalAmt);
-                tr.innerHTML = `
-                    <td><input type="checkbox" class="order-select-chk"></td>
-                    <td>${invoiceId}</td>
-                    <td>${todayStr}</td>
-                    <td>${chosenAddr ? chosenAddr.name : 'Customer'}<br><small>Mob: ${chosenAddr ? chosenAddr.mobile : '9876543210'}</small></td>
-                    <td>${fullAddress}</td>
-                    <td>Cart Order (₹${totalAmt})</td>
-                    <td>
-                        <select class="admin-input-sm" style="padding:4px;" onchange="checkOrderCancellationRule(this)">
-                            <option value="Confirmed">Confirmed</option>
-                            <option value="Processing" selected>Processing</option>
-                            <option value="Dispatched">Dispatched</option>
-                            <option value="Delivered">Delivered</option>
-                            <option value="Cancelled">Cancelled</option>
-                        </select>
-                    </td>
-                    <td>
-                        <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px; width:auto;" onclick="generateQRPreview('${invoiceId}', '${chosenAddr ? chosenAddr.name : 'Customer'}', '${chosenAddr ? chosenAddr.mobile : '9876543210'}', '', '${fullAddress}')">QR Label</button>
-                        <button class="btn-action" style="padding:4px 8px; font-size:11px; background:#475569; width:auto;" onclick="printIndividualGSTInvoice('${invoiceId}', '${chosenAddr ? chosenAddr.name : 'Customer'}', '${chosenAddr ? chosenAddr.mobile : '9876543210'}', '${fullAddress}', 'Cart Items', ${totalAmt})">GST Invoice</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            }
-
-            cart = [];
-            const countEl = document.getElementById('cart-count');
-            if(countEl) countEl.innerText = "0";
-            renderCart();
-            renderGlobalOrderHistory();
-            navigateTo('history-view');
         }
 
         function navigateTo(viewId) {
