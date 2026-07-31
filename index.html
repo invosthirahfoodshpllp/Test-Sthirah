@@ -463,6 +463,30 @@
             #printable-invoice-area { position: absolute; left: 0; top: 0; width: 100%; }
         }
 
+        /* Shop Grid Styles */
+        .shop-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+        .shop-grid-card {
+            background: transparent;
+            border: 2px solid var(--green-accent);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+        .shop-grid-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
         /* Three Section Layout for Shop Page matching Reference Image 3 specification (Side Thumbnails layout) */
         .shop-page-layout {
             display: grid;
@@ -770,103 +794,8 @@
     <main id="product-view" class="page-view">
         <div class="product-section">
             <div id="dynamic-shop-catalog-container">
-                <div class="shop-page-layout">
-                    
-                    <!-- SECTION 1: Product Photo Box with Large Image Top & Thumbnails Bottom -->
-                    <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
-                        <div class="product-gallery-side-container">
-                            <div class="side-thumbnails-col" id="shop-thumbs-container">
-                                <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="side-thumb active-thumb" onmouseover="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg')">
-                                <img src="Sthirah Jaggery Powder 500g Back.jpg" class="side-thumb" onmouseover="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')" onclick="changeShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg')">
-                                <img src="Sthirah Jaggery Powder Nutrition Information .png" class="side-thumb" onmouseover="changeShopImage(this, 'Sthirah Jaggery Powder Nutrition Information .png')" onclick="changeShopImage(this, 'Sthirah Jaggery Powder Nutrition Information .png')">
-                            </div>
-                            <div class="main-image-preview-wrapper img-zoom-container" id="shop-zoom-container" onmousemove="imageZoom('shop-pimg-display', 'shop-zoom-result', event)" onmouseenter="showZoom('shop-zoom-result')" onmouseleave="hideZoom('shop-zoom-result')">
-                                <img id="shop-pimg-display" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder" class="product-pack-img" style="max-height:400px; max-width:100%; object-fit:contain;">
-                                <div id="shop-zoom-result" class="img-zoom-result"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SECTION 2: Product Details Box -->
-                    <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
-                        <div>
-                            <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;" id="shop-product-title"><strong>Sthirah Cane Jaggery Powder</strong></h1>
-                            <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
-                                <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                                <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
-                            </div>
-                            <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price">₹110.00 per KG</p>
-                            
-                            <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
-                                Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped In Individual 500g unit packaging.
-                            </p>
-                            
-                            <!-- Callout box -->
-                            <div style="background:#F2F7EC; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
-                                <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                                    <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
-                                </strong>
-                                <p style="font-size:13.5px; color:#334155; line-height:1.5;">
-                                    Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
-                                </p>
-                            </div>
-
-                            <!-- Key Product Highlights -->
-                            <div style="margin-bottom:20px;">
-                                <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
-                                <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
-                                    <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
-                                    <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
-                                    <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="font-size:13px; color:var(--text-dark); margin-bottom:10px; text-align:center;"><strong>*Shipped In Individual 500G Unit Packets</strong></p>
-
-                            <!-- Quantity Stepper Widget with Capital KG -->
-                            <div class="quantity-stepper-box">
-                                <label>Quantity (KG):</label>
-                                <div class="stepper-controls">
-                                    <button type="button" class="stepper-btn" onclick="adjustShopQty(-1)">-</button>
-                                    <input type="number" id="shop-qty-input" class="stepper-input" value="1" min="1" max="99" maxlength="3" oninput="onQtyInput(this)" onblur="onQtyBlur(this)">
-                                    <button type="button" class="stepper-btn" onclick="adjustShopQty(1)">+</button>
-                                </div>
-                            </div>
-
-                            <button class="btn-action" onclick="addToCartFromShop()">ADD TO CART</button>
-                        </div>
-                    </div>
-
-                </div>
+                <!-- Populated dynamically via JS either as Shop Grid or Individual Product Detail View matching Reference Image 2 -->
             </div>
-
-            <!-- SECTION 3: Customer Reviews Section on the bottom for full width of the page -->
-            <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); margin-top:30px; width:100%;">
-                <h3 style="color:var(--green-accent); font-size:22px; font-weight:800; margin-bottom:20px; border-bottom:2px solid var(--green-accent); padding-bottom:10px;">Customer Reviews & Ratings</h3>
-                
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:25px;">
-                    <div style="background:rgba(255,255,255,0.5); padding:20px; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
-                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <div style="margin:8px 0 4px 0;"><strong>Karthik R.</strong> <span style="font-size:12px; color:#555;">— June 12, 2026</span></div>
-                        <p style="font-size:14px; color:#334155; line-height:1.5;">Absolute top quality jaggery! Gives my morning coffee the best caramel flavor without any artificial aftertaste.</p>
-                    </div>
-
-                    <div style="background:rgba(255,255,255,0.5); padding:20px; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
-                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <div style="margin:8px 0 4px 0;"><strong>Priya S.</strong> <span style="font-size:12px; color:#555;">— June 18, 2026</span></div>
-                        <p style="font-size:14px; color:#334155; line-height:1.5;">Clean packaging in 500g packets. Very authentic taste and fast shipping across Tamil Nadu.</p>
-                    </div>
-
-                    <div style="background:rgba(255,255,255,0.5); padding:20px; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
-                        <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <div style="margin:8px 0 4px 0;"><strong>Rajesh M.</strong> <span style="font-size:12px; color:#555;">— July 02, 2026</span></div>
-                        <p style="font-size:14px; color:#334155; line-height:1.5;">Replaced refined sugar completely with Sthirah powder. Highly recommended!</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </main>
 
@@ -1383,9 +1312,14 @@
                 <div id="tab-categories" class="admin-panel-tab">
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:600px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Product Categories Management</h2>
-                        <div class="form-group"><label>Category Name</label><input type="text" value="Natural Sweeteners & Jaggery"></div>
-                        <div class="form-group"><label>Description</label><textarea rows="2">Pure organic cane jaggery powder and farm sweeteners.</textarea></div>
-                        <button class="btn-action" onclick="alert('Category saved successfully!')">Save Category</button>
+                        <div class="form-group"><label>Category Name</label><input type="text" id="new-cat-name" placeholder="e.g. Natural Sweeteners"></div>
+                        <div class="form-group"><label>Description</label><textarea id="new-cat-desc" rows="2" placeholder="Category description"></textarea></div>
+                        <button class="btn-action" onclick="addNewCategoryFromTab()">Save Category</button>
+                        
+                        <div style="margin-top:20px;">
+                            <h4 style="margin-bottom:10px; font-size:15px;">Existing Categories</h4>
+                            <div id="admin-categories-list" style="font-size:13px;"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -1432,15 +1366,25 @@
                     <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px; max-width:700px;">
                         <h2 style="font-size:18px; margin-bottom:15px; color:#0F172A;">Add New Product Wizard</h2>
                         <div class="form-group"><label>Product Name</label><input type="text" id="new-prod-name" placeholder="e.g. Organic Jaggery Powder" value="Sthirah Cane Jaggery Powder"></div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="new-prod-category" class="admin-input-sm">
+                                <option value="Natural Sweeteners & Jaggery">Natural Sweeteners & Jaggery</option>
+                            </select>
+                        </div>
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
                             <div class="form-group"><label>Base Price (₹)</label><input type="number" id="new-prod-price" placeholder="110" value="110"></div>
-                            <div class="form-group"><label>Tax Rate (%)</label><input type="number" value="5"></div>
+                            <div class="form-group"><label>Tax Rate (%)</label><input type="number" id="new-prod-tax" value="5"></div>
                         </div>
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
-                            <div class="form-group"><label>HSN Code</label><input type="text" value="17011490"></div>
-                            <div class="form-group"><label>Initial Stock Units</label><input type="number" value="480"></div>
+                            <div class="form-group"><label>HSN Code</label><input type="text" id="new-prod-hsn" value="17011490"></div>
+                            <div class="form-group"><label>Initial Stock Units</label><input type="number" id="new-prod-stock" value="480"></div>
                         </div>
                         <div class="form-group"><label>Product Description / Benefits</label><textarea id="new-prod-desc" rows="3">Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped In Individual 500g unit packaging.</textarea></div>
+                        <div class="form-group">
+                            <label>Multiple Product Images (Select up to 5 images)</label>
+                            <input type="file" id="new-prod-images-files" accept="image/*" multiple>
+                        </div>
                         <button class="btn-action" onclick="addNewProductFromWizard()">Publish Product</button>
                     </div>
                 </div>
@@ -1458,6 +1402,7 @@
                                     <tr>
                                         <th>Multi Images</th>
                                         <th>Product / SKU Name</th>
+                                        <th>Category</th>
                                         <th>Price (₹)</th>
                                         <th>Tax Rate (%)</th>
                                         <th>HSN Code</th>
@@ -1466,25 +1411,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="admin-sku-table-body">
-                                    <tr id="sku-row-0">
-                                        <td>
-                                            <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
-                                                <div style="display:flex; gap:3px;" class="admin-multi-img-preview-box">
-                                                    <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="sku-img-preview" style="width:30px; height:30px; object-fit:contain; border:1px solid #ccc;">
-                                                </div>
-                                                <input type="file" accept="image/*" multiple style="font-size:10px; width:130px;" onchange="previewMultipleProductImages(this)">
-                                            </div>
-                                        </td>
-                                        <td><input type="text" class="admin-input-sm sku-name" value="Sthirah Cane Jaggery Powder"></td>
-                                        <td><input type="number" class="admin-input-sm sku-price" value="110"></td>
-                                        <td><input type="number" class="admin-input-sm sku-tax" value="5"></td>
-                                        <td><input type="text" class="admin-input-sm sku-hsn" value="17011490"></td>
-                                        <td><input type="number" class="admin-input-sm sku-stock" value="480"></td>
-                                        <td>
-                                            <button class="btn-action" style="padding:4px 8px; font-size:11px; margin-bottom:3px; width:auto;" onclick="saveProductRowByIndex(0, this)">Save</button>
-                                            <button class="cart-remove-btn" style="padding:4px 8px; font-size:11px; width:auto;" onclick="deleteProductRowByIndex(0)">Delete</button>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1787,15 +1713,21 @@
         let currentUser = JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
         window.currentUser = currentUser;
 
+        let categories = JSON.parse(localStorage.getItem('sthirah_categories')) || [
+            { name: "Natural Sweeteners & Jaggery", description: "Pure organic cane jaggery powder and farm sweeteners." }
+        ];
+
         let productCatalog = JSON.parse(localStorage.getItem('sthirah_product_catalog')) || [
             {
                 id: 0,
                 name: "Sthirah Cane Jaggery Powder",
+                category: "Natural Sweeteners & Jaggery",
                 price: 110,
                 tax: 5,
                 hsn: "17011490",
                 stock: 480,
                 description: "Prepared directly from sugarcane juice harvested on our farm in Salem. Retains natural molasses and essential minerals without added refining agents. Shipped In Individual 500g unit packaging.",
+                images: ["Sthirah Jaggery Powder 500g Front.jpeg", "Sthirah Jaggery Powder 500g Back.jpg", "Sthirah Jaggery Powder Nutrition Information .png"],
                 img: "Sthirah Jaggery Powder 500g Front.jpeg"
             }
         ];
@@ -1843,6 +1775,49 @@
             });
         }
         populateAdminShippingTable();
+
+        function renderCategoriesDropdownAndList() {
+            const catSelect = document.getElementById('new-prod-category');
+            if(catSelect) {
+                let optHtml = "";
+                categories.forEach(c => {
+                    optHtml += `<option value="${c.name}">${c.name}</option>`;
+                });
+                catSelect.innerHTML = optHtml;
+            }
+
+            const catListDiv = document.getElementById('admin-categories-list');
+            if(catListDiv) {
+                let listHtml = "";
+                categories.forEach((c, idx) => {
+                    listHtml += `<div style="background:#F8FAFC; padding:8px 12px; border:1px solid #E2E8F0; border-radius:6px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><strong>${c.name}</strong><br><small>${c.description}</small></div>
+                        ${idx > 0 ? `<button class="cart-remove-btn" style="padding:2px 6px; font-size:11px;" onclick="deleteCategory(${idx})">Delete</button>` : ''}
+                    </div>`;
+                });
+                catListDiv.innerHTML = listHtml;
+            }
+        }
+
+        function addNewCategoryFromTab() {
+            const name = document.getElementById('new-cat-name').value.trim();
+            const desc = document.getElementById('new-cat-desc').value.trim();
+            if(!name) { alert("Please enter category name."); return; }
+            categories.push({ name, description: desc });
+            localStorage.setItem('sthirah_categories', JSON.stringify(categories));
+            document.getElementById('new-cat-name').value = "";
+            document.getElementById('new-cat-desc').value = "";
+            renderCategoriesDropdownAndList();
+            alert("Category added successfully!");
+        }
+
+        function deleteCategory(idx) {
+            if(confirm("Delete this category?")) {
+                categories.splice(idx, 1);
+                localStorage.setItem('sthirah_categories', JSON.stringify(categories));
+                renderCategoriesDropdownAndList();
+            }
+        }
 
         function renderAdminUsersTable() {
             const tbody = document.getElementById('admin-users-table-body');
@@ -1908,76 +1883,29 @@
         function renderStorefrontCatalog() {
             const shopContainer = document.getElementById('dynamic-shop-catalog-container');
             if(shopContainer) {
-                let shopHtml = "";
+                let shopHtml = `<div style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+                    <h2 style="font-size:26px; font-weight:800; color:var(--green-accent);">Our Products Catalog</h2>
+                </div>`;
+                shopHtml += `<div class="shop-grid-container">`;
                 productCatalog.forEach((prod, idx) => {
+                    let thumbImg = (prod.images && prod.images.length > 0) ? prod.images[0] : (prod.img || defaultProductImg);
                     shopHtml += `
-                        <div class="shop-page-layout">
-                            
-                            <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
-                                <div class="product-gallery-side-container">
-                                    <div class="side-thumbnails-col" id="shop-thumbs-container-${idx}">
-                                        <img src="Sthirah Jaggery Powder 500g Front.jpeg" class="side-thumb active-thumb" onmouseover="changeDynamicShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg', ${idx})" onclick="changeDynamicShopImage(this, 'Sthirah Jaggery Powder 500g Front.jpeg', ${idx})">
-                                        <img src="Sthirah Jaggery Powder 500g Back.jpg" class="side-thumb" onmouseover="changeDynamicShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg', ${idx})" onclick="changeDynamicShopImage(this, 'Sthirah Jaggery Powder 500g Back.jpg', ${idx})">
-                                        <img src="Sthirah Jaggery Powder Nutrition Information .png" class="side-thumb" onmouseover="changeDynamicShopImage(this, 'Sthirah Jaggery Powder Nutrition Information .png', ${idx})" onclick="changeDynamicShopImage(this, 'Sthirah Jaggery Powder Nutrition Information .png', ${idx})">
-                                    </div>
-                                    <div class="main-image-preview-wrapper img-zoom-container" id="shop-zoom-container-${idx}" onmousemove="imageZoom('shop-pimg-display-${idx}', 'shop-zoom-result-${idx}', event)" onmouseenter="showZoom('shop-zoom-result-${idx}')" onmouseleave="hideZoom('shop-zoom-result-${idx}')">
-                                        <img id="shop-pimg-display-${idx}" src="${prod.img || defaultProductImg}" alt="${prod.name}" class="product-pack-img" style="max-height:400px; max-width:100%; object-fit:contain;">
-                                        <div id="shop-zoom-result-${idx}" class="img-zoom-result"></div>
-                                    </div>
+                        <div class="shop-grid-card" onclick="openProductDetailView(${idx})">
+                            <div>
+                                <div style="width:100%; height:200px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:8px; margin-bottom:15px; border:1px solid #eee; overflow:hidden;">
+                                    <img src="${thumbImg}" style="max-height:100%; max-width:100%; object-fit:contain;">
                                 </div>
+                                <span style="font-size:11px; font-weight:700; background:#E2E8F0; color:var(--green-accent); padding:3px 8px; border-radius:4px; text-transform:uppercase;">${prod.category || 'General'}</span>
+                                <h3 style="font-size:18px; font-weight:700; color:var(--text-dark); margin:10px 0 6px 0;">${prod.name}</h3>
                             </div>
-
-                            <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
-                                <div>
-                                    <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;" id="shop-product-title-${idx}"><strong>${prod.name}</strong></h1>
-                                    <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
-                                        <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                                        <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
-                                    </div>
-                                    <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;" id="shop-product-price-${idx}">₹${prod.price}.00 per KG</p>
-                                    
-                                    <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
-                                        ${prod.description}
-                                    </p>
-                                    
-                                    <div style="background:#F2F7EC; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
-                                        <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                                            <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
-                                        </strong>
-                                        <p style="font-size:13.5px; color:#334155; line-height:1.5;">
-                                            Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
-                                        </p>
-                                    </div>
-
-                                    <div style="margin-bottom:20px;">
-                                        <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
-                                        <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
-                                            <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
-                                            <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
-                                            <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <p style="font-size:13px; color:var(--text-dark); margin-bottom:10px; text-align:center;"><strong>*Shipped In Individual 500G Unit Packets</strong></p>
-
-                                    <div class="quantity-stepper-box">
-                                        <label>Quantity (KG):</label>
-                                        <div class="stepper-controls">
-                                            <button type="button" class="stepper-btn" onclick="adjustCustomQty(${idx}, -1)">-</button>
-                                            <input type="number" id="custom-qty-${idx}" class="stepper-input" value="1" min="1" max="99" maxlength="3" oninput="onQtyInput(this)" onblur="onQtyBlur(this)">
-                                            <button type="button" class="stepper-btn" onclick="adjustCustomQty(${idx}, 1)">+</button>
-                                        </div>
-                                    </div>
-
-                                    <button class="btn-action" onclick="addCatalogItemToCart(${idx})">ADD TO CART</button>
-                                </div>
+                            <div>
+                                <div style="font-size:20px; font-weight:800; color:var(--green-accent); margin-bottom:12px;">₹${prod.price}.00 per KG</div>
+                                <button class="btn-action" style="padding:10px;" onclick="event.stopPropagation(); openProductDetailView(${idx});">VIEW PRODUCT</button>
                             </div>
-
                         </div>
                     `;
                 });
+                shopHtml += `</div>`;
                 shopContainer.innerHTML = shopHtml;
             }
 
@@ -1985,17 +1913,28 @@
             if(adminTbody) {
                 let adminHtml = "";
                 productCatalog.forEach((prod, idx) => {
+                    let imgListHtml = "";
+                    let imgs = prod.images && prod.images.length > 0 ? prod.images : [prod.img || defaultProductImg];
+                    imgs.forEach(im => {
+                        imgListHtml += `<img src="${im}" style="width:25px; height:25px; object-fit:contain; border:1px solid #ccc; border-radius:3px;">`;
+                    });
+
                     adminHtml += `
                         <tr id="sku-row-${idx}">
                             <td>
                                 <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
-                                    <div style="display:flex; gap:3px;">
-                                        <img src="${prod.img || defaultProductImg}" style="width:30px; height:30px; object-fit:contain; border:1px solid #ccc;">
+                                    <div style="display:flex; gap:3px; flex-wrap:wrap; max-width:100px;">
+                                        ${imgListHtml}
                                     </div>
-                                    <input type="file" accept="image/*" style="font-size:10px; width:130px;" onchange="updateProductImage(this, ${idx})">
+                                    <input type="file" accept="image/*" multiple style="font-size:10px; width:130px;" onchange="updateMultipleProductImages(this, ${idx})">
                                 </div>
                             </td>
                             <td><input type="text" class="admin-input-sm sku-name" value="${prod.name}"></td>
+                            <td>
+                                <select class="admin-input-sm sku-category">
+                                    ${categories.map(c => `<option value="${c.name}" ${prod.category === c.name ? 'selected' : ''}>${c.name}</option>`).join('')}
+                                </select>
+                            </td>
                             <td><input type="number" class="admin-input-sm sku-price" value="${prod.price}"></td>
                             <td><input type="number" class="admin-input-sm sku-tax" value="${prod.tax}"></td>
                             <td><input type="text" class="admin-input-sm sku-hsn" value="${prod.hsn}"></td>
@@ -2009,19 +1948,147 @@
                 });
                 adminTbody.innerHTML = adminHtml;
             }
+            renderCategoriesDropdownAndList();
         }
 
-        function changeDynamicShopImage(thumbEl, imgPath, idx) {
-            const img = document.getElementById(`shop-pimg-display-${idx}`);
+        function openProductDetailView(idx) {
+            const prod = productCatalog[idx];
+            const shopContainer = document.getElementById('dynamic-shop-catalog-container');
+            if(!shopContainer) return;
+
+            let imgs = prod.images && prod.images.length > 0 ? prod.images : [prod.img || defaultProductImg];
+            let thumbsHtml = "";
+            imgs.forEach((im, i) => {
+                thumbsHtml += `<img src="${im}" class="side-thumb ${i === 0 ? 'active-thumb' : ''}" onmouseover="changeDetailShopImage(this, '${im}')" onclick="changeDetailShopImage(this, '${im}')">`;
+            });
+
+            shopContainer.innerHTML = `
+                <div style="margin-bottom:20px;">
+                    <button class="btn-action" style="width:auto; padding:8px 16px; background:#475569;" onclick="renderStorefrontCatalog()"><i class="fa-solid fa-arrow-left"></i> Back to All Products</button>
+                </div>
+                <div class="shop-page-layout">
+                    <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
+                        <div class="product-gallery-side-container">
+                            <div class="side-thumbnails-col">
+                                ${thumbsHtml}
+                            </div>
+                            <div class="main-image-preview-wrapper img-zoom-container" id="detail-zoom-container" onmousemove="imageZoom('detail-pimg-display', 'detail-zoom-result', event)" onmouseenter="showZoom('detail-zoom-result')" onmouseleave="hideZoom('detail-zoom-result')">
+                                <img id="detail-pimg-display" src="${imgs[0]}" alt="${prod.name}" class="product-pack-img" style="max-height:400px; max-width:100%; object-fit:contain;">
+                                <div id="detail-zoom-result" class="img-zoom-result"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; height: 100%;">
+                        <div>
+                            <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;"><strong>${prod.name}</strong></h1>
+                            <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
+                                <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
+                            </div>
+                            <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;">₹${prod.price}.00</p>
+                            
+                            <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
+                                ${prod.description}
+                            </p>
+                            
+                            <div style="background:#F2F7EC; border-left:4px solid var(--green-accent); padding:16px; border-radius:4px; margin-bottom:20px;">
+                                <strong style="color:var(--green-accent); font-size:14px; display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                    <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
+                                </strong>
+                                <p style="font-size:13.5px; color:#334155; line-height:1.5;">
+                                    Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
+                                </p>
+                            </div>
+
+                            <div style="margin-bottom:20px;">
+                                <h4 style="font-size:15px; font-weight:700; color:var(--green-accent); margin-bottom:10px;">Key Product Highlights:</h4>
+                                <ul style="list-style:disc; padding-left:18px; font-size:13.5px; line-height:1.6; color:#333; display:flex; flex-direction:column; gap:6px;">
+                                    <li>Crafted using traditional boiling and evaporation methods from fresh sugarcane juice.</li>
+                                    <li>Free from synthetic additives, artificial colorings, and chemical clarifiers.</li>
+                                    <li>Packed in convenient moisture-resistant 500g unit packets to ensure long shelf life.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p style="font-size:13px; color:var(--text-dark); margin-bottom:10px; text-align:center;"><strong>*Shipped In Individual 500G Unit Packets</strong></p>
+
+                            <div class="quantity-stepper-box">
+                                <label>Quantity (KG):</label>
+                                <div class="stepper-controls">
+                                    <button type="button" class="stepper-btn" onclick="adjustDetailQty(-1)">-</button>
+                                    <input type="number" id="detail-qty-input" class="stepper-input" value="1" min="1" max="99" maxlength="3" oninput="onQtyInput(this)" onblur="onQtyBlur(this)">
+                                    <button type="button" class="stepper-btn" onclick="adjustDetailQty(1)">+</button>
+                                </div>
+                            </div>
+
+                            <button class="btn-action" onclick="addCatalogItemToCartFromDetail(${idx})">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); margin-top:30px; width:100%;">
+                    <h3 style="color:var(--green-accent); font-size:22px; font-weight:800; margin-bottom:20px; border-bottom:2px solid var(--green-accent); padding-bottom:10px;">Customer Reviews & Ratings</h3>
+                    
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:25px;">
+                        <div style="background:rgba(255,255,255,0.5); padding:20px; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
+                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <div style="margin:8px 0 4px 0;"><strong>Karthik R.</strong> <span style="font-size:12px; color:#555;">— June 12, 2026</span></div>
+                            <p style="font-size:14px; color:#334155; line-height:1.5;">Absolute top quality jaggery! Gives my morning coffee the best caramel flavor without any artificial aftertaste.</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:20px; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
+                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <div style="margin:8px 0 4px 0;"><strong>Priya S.</strong> <span style="font-size:12px; color:#555;">— June 18, 2026</span></div>
+                            <p style="font-size:14px; color:#334155; line-height:1.5;">Clean packaging in 500g packets. Very authentic taste and fast shipping across Tamil Nadu.</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:20px; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
+                            <div class="star-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <div style="margin:8px 0 4px 0;"><strong>Rajesh M.</strong> <span style="font-size:12px; color:#555;">— July 02, 2026</span></div>
+                            <p style="font-size:14px; color:#334155; line-height:1.5;">Replaced refined sugar completely with Sthirah powder. Highly recommended!</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeDetailShopImage(thumbEl, imgPath) {
+            const img = document.getElementById('detail-pimg-display');
             if(!img) return;
             img.style.opacity = 0;
             setTimeout(() => {
                 img.src = imgPath;
-                productCatalog[idx].img = imgPath;
                 img.style.opacity = 1;
             }, 250);
             thumbEl.parentElement.querySelectorAll('.side-thumb').forEach(t => t.classList.remove('active-thumb'));
             thumbEl.classList.add('active-thumb');
+        }
+
+        function adjustDetailQty(val) {
+            const input = document.getElementById('detail-qty-input');
+            if(!input) return;
+            let cur = parseInt(input.value) || 1;
+            cur += val;
+            if(cur < 1) cur = 1;
+            if(cur > 99) cur = 99;
+            input.value = cur;
+        }
+
+        function addCatalogItemToCartFromDetail(idx) {
+            const prod = productCatalog[idx];
+            const qtyInput = document.getElementById('detail-qty-input');
+            const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+            const size = qty + " KG";
+            const price = qty * prod.price;
+            let imgToUse = (prod.images && prod.images.length > 0) ? prod.images[0] : (prod.img || defaultProductImg);
+            cart.push({ name: prod.name, qty, size, price, img: imgToUse });
+            const countEl = document.getElementById('cart-count');
+            if(countEl) countEl.innerText = cart.length;
+            renderCart();
+            navigateTo('cart-view');
         }
 
         function onQtyInput(input) {
@@ -2079,16 +2146,6 @@
             input.value = cur;
         }
 
-        function adjustCustomQty(idx, val) {
-            const input = document.getElementById(`custom-qty-${idx}`);
-            if(!input) return;
-            let cur = parseInt(input.value) || 1;
-            cur += val;
-            if(cur < 1) cur = 1;
-            if(cur > 99) cur = 99;
-            input.value = cur;
-        }
-
         function addToCart() {
             const qtyInput = document.getElementById('home-qty-input');
             const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
@@ -2101,42 +2158,24 @@
             navigateTo('cart-view');
         }
 
-        function addToCartFromShop() {
-            const qtyInput = document.getElementById('shop-qty-input');
-            const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
-            const size = qty + " KG";
-            const price = qty * unitPricePerKg;
-            const imgEl = document.getElementById('shop-pimg-display');
-            const currentImg = imgEl ? imgEl.src : defaultProductImg;
-            cart.push({ name: "Sthirah Cane Jaggery Powder", qty, size, price, img: currentImg });
-            const countEl = document.getElementById('cart-count');
-            if(countEl) countEl.innerText = cart.length;
-            renderCart();
-            navigateTo('cart-view');
-        }
-
-        function addCatalogItemToCart(idx) {
-            const prod = productCatalog[idx];
-            const qtyInput = document.getElementById(`custom-qty-${idx}`);
-            const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
-            const size = qty + " KG";
-            const price = qty * prod.price;
-            cart.push({ name: prod.name, qty, size, price, img: prod.img || defaultProductImg });
-            const countEl = document.getElementById('cart-count');
-            if(countEl) countEl.innerText = cart.length;
-            renderCart();
-            navigateTo('cart-view');
-        }
-
-        function updateProductImage(fileInput, idx) {
-            if(fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    productCatalog[idx].img = e.target.result;
-                    localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
-                    renderStorefrontCatalog();
-                };
-                reader.readAsDataURL(fileInput.files[0]);
+        function updateMultipleProductImages(fileInput, idx) {
+            if(fileInput.files && fileInput.files.length > 0) {
+                let loadedCount = 0;
+                let newImages = [];
+                Array.from(fileInput.files).forEach((file, fIdx) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newImages[fIdx] = e.target.result;
+                        loadedCount++;
+                        if(loadedCount === fileInput.files.length) {
+                            productCatalog[idx].images = newImages;
+                            productCatalog[idx].img = newImages[0];
+                            localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
+                            renderStorefrontCatalog();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
             }
         }
 
@@ -2144,12 +2183,14 @@
             const row = document.getElementById(`sku-row-${idx}`);
             if(!row) return;
             const name = row.querySelector('.sku-name').value;
+            const category = row.querySelector('.sku-category').value;
             const price = parseFloat(row.querySelector('.sku-price').value) || 110;
             const tax = parseFloat(row.querySelector('.sku-tax').value) || 5;
             const hsn = row.querySelector('.sku-hsn').value;
             const stock = parseInt(row.querySelector('.sku-stock').value) || 100;
 
             productCatalog[idx].name = name;
+            productCatalog[idx].category = category;
             productCatalog[idx].price = price;
             productCatalog[idx].tax = tax;
             productCatalog[idx].hsn = hsn;
@@ -2177,24 +2218,51 @@
 
         function addNewProductFromWizard() {
             const name = document.getElementById('new-prod-name').value || "New Product";
+            const category = document.getElementById('new-prod-category').value || "Natural Sweeteners & Jaggery";
             const price = parseFloat(document.getElementById('new-prod-price').value) || 100;
+            const tax = parseFloat(document.getElementById('new-prod-tax').value) || 5;
+            const hsn = document.getElementById('new-prod-hsn').value || "17011490";
+            const stock = parseInt(document.getElementById('new-prod-stock').value) || 100;
             const desc = document.getElementById('new-prod-desc').value || "Prepared directly from sugarcane juice harvested on our farm in Salem.";
+            const fileInput = document.getElementById('new-prod-images-files');
             
-            productCatalog.push({
-                id: Date.now(),
-                name: name,
-                price: price,
-                tax: 5,
-                hsn: "17011490",
-                stock: 250,
-                description: desc,
-                img: defaultProductImg
-            });
-
-            localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
-            renderStorefrontCatalog();
-            alert("New product published successfully and synced to Shop page!");
-            switchAdminTab('tab-products', document.querySelector('[onclick*=\'tab-products\']'));
+            if(fileInput.files && fileInput.files.length > 0) {
+                let loadedCount = 0;
+                let newImages = [];
+                Array.from(fileInput.files).forEach((file, fIdx) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        newImages[fIdx] = e.target.result;
+                        loadedCount++;
+                        if(loadedCount === fileInput.files.length) {
+                            productCatalog.push({
+                                id: Date.now(),
+                                name, category, price, tax, hsn, stock,
+                                description: desc,
+                                images: newImages,
+                                img: newImages[0]
+                            });
+                            localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
+                            renderStorefrontCatalog();
+                            alert("New product published successfully and synced to Shop page!");
+                            switchAdminTab('tab-products', document.querySelector('[onclick*=\'tab-products\']'));
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                productCatalog.push({
+                    id: Date.now(),
+                    name, category, price, tax, hsn, stock,
+                    description: desc,
+                    images: [defaultProductImg],
+                    img: defaultProductImg
+                });
+                localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
+                renderStorefrontCatalog();
+                alert("New product published successfully and synced to Shop page!");
+                switchAdminTab('tab-products', document.querySelector('[onclick*=\'tab-products\']'));
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -2226,18 +2294,6 @@
                 img.style.opacity = 1;
             }, 250);
             thumbEl.parentElement.querySelectorAll('.side-thumb').forEach(t => t.classList.remove('active-thumb'));
-            thumbEl.classList.add('active-thumb');
-        }
-
-        function changeShopImage(thumbEl, imgPath) {
-            const img = document.getElementById('shop-pimg-display');
-            if(!img) return;
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = imgPath;
-                img.style.opacity = 1;
-            }, 250);
-            document.querySelectorAll('#shop-thumbs-container .side-thumb').forEach(t => t.classList.remove('active-thumb'));
             thumbEl.classList.add('active-thumb');
         }
 
@@ -2734,7 +2790,10 @@
             if(navHome) navHome.classList.remove('active');
             if(navShop) navShop.classList.remove('active');
             if(viewId === 'home-view' && navHome) navHome.classList.add('active');
-            if(viewId === 'product-view' && navShop) navShop.classList.add('active');
+            if(viewId === 'product-view' && navShop) {
+                navShop.classList.add('active');
+                renderStorefrontCatalog();
+            }
 
             const footer = document.getElementById('global-footer');
             if(footer) {
@@ -2765,6 +2824,7 @@
                 document.getElementById('admin-login-screen').style.display = "none";
                 document.getElementById('admin-console-screen').style.display = "flex";
                 startAdminInactivityTimer();
+                renderCategoriesDropdownAndList();
             } else {
                 alert("Access Denied: Invalid admin credentials or user is not authorized in User Management.");
             }
@@ -2818,6 +2878,9 @@
             };
             const headerTitle = document.getElementById('admin-header-title');
             if(headerTitle) headerTitle.innerText = titleMap[tabId] || 'Dashboard';
+            if(tabId === 'tab-categories' || tabId === 'tab-add-product' || tabId === 'tab-products') {
+                renderCategoriesDropdownAndList();
+            }
         }
     </script>
 </body>
