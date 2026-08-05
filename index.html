@@ -25,13 +25,13 @@
         .clickable { cursor: pointer; }
 
         /* Header Navbar */
-        .navbar { position: relative; width: 100%; z-index: 10; padding: 15px 40px; background-color: var(--bg-sage); border-bottom: 1px solid var(--border-light); }
+        .navbar { position: relative; width: 100%; z-index: 100; padding: 15px 40px; background-color: var(--bg-sage); border-bottom: 1px solid var(--border-light); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .logo-img { height: 50px; object-fit: contain; transition: transform 0.3s ease; }
         .logo-img:hover { transform: scale(1.05); }
 
-        .nav-links { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .nav-links a { 
+        .nav-links { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; position: relative; }
+        .nav-links > a { 
             text-decoration: none; 
             color: var(--text-dark); 
             font-size: 14px; 
@@ -39,10 +39,68 @@
             display: inline-block;
             transition: color 0.3s ease, transform 0.2s ease; 
         }
-        .nav-links a:hover, .nav-links a.active { 
+        .nav-links > a:hover, .nav-links > a.active { 
             color: var(--green-accent); 
             font-weight: 600;
             transform: translateY(-2px); 
+        }
+
+        /* Dropdown Menus with Hover Bridge to prevent premature closing */
+        .user-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .user-dropdown-toggle {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-block;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        .user-dropdown-toggle:hover, .user-dropdown-wrapper:hover .user-dropdown-toggle {
+            color: var(--green-accent);
+            font-weight: 600;
+        }
+        .user-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 180px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            z-index: 1000;
+            overflow: hidden;
+            padding-top: 6px;
+        }
+        .user-dropdown-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+        .user-dropdown-wrapper:hover .user-dropdown-menu {
+            display: block;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+        .user-dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+        .user-dropdown-menu a:hover {
+            background: rgba(17, 107, 50, 0.08);
+            color: var(--green-accent);
         }
 
         /* Cart Icon Styling */
@@ -57,6 +115,7 @@
             font-weight: 600 !important;
             box-shadow: 0 2px 8px rgba(17, 107, 50, 0.25);
             transition: all 0.3s ease !important;
+            text-decoration: none !important;
         }
         .cart-btn-wrapper:hover {
             background-color: #0c4d24 !important;
@@ -596,8 +655,27 @@
             </div>
             <nav class="nav-links">
                 <a href="javascript:void(0)" id="nav-home" class="active" onclick="navigateTo('home-view')">Home</a>
-                <a href="javascript:void(0)" id="nav-shop" onclick="navigateTo('product-view')">Shop</a>
-                <a href="javascript:void(0)" id="user-nav-label" onclick="navigateTo('account-view')">My Account</a>
+                
+                <!-- Shop Dropdown Menu with Categories -->
+                <div class="user-dropdown-wrapper">
+                    <a href="javascript:void(0)" id="nav-shop" class="user-dropdown-toggle" onclick="filterShopByCategory('All')">Shop</a>
+                    <div class="user-dropdown-menu" id="navbar-shop-categories-menu">
+                        <a href="javascript:void(0)" onclick="filterShopByCategory('All')">All Product</a>
+                        <a href="javascript:void(0)" onclick="filterShopByCategory('Jaggery Powder')">Jaggery Powder</a>
+                    </div>
+                </div>
+
+                <!-- My Account / User Name Dropdown Menu -->
+                <div id="user-nav-container" class="user-dropdown-wrapper">
+                    <a href="javascript:void(0)" id="user-nav-label" class="user-dropdown-toggle" onclick="navigateTo('account-view')">My Account</a>
+                    <div class="user-dropdown-menu" id="user-dropdown-links">
+                        <a href="javascript:void(0)" onclick="navigateTo('account-view')">My Account</a>
+                        <a href="javascript:void(0)" onclick="navigateTo('address-view')">Address</a>
+                        <a href="javascript:void(0)" onclick="navigateTo('track-order-view')">Track Order</a>
+                        <a href="javascript:void(0)" onclick="navigateTo('history-view')">Order History</a>
+                    </div>
+                </div>
+
                 <a href="javascript:void(0)" class="cart-btn-wrapper" onclick="navigateTo('cart-view')">
                     <i class="fa-solid fa-bag-shopping"></i> 
                     <span>Cart</span> 
@@ -731,13 +809,13 @@
                         </div>
                         <div class="main-image-preview-wrapper img-zoom-container" id="home-zoom-container" onmousemove="imageZoom('home-main-product-img', 'home-zoom-result', event)" onmouseenter="showZoom('home-zoom-result')" onmouseleave="hideZoom('home-zoom-result')">
                             <span class="badge-sale">SALE</span>
-                            <img id="home-main-product-img" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder 500g" class="product-pack-img clickable" onclick="navigateTo('product-view')" style="max-height:380px;">
+                            <img id="home-main-product-img" src="Sthirah Jaggery Powder 500g Front.jpeg" alt="Sthirah Jaggery Powder 500g" class="product-pack-img clickable" onclick="openProductDetailView(0)" style="max-height:380px;">
                             <div id="home-zoom-result" class="img-zoom-result"></div>
                         </div>
                     </div>
                     
                     <div class="product-details">
-                        <h3 id="home-product-title" class="product-title-link clickable" onclick="navigateTo('product-view')" style="font-weight: 800;"><strong>Sthirah Cane Jaggery Powder</strong></h3>
+                        <h3 id="home-product-title" class="product-title-link clickable" onclick="openProductDetailView(0)" style="font-weight: 800;"><strong>Sthirah Cane Jaggery Powder</strong></h3>
                         <p id="home-product-price" class="price">₹110.00 per KG</p>
                         
                         <ul class="benefits-list">
@@ -941,7 +1019,6 @@
                     <p style="font-size:12px; color:#555; margin-bottom:20px;">(Incl. all taxes & shipping)</p>
                     
                     <div style="margin-bottom:20px;">
-                        <h4 style="font-size:14px; font-weight:700; margin-bottom:8px; color:var(--green-accent);">Select Saved Delivery Address</h4>
                         <div id="checkout-saved-addresses-selection" style="font-size:13px;"></div>
                     </div>
 
@@ -1333,7 +1410,7 @@
                                     <tr>
                                         <td>TXN98321049</td>
                                         <td>STH/2026/101</td>
-                                        <td>UPI / QR Pay</td>
+                                        <td>Razorpay</td>
                                         <td>₹220.00</td>
                                         <td><span style="color:var(--green-accent); font-weight:650;">SUCCESS</span></td>
                                     </tr>
@@ -1367,7 +1444,7 @@
                         <div class="form-group">
                             <label>Category</label>
                             <select id="new-prod-category" class="admin-input-sm">
-                                <option value="Natural Sweeteners & Jaggery">Natural Sweeteners & Jaggery</option>
+                                <option value="Jaggery Powder">Jaggery Powder</option>
                             </select>
                         </div>
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
@@ -1591,7 +1668,7 @@
                 <div class="footer-col-img3">
                     <h4>Our Product</h4>
                     <ul>
-                        <li><a href="javascript:void(0)" onclick="navigateTo('product-view')">Jaggery Powder</a></li>
+                        <li><a href="javascript:void(0)" onclick="openProductDetailView(0)">Jaggery Powder</a></li>
                     </ul>
                 </div>
 
@@ -1677,10 +1754,11 @@
                         addresses: JSON.parse(localStorage.getItem('sthirah_user_' + user.uid))?.addresses || [],
                         orders: JSON.parse(localStorage.getItem('sthirah_user_' + user.uid))?.orders || []
                     };
-                    localStorage.setItem('sthirah_logged_customer', JSON.stringify(userData));
+                    saveCookie('sthirah_logged_customer', JSON.stringify(userData), 365);
                     localStorage.setItem('sthirah_user_' + user.uid, JSON.stringify(userData));
                     window.currentUser = userData;
                     updateCustomerNav();
+                    renderCart();
                 })
                 .catch((error) => {
                     console.error("Firebase Login Error:", error);
@@ -1690,9 +1768,11 @@
 
         window.handleLogout = function() {
             signOut(auth).then(() => {
+                deleteCookie('sthirah_logged_customer');
                 localStorage.removeItem('sthirah_logged_customer');
                 window.currentUser = null;
                 updateCustomerNav();
+                renderCart();
             }).catch((error) => {
                 console.error("Logout Error:", error);
             });
@@ -1710,7 +1790,7 @@
                     orders: existing?.orders || []
                 };
                 window.currentUser = userData;
-                localStorage.setItem('sthirah_logged_customer', JSON.stringify(userData));
+                saveCookie('sthirah_logged_customer', JSON.stringify(userData), 365);
                 localStorage.setItem('sthirah_user_' + user.uid, JSON.stringify(userData));
             } else {
                 if(!window.currentUser || !window.currentUser.email) {
@@ -1723,20 +1803,58 @@
 
     <!-- JavaScript Application Logic -->
     <script>
+        // Cookie Helpers for persistent login
+        function saveCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/; SameSite=Lax";
+        }
+
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for(let i=0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+            }
+            return null;
+        }
+
+        function deleteCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999; path=/;';
+        }
+
         let cart = [];
         let adminTimer = null;
-        let currentUser = JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
+        let currentUser = null;
+        try {
+            let cookieData = getCookie('sthirah_logged_customer');
+            if (cookieData) {
+                currentUser = JSON.parse(cookieData);
+            } else {
+                currentUser = JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
+            }
+        } catch(e) {
+            currentUser = null;
+        }
         window.currentUser = currentUser;
 
         let categories = JSON.parse(localStorage.getItem('sthirah_categories')) || [
-            { name: "Natural Sweeteners & Jaggery", description: "Pure organic cane jaggery powder and farm sweeteners." }
+            { name: "Jaggery Powder", description: "Pure organic cane jaggery powder and farm sweeteners." }
         ];
+
+        let currentCategoryFilter = "All";
 
         let productCatalog = JSON.parse(localStorage.getItem('sthirah_product_catalog')) || [
             {
                 id: 0,
                 name: "Sthirah Cane Jaggery Powder",
-                category: "Natural Sweeteners & Jaggery",
+                category: "Jaggery Powder",
                 price: 110,
                 tax: 5,
                 hsn: "17011490",
@@ -1859,6 +1977,24 @@
                 });
                 catListDiv.innerHTML = listHtml;
             }
+
+            // Render Navbar Shop Categories Dropdown
+            const navbarShopCatMenu = document.getElementById('navbar-shop-categories-menu');
+            if(navbarShopCatMenu) {
+                navbarShopCatMenu.innerHTML = `
+                    <a href="javascript:void(0)" onclick="filterShopByCategory('All')">All Product</a>
+                    <a href="javascript:void(0)" onclick="filterShopByCategory('Jaggery Powder')">Jaggery Powder</a>
+                `;
+            }
+        }
+
+        function filterShopByCategory(catName) {
+            currentCategoryFilter = catName;
+            if(catName === "Jaggery Powder") {
+                openProductDetailView(0);
+            } else {
+                navigateTo('product-view');
+            }
         }
 
         function addNewCategoryFromTab() {
@@ -1945,29 +2081,40 @@
         function renderStorefrontCatalog() {
             const shopContainer = document.getElementById('dynamic-shop-catalog-container');
             if(shopContainer) {
-                let shopHtml = `<div style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
-                    <h2 style="font-size:26px; font-weight:800; color:var(--green-accent);">Our Products Catalog</h2>
-                </div>`;
-                shopHtml += `<div class="shop-grid-container">`;
-                productCatalog.forEach((prod, idx) => {
-                    if(prod.hidden) return;
-                    let thumbImg = (prod.images && prod.images.length > 0) ? prod.images[0] : (prod.img || defaultProductImg);
-                    shopHtml += `
-                        <div class="shop-grid-card" onclick="openProductDetailView(${idx})">
-                            <div>
-                                <div style="width:100%; height:200px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:8px; margin-bottom:15px; border:1px solid #eee; overflow:hidden;">
-                                    <img src="${thumbImg}" style="max-height:100%; max-width:100%; object-fit:contain;">
-                                </div>
-                                <h3 style="font-size:18px; font-weight:700; color:var(--text-dark); margin:10px 0 6px 0;">${prod.name}</h3>
-                            </div>
-                            <div>
-                                <div style="font-size:20px; font-weight:800; color:var(--green-accent); margin-bottom:12px;">₹${prod.price}.00 per KG</div>
-                                <button class="btn-action" style="padding:10px;" onclick="event.stopPropagation(); openProductDetailView(${idx});">VIEW PRODUCT</button>
-                            </div>
-                        </div>
-                    `;
+                let filteredProducts = productCatalog.filter(prod => {
+                    if(prod.hidden) return false;
+                    if(currentCategoryFilter !== "All" && prod.category !== currentCategoryFilter) return false;
+                    return true;
                 });
-                shopHtml += `</div>`;
+
+                let shopHtml = `<div style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+                    <h2 style="font-size:26px; font-weight:800; color:var(--green-accent);">Our Products Catalog ${currentCategoryFilter !== 'All' ? '— ' + currentCategoryFilter : ''}</h2>
+                </div>`;
+                
+                if(filteredProducts.length === 0) {
+                    shopHtml += `<p style="font-size:15px; color:#555;">No products found in this category.</p>`;
+                } else {
+                    shopHtml += `<div class="shop-grid-container">`;
+                    filteredProducts.forEach((prod) => {
+                        let originalIndex = productCatalog.indexOf(prod);
+                        let thumbImg = (prod.images && prod.images.length > 0) ? prod.images[0] : (prod.img || defaultProductImg);
+                        shopHtml += `
+                            <div class="shop-grid-card" onclick="openProductDetailView(${originalIndex})">
+                                <div>
+                                    <div style="width:100%; height:200px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:8px; margin-bottom:15px; border:1px solid #eee; overflow:hidden;">
+                                        <img src="${thumbImg}" style="max-height:100%; max-width:100%; object-fit:contain;">
+                                    </div>
+                                    <h3 style="font-size:18px; font-weight:700; color:var(--text-dark); margin:10px 0 6px 0;">${prod.name}</h3>
+                                </div>
+                                <div>
+                                    <div style="font-size:20px; font-weight:800; color:var(--green-accent); margin-bottom:12px;">₹${prod.price}.00 per KG</div>
+                                    <button class="btn-action" style="padding:10px;" onclick="event.stopPropagation(); openProductDetailView(${originalIndex});">VIEW PRODUCT</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    shopHtml += `</div>`;
+                }
                 shopContainer.innerHTML = shopHtml;
             }
 
@@ -2077,6 +2224,8 @@
             const prod = productCatalog[idx];
             const shopContainer = document.getElementById('dynamic-shop-catalog-container');
             if(!shopContainer) return;
+
+            navigateTo('product-view');
 
             let imgs = prod.images && prod.images.length > 0 ? prod.images : [prod.img || defaultProductImg];
             let thumbsHtml = "";
@@ -2306,7 +2455,7 @@
 
         function addNewProductFromWizard() {
             const name = document.getElementById('new-prod-name').value.trim() || "New Product";
-            const category = document.getElementById('new-prod-category').value || "Natural Sweeteners & Jaggery";
+            const category = document.getElementById('new-prod-category').value || "Jaggery Powder";
             const price = parseFloat(document.getElementById('new-prod-price').value) || 100;
             const tax = parseFloat(document.getElementById('new-prod-tax').value) || 5;
             const hsn = document.getElementById('new-prod-hsn').value || "17011490";
@@ -2543,22 +2692,53 @@
         }
 
         function updateCustomerNav() {
-            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
-            if(currentUser) {
-                document.getElementById('user-nav-label').innerText = "Account (" + (currentUser.name || currentUser.id ? (currentUser.name || currentUser.id).split('@')[0] : 'User') + ")";
-                document.getElementById('login-box').style.display = "none";
-                document.getElementById('user-profile').style.display = "block";
-                document.getElementById('edit-profile-name').value = currentUser.name || currentUser.id || "";
-                document.getElementById('edit-profile-email').value = currentUser.email || currentUser.id || "";
-                document.getElementById('edit-profile-mobile').value = currentUser.mobile || "";
-                renderSavedAddressesInAccount();
-                renderGlobalOrderHistory();
-            } else {
-                document.getElementById('user-nav-label').innerText = "My Account";
-                document.getElementById('user-profile').style.display = "none";
-                document.getElementById('login-box').style.display = "block";
-                const addrCont = document.getElementById('subpage-addresses-container');
-                if(addrCont) addrCont.innerHTML = "<p>Please log in via Google to view and edit your saved delivery locations.</p>";
+            try {
+                let cookieData = getCookie('sthirah_logged_customer');
+                if (cookieData) {
+                    currentUser = JSON.parse(cookieData);
+                } else {
+                    currentUser = JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
+                }
+            } catch(e) {
+                currentUser = null;
+            }
+            window.currentUser = currentUser;
+
+            const userNavContainer = document.getElementById('user-nav-container');
+            if(userNavContainer) {
+                if(currentUser && (currentUser.name || currentUser.email)) {
+                    let displayName = currentUser.name || currentUser.email.split('@')[0];
+                    userNavContainer.innerHTML = `
+                        <a href="javascript:void(0)" id="user-nav-label" class="user-dropdown-toggle" onclick="navigateTo('account-view')">${displayName}</a>
+                        <div class="user-dropdown-menu" id="user-dropdown-links">
+                            <a href="javascript:void(0)" onclick="navigateTo('account-view')">My Account</a>
+                            <a href="javascript:void(0)" onclick="navigateTo('address-view')">Address</a>
+                            <a href="javascript:void(0)" onclick="navigateTo('track-order-view')">Track Order</a>
+                            <a href="javascript:void(0)" onclick="navigateTo('history-view')">Order History</a>
+                        </div>
+                    `;
+                    document.getElementById('login-box').style.display = "none";
+                    document.getElementById('user-profile').style.display = "block";
+                    document.getElementById('edit-profile-name').value = currentUser.name || currentUser.id || "";
+                    document.getElementById('edit-profile-email').value = currentUser.email || currentUser.id || "";
+                    document.getElementById('edit-profile-mobile').value = currentUser.mobile || "";
+                    renderSavedAddressesInAccount();
+                    renderGlobalOrderHistory();
+                } else {
+                    userNavContainer.innerHTML = `
+                        <a href="javascript:void(0)" id="user-nav-label" class="user-dropdown-toggle" onclick="navigateTo('account-view')">My Account</a>
+                        <div class="user-dropdown-menu" id="user-dropdown-links">
+                            <a href="javascript:void(0)" onclick="navigateTo('account-view')">My Account</a>
+                            <a href="javascript:void(0)" onclick="navigateTo('address-view')">Address</a>
+                            <a href="javascript:void(0)" onclick="navigateTo('track-order-view')">Track Order</a>
+                            <a href="javascript:void(0)" onclick="navigateTo('history-view')">Order History</a>
+                        </div>
+                    `;
+                    document.getElementById('user-profile').style.display = "none";
+                    document.getElementById('login-box').style.display = "block";
+                    const addrCont = document.getElementById('subpage-addresses-container');
+                    if(addrCont) addrCont.innerHTML = "<p>Please log in via Google to view and edit your saved delivery locations.</p>";
+                }
             }
         }
         updateCustomerNav();
@@ -2573,8 +2753,8 @@
             }
             currentUser.name = document.getElementById('edit-profile-name').value;
             currentUser.mobile = mob;
+            saveCookie('sthirah_logged_customer', JSON.stringify(currentUser), 365);
             localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
-            localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
             window.currentUser = currentUser;
             alert("Profile details updated successfully!");
             navigateTo('account-view');
@@ -2658,8 +2838,8 @@
                 currentUser.addresses.push(newAddr);
             }
 
+            saveCookie('sthirah_logged_customer', JSON.stringify(currentUser), 365);
             localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
-            localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
             window.currentUser = currentUser;
             toggleAddressForm(false);
             renderSavedAddressesInAccount();
@@ -2672,8 +2852,8 @@
             if(!currentUser) return;
             if(confirm("Are you sure you want to delete this address?")) {
                 currentUser.addresses.splice(idx, 1);
+                saveCookie('sthirah_logged_customer', JSON.stringify(currentUser), 365);
                 localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
-                localStorage.setItem('sthirah_logged_customer', JSON.stringify(currentUser));
                 window.currentUser = currentUser;
                 renderSavedAddressesInAccount();
                 renderCart();
@@ -2730,7 +2910,18 @@
         }
 
         function renderCart() {
-            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
+            try {
+                let cookieData = getCookie('sthirah_logged_customer');
+                if (cookieData) {
+                    currentUser = JSON.parse(cookieData);
+                } else {
+                    currentUser = JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
+                }
+            } catch(e) {
+                currentUser = null;
+            }
+            window.currentUser = currentUser;
+
             const list = document.getElementById('cart-list');
             const summaryCol = document.getElementById('cart-summary-col');
             const itemCountLbl = document.getElementById('cart-item-count-lbl');
@@ -2762,7 +2953,7 @@
                                 <p style="font-size:12px; color:var(--text-muted); margin-top:4px;"><strong>*Shipped In Individual 500G Unit Packets</strong></p>
                             </div>
                         </div>
-                        <div style="display:flex; align-items:center; gap:15px; flex-wrap:wrap;">
+                        <div style="display:flex; align-items:center; gap:15px; flex-wrap:wrap; width: 100%; justify-content: flex-start; margin-top: 10px;">
                             <div class="quantity-stepper-box" style="margin-bottom:0; width:auto; padding:6px 12px;">
                                 <label style="margin-right:8px; font-size:12px;">Qty (KG):</label>
                                 <div class="stepper-controls">
@@ -2786,10 +2977,18 @@
 
             const addressSelectionBox = document.getElementById('checkout-saved-addresses-selection');
             if(addressSelectionBox) {
-                if(!currentUser || !currentUser.addresses || currentUser.addresses.length === 0) {
-                    addressSelectionBox.innerHTML = "<p style='color:red; font-size:12px;'>Please log in via Google and add at least one address in 'My Account' to proceed.</p>";
+                if(!currentUser || !currentUser.email) {
+                    addressSelectionBox.innerHTML = `
+                        <div style="color:red; font-size:13px; font-weight:600; margin-bottom:8px;">LOGIN TO PROCEED</div>
+                        <div style="font-size:14px; font-weight:700; color:var(--green-accent);">Select Saved Delivery Address</div>
+                    `;
+                } else if(!currentUser.addresses || currentUser.addresses.length === 0) {
+                    addressSelectionBox.innerHTML = `
+                        <div style="font-size:14px; font-weight:700; color:var(--green-accent); margin-bottom:8px;">Select Saved Delivery Address</div>
+                        <div style="color:red; font-size:13px; font-weight:600;">select address</div>
+                    `;
                 } else {
-                    let addHtml = "";
+                    let addHtml = `<div style="font-size:14px; font-weight:700; color:var(--green-accent); margin-bottom:8px;">Select Saved Delivery Address</div>`;
                     currentUser.addresses.forEach((addr, idx) => {
                         addHtml += `
                             <label style="display:block; background:rgba(255,255,255,0.7); border:1px solid var(--green-accent); padding:10px; border-radius:6px; margin-bottom:6px; cursor:pointer;">
@@ -2802,6 +3001,94 @@
                     addressSelectionBox.innerHTML = addHtml;
                 }
             }
+        }
+
+        function processCheckoutOrder() {
+            try {
+                let cookieData = getCookie('sthirah_logged_customer');
+                if (cookieData) {
+                    currentUser = JSON.parse(cookieData);
+                } else {
+                    currentUser = JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
+                }
+            } catch(e) {
+                currentUser = null;
+            }
+
+            if (!currentUser || !currentUser.email) {
+                alert("LOGIN TO PROCEED");
+                navigateTo('account-view');
+                return;
+            }
+
+            if (!currentUser.addresses || currentUser.addresses.length === 0) {
+                alert("select address");
+                navigateTo('address-view');
+                return;
+            }
+
+            const selectedAddrRadio = document.querySelector('input[name="selected_checkout_addr"]:checked');
+            if(!selectedAddrRadio) {
+                alert("select address");
+                return;
+            }
+
+            const addrIdx = parseInt(selectedAddrRadio.value);
+            const chosenAddr = currentUser.addresses[addrIdx];
+
+            let totalAmount = 0;
+            cart.forEach(item => {
+                totalAmount += parseInt(item.price);
+            });
+
+            const options = {
+                "key": "rzp_test_TM5KnAn6nqQswH",
+                "amount": totalAmount * 100, 
+                "currency": "INR",
+                "name": "Sthirah",
+                "description": "Cane Jaggery Powder Purchase",
+                "image": "Logo 2.png",
+                "handler": function (response){
+                    alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+                    
+                    let summaryText = cart.map(i => `${i.qty}KG ${i.name}`).join(', ');
+                    let fullAddressText = `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area} - ${chosenAddr.pincode}`;
+                    
+                    let newOrder = {
+                        invoiceId: "STH/2026/" + Math.floor(100 + Math.random() * 900),
+                        date: new Date().toISOString().split('T')[0],
+                        status: "Confirmed",
+                        summary: summaryText,
+                        address: fullAddressText,
+                        amount: totalAmount,
+                        paymentId: response.razorpay_payment_id
+                    };
+
+                    if(!currentUser.orders) currentUser.orders = [];
+                    currentUser.orders.unshift(newOrder);
+                    saveCookie('sthirah_logged_customer', JSON.stringify(currentUser), 365);
+                    localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
+
+                    cart = [];
+                    const countEl = document.getElementById('cart-count');
+                    if(countEl) countEl.innerText = "0";
+                    renderCart();
+                    navigateTo('history-view');
+                },
+                "prefill": {
+                    "name": chosenAddr.name,
+                    "email": currentUser.email,
+                    "contact": chosenAddr.mobile
+                },
+                "notes": {
+                    "address": `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area} - ${chosenAddr.pincode}`
+                },
+                "theme": {
+                    "color": "#116B32"
+                }
+            };
+            const rzp = new Razorpay(options);
+            rzp.open();
         }
 
         function removeFromCart(index) {
