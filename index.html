@@ -975,8 +975,8 @@
                 <input type="text" id="edit-profile-email" readonly style="background:rgba(240,240,240,0.8); color:#555; cursor:not-allowed;">
             </div>
             <div class="form-group">
-                <label>Mobile Number (10 Digits)</label>
-                <input type="tel" id="edit-profile-mobile" placeholder="Enter 10-digit mobile number" maxlength="10" style="background:rgba(255,255,255,0.7);">
+                <label>Mobile number *</label>
+                <input type="tel" id="edit-profile-mobile" placeholder="10-Digits" maxlength="10" style="background:rgba(255,255,255,0.7);">
             </div>
             <button class="btn-action" style="width:auto; padding:10px 25px;" onclick="saveProfileDetails()">Save Changes</button>
             <button class="btn-action" style="background:#475569; width:auto; padding:10px 25px; margin-left:10px;" onclick="navigateTo('account-view')">Back to Account</button>
@@ -986,25 +986,29 @@
     <!-- ADDRESS SUBPAGE -->
     <main id="address-view" class="page-view">
         <div class="content-page">
-            <h1>My Saved Addresses</h1>
-            <p>Manage your delivery addresses securely. You can store up to 5 individual addresses for fast and seamless checkout.</p>
-            <div id="subpage-addresses-container" style="margin-top:20px;">
-                <p>Please log in to view and edit your saved delivery locations.</p>
-            </div>
+            <h1 style="margin-bottom:6px;">My Saved Addresses</h1>
+            <p style="margin-bottom:12px;">Manage your delivery addresses securely. You can store up to 5 individual addresses for fast and seamless checkout.</p>
+            <p style="margin-bottom:15px;"></p>
+            <div id="subpage-addresses-container" style="margin-top:20px;"></div>
 
             <div id="add-address-form-box" style="background:rgba(255,255,255,0.6); padding:20px; border-radius:8px; border:1px solid var(--green-accent); margin-top:20px; display:none;">
                 <h4 id="form-mode-title" style="margin-bottom:12px; color:var(--green-accent);">Add New Address</h4>
                 <input type="hidden" id="edit-address-index" value="-1">
                 
                 <div class="form-group"><label>Full name *</label><input type="text" id="acc-addr-name" required placeholder="First and Last name" style="background:rgba(255,255,255,0.8);"></div>
-                <div class="form-group"><label>Mobile number *</label><input type="tel" id="acc-addr-mobile" maxlength="10" required placeholder="10-digit mobile number" style="background:rgba(255,255,255,0.8);"></div>
-                <div class="form-group"><label>Alternative mobile number *</label><input type="tel" id="acc-addr-alt" maxlength="10" required placeholder="10-digit alternative number" style="background:rgba(255,255,255,0.8);"></div>
-                <div class="form-group"><label>Door no *</label><input type="text" id="acc-addr-door" required placeholder="Flat, House no., Building" style="background:rgba(255,255,255,0.8);"></div>
-                <div class="form-group"><label>Street *</label><input type="text" id="acc-addr-street" required placeholder="Area, Street, Sector, Village" style="background:rgba(255,255,255,0.8);"></div>
-                <div class="form-group"><label>Area *</label><input type="text" id="acc-addr-area" required placeholder="Town/City Area" style="background:rgba(255,255,255,0.8);"></div>
-                <div class="form-group"><label>Pincode *</label><input type="text" id="acc-addr-pin" maxlength="6" required placeholder="6 digits [0-9] PIN code" style="background:rgba(255,255,255,0.8);" oninput="autoDetectCityState(this.value)"></div>
-                <div class="form-group"><label>City *</label><input type="text" id="acc-addr-city" required placeholder="City auto-detected" style="background:rgba(240,240,240,0.8);" readonly></div>
-                <div class="form-group"><label>State *</label><input type="text" id="acc-addr-state" required placeholder="State auto-detected" style="background:rgba(240,240,240,0.8);" readonly></div>
+                <div class="form-group"><label>Mobile number *</label><input type="tel" id="acc-addr-mobile" maxlength="10" required placeholder="10-Digits" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group"><label>Alternative mobile number</label><input type="tel" id="acc-addr-alt" maxlength="10" placeholder="10-Digits (Optional)" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group"><label>Door no *</label><input type="text" id="acc-addr-door" required placeholder="Door No, Flat No, Bulding No" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group"><label>Street *</label><input type="text" id="acc-addr-street" required placeholder="Street Name" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group"><label>Area *</label><input type="text" id="acc-addr-area" required placeholder="Area" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group"><label>Landmark</label><input type="text" id="acc-addr-landmark" placeholder="Landmark (Optional)" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group"><label>Pincode *</label><input type="text" id="acc-addr-pin" maxlength="6" required placeholder="6 digits [0-9] PIN code" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group"><label>City *</label><input type="text" id="acc-addr-city" required placeholder="City" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group">
+                    <label>State *</label>
+                    <input type="text" id="acc-addr-state" required placeholder="State" style="background:rgba(255,255,255,0.8);" oninput="onAddressStateInput(this)">
+                    <p id="address-state-shipping-preview" style="font-size:12px; font-weight:600; color:var(--green-accent); margin-top:5px;"></p>
+                </div>
 
                 <button class="btn-action" style="width:auto; padding:10px 25px; margin-top:10px;" onclick="saveAddressFromAccount()">Save Address</button>
             </div>
@@ -1023,7 +1027,7 @@
             <p>We know how much you look forward to receiving your farm-fresh package. Enter your unique Order ID and registered mobile number below to see real-time updates regarding your shipment's current transit status, dispatch partner details, and expected delivery arrival date at your doorstep.</p>
             <div style="margin: 25px 0; max-width: 500px;">
                 <div class="form-group"><label>Order ID / Invoice Number</label><input type="text" id="track-id" placeholder="e.g. STH/2026/101" style="background:rgba(255,255,255,0.7);"></div>
-                <div class="form-group"><label>Registered Mobile Number</label><input type="tel" placeholder="e.g. 9876543210" style="background:rgba(255,255,255,0.7);"></div>
+                <div class="form-group"><label>Mobile number *</label><input type="tel" maxlength="10" placeholder="10-Digits" style="background:rgba(255,255,255,0.7);"></div>
                 <button class="btn-action" style="width:auto;" onclick="alert('Status: Package is safely in transit via our courier partner. Expected delivery within 2-3 business days.')">Track Order Status</button>
             </div>
             <p style="font-size:13px; color:#555;">If you experience any delays or have questions regarding your delivery routing, please reach out directly to our customer care team at invosthirahfoodshpllp@gmail.com.</p>
@@ -1352,7 +1356,6 @@
                                     <tr data-status="Processing" data-date="2026-07-15" data-amount="220">
                                         <td><input type="checkbox" class="order-select-chk"></td>
                                         <td>STH/2026/101</td>
-                                        <td>2026-07-15</td>
                                         <td>Ramesh Kumar<br><small>Mob: 9876543210</small></td>
                                         <td>Door 12, Main Street, Salem, TN - 636015</td>
                                         <td>2KG Jaggery Powder (₹220)</td>
@@ -2785,7 +2788,7 @@
             if(!currentUser) return;
             const mob = document.getElementById('edit-profile-mobile').value;
             if(mob && mob.length !== 10) {
-                alert("Mobile number must be exactly 10 digits.");
+                alert("Mobile number must be exactly 10-Digits.");
                 return;
             }
             currentUser.name = document.getElementById('edit-profile-name').value;
@@ -2809,10 +2812,11 @@
                     const addr = currentUser.addresses[editIdx];
                     document.getElementById('acc-addr-name').value = addr.name;
                     document.getElementById('acc-addr-mobile').value = addr.mobile;
-                    document.getElementById('acc-addr-alt').value = addr.altMobile;
+                    document.getElementById('acc-addr-alt').value = addr.altMobile || '';
                     document.getElementById('acc-addr-door').value = addr.door;
                     document.getElementById('acc-addr-street').value = addr.street;
                     document.getElementById('acc-addr-area').value = addr.area;
+                    document.getElementById('acc-addr-landmark').value = addr.landmark || '';
                     document.getElementById('acc-addr-pin').value = addr.pincode;
                     document.getElementById('acc-addr-city').value = addr.city || '';
                     document.getElementById('acc-addr-state').value = addr.state || '';
@@ -2825,58 +2829,27 @@
                     document.getElementById('acc-addr-door').value = "";
                     document.getElementById('acc-addr-street').value = "";
                     document.getElementById('acc-addr-area').value = "";
+                    document.getElementById('acc-addr-landmark').value = "";
                     document.getElementById('acc-addr-pin').value = "";
                     document.getElementById('acc-addr-city').value = "";
                     document.getElementById('acc-addr-state').value = "";
                 }
+                onAddressStateInput(document.getElementById('acc-addr-state'));
             } else {
                 box.style.display = "none";
             }
         }
 
-        function autoDetectCityState(pincode) {
-            const pin = pincode.trim();
-            const cityInput = document.getElementById('acc-addr-city');
-            const stateInput = document.getElementById('acc-addr-state');
-            if(!cityInput || !stateInput) return;
-
-            if(pin.startsWith("63") || pin.startsWith("60") || pin.startsWith("64") || pin.startsWith("62")) {
-                cityInput.value = "Salem";
-                stateInput.value = "Tamil Nadu";
-            } else if(pin.startsWith("56") || pin.startsWith("57") || pin.startsWith("58") || pin.startsWith("59")) {
-                cityInput.value = "Bangalore";
-                stateInput.value = "Karnataka";
-            } else if(pin.startsWith("67") || pin.startsWith("68") || pin.startsWith("69")) {
-                cityInput.value = "Kochi";
-                stateInput.value = "Kerala";
-            } else if(pin.startsWith("50") || pin.startsWith("51") || pin.startsWith("52") || pin.startsWith("53")) {
-                cityInput.value = "Hyderabad";
-                stateInput.value = "Andhra Pradesh";
-            } else if(pin.startsWith("40") || pin.startsWith("41") || pin.startsWith("42") || pin.startsWith("43") || pin.startsWith("44")) {
-                cityInput.value = "Mumbai";
-                stateInput.value = "Maharashtra";
-            } else if(pin.startsWith("36") || pin.startsWith("37") || pin.startsWith("38") || pin.startsWith("39")) {
-                cityInput.value = "Ahmedabad";
-                stateInput.value = "Gujarat";
-            } else if(pin.startsWith("11")) {
-                cityInput.value = "New Delhi";
-                stateInput.value = "Delhi";
-            } else if(pin.startsWith("70") || pin.startsWith("71") || pin.startsWith("72") || pin.startsWith("73") || pin.startsWith("74")) {
-                cityInput.value = "Kolkata";
-                stateInput.value = "West Bengal";
-            } else if(pin.startsWith("75") || pin.startsWith("76") || pin.startsWith("77")) {
-                cityInput.value = "Bhubaneswar";
-                stateInput.value = "Odisha";
-            } else if(pin.startsWith("80") || pin.startsWith("81") || pin.startsWith("82") || pin.startsWith("83") || pin.startsWith("84") || pin.startsWith("85")) {
-                cityInput.value = "Patna";
-                stateInput.value = "Bihar";
-            } else if(pin.length === 6) {
-                cityInput.value = "Other City";
-                stateInput.value = "Other States";
-            } else {
-                cityInput.value = "";
-                stateInput.value = "";
+        function onAddressStateInput(inputEl) {
+            const preview = document.getElementById('address-state-shipping-preview');
+            if(!inputEl || !preview) return;
+            const stateName = inputEl.value.trim();
+            if(!stateName) {
+                preview.innerText = "";
+                return;
             }
+            let mat = shippingMatrix.find(s => s.name.toLowerCase() === stateName.toLowerCase()) || shippingMatrix[shippingMatrix.length - 1];
+            preview.innerText = `Shipping Rate for 1KG in ${mat.name} (${mat.zone}): ₹${mat.rate1kg.toFixed(2)}`;
         }
 
         function saveAddressFromAccount() {
@@ -2889,19 +2862,25 @@
             const altVal = document.getElementById('acc-addr-alt').value;
             const pinVal = document.getElementById('acc-addr-pin').value;
             const cityVal = document.getElementById('acc-addr-city').value;
-            const stateVal = document.getElementById('acc-addr-state').value;
+            const stateVal = document.getElementById('acc-addr-state').value.trim();
+            const landmarkVal = document.getElementById('acc-addr-landmark').value;
 
-            if(!document.getElementById('acc-addr-name').value || !mobileVal || !altVal || !document.getElementById('acc-addr-door').value || !document.getElementById('acc-addr-street').value || !document.getElementById('acc-addr-area').value || !pinVal || !stateVal) {
+            if(!document.getElementById('acc-addr-name').value || !mobileVal || !document.getElementById('acc-addr-door').value || !document.getElementById('acc-addr-street').value || !document.getElementById('acc-addr-area').value || !pinVal || !cityVal || !stateVal) {
                 alert("Please fill in all mandatory address fields.");
                 return;
             }
 
-            if(mobileVal.length !== 10 || altVal.length !== 10) {
-                alert("Both Mobile and Alternative Mobile numbers must be exactly 10 digits.");
+            if(mobileVal.length !== 10) {
+                alert("Mobile number must be exactly 10-Digits.");
                 return;
             }
 
-            if(pinVal.length !== 6) {
+            if(altVal && altVal.length !== 10) {
+                alert("Alternative mobile number must be exactly 10-Digits if provided.");
+                return;
+            }
+
+            if(pinVal.length !== 6 || !/^\d{6}$/.test(pinVal)) {
                 alert("Pincode must be exactly 6 digits.");
                 return;
             }
@@ -2913,9 +2892,10 @@
                 door: document.getElementById('acc-addr-door').value,
                 street: document.getElementById('acc-addr-street').value,
                 area: document.getElementById('acc-addr-area').value,
+                landmark: landmarkVal,
                 pincode: pinVal,
-                city: cityVal || "Salem",
-                state: stateVal || "Tamil Nadu"
+                city: cityVal,
+                state: stateVal
             };
 
             if(editIdx >= 0) {
@@ -2966,37 +2946,14 @@
                 subHtml += `
                     <div style="background:rgba(255,255,255,0.7); border:1px solid var(--green-accent); padding:15px; border-radius:6px; margin-bottom:12px;">
                         <strong>Address #${idx + 1}: ${a.name}</strong><br>
-                        Contact: ${a.mobile} (Alternate: ${a.altMobile})<br>
-                        Location: Door ${a.door}, ${a.street}, ${a.area}, ${a.city || 'Salem'}, ${a.state || 'Tamil Nadu'} - ${a.pincode}<br>
+                        Contact: ${a.mobile} ${a.altMobile ? '(Alternate: ' + a.altMobile + ')' : ''}<br>
+                        Location: Door ${a.door}, ${a.street}, ${a.area}, ${a.landmark ? 'Landmark: ' + a.landmark + ',' : ''} ${a.city}, ${a.state} - ${a.pincode}<br>
                         <button class="btn-action" style="width:auto; padding:6px 14px; font-size:12px; margin-top:10px;" onclick="navigateTo('address-view'); toggleAddressForm(true, ${idx});">Edit Address</button>
                         <button class="cart-remove-btn" style="width:auto; padding:6px 14px; font-size:12px; margin-top:10px; margin-left:8px;" onclick="deleteAddress(${idx})">Delete</button>
                     </div>
                 `;
             });
             subpageContainer.innerHTML = subHtml;
-        }
-
-        function renderGlobalOrderHistory() {
-            currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
-            const box = document.getElementById('global-order-history-box');
-            if(!currentUser || !box) return;
-            const history = currentUser.orders || [];
-            if(history.length === 0) {
-                box.innerHTML = "<p>No past orders recorded in this account yet.</p>";
-                return;
-            }
-            let html = "";
-            history.forEach(ord => {
-                html += `
-                    <div style="background:white; border:1px solid #ddd; padding:15px; border-radius:6px; margin-bottom:10px;">
-                        <strong>Invoice ID: ${ord.invoiceId}</strong><br>
-                        Status: <span style="color:var(--green-accent); font-weight:600;">${ord.status}</span><br>
-                        Items: ${ord.summary}<br>
-                        Address: ${ord.address}
-                    </div>
-                `;
-            });
-            box.innerHTML = html;
         }
 
         function calculateShippingCost(totalWeightKg) {
@@ -3108,7 +3065,7 @@
                             <label style="display:block; background:rgba(255,255,255,0.7); border:1px solid var(--green-accent); padding:10px; border-radius:6px; margin-bottom:6px; cursor:pointer;">
                                 <input type="radio" name="selected_checkout_addr" value="${idx}" ${idx === 0 ? 'checked' : ''} onchange="renderCart()">
                                 <strong>${addr.name}</strong> (${addr.mobile})<br>
-                                Door ${addr.door}, ${addr.street}, ${addr.area}, ${addr.city || 'Salem'}, ${addr.state || 'Tamil Nadu'} - ${addr.pincode}
+                                Door ${addr.door}, ${addr.street}, ${addr.area}, ${addr.city}, ${addr.state} - ${addr.pincode}
                             </label>
                         `;
                     });
@@ -3171,7 +3128,7 @@
                     alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
                     
                     let summaryText = cart.map(i => `${i.qty}KG ${i.name}`).join(', ');
-                    let fullAddressText = `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area}, ${chosenAddr.city || 'Salem'}, ${chosenAddr.state || 'Tamil Nadu'} - ${chosenAddr.pincode}`;
+                    let fullAddressText = `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area}, ${chosenAddr.city}, ${chosenAddr.state} - ${chosenAddr.pincode}`;
                     
                     let newOrder = {
                         invoiceId: "STH/2026/" + Math.floor(100 + Math.random() * 900),
@@ -3200,7 +3157,7 @@
                     "contact": chosenAddr.mobile
                 },
                 "notes": {
-                    "address": `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area}, ${chosenAddr.city || 'Salem'}, ${chosenAddr.state || 'Tamil Nadu'} - ${chosenAddr.pincode}`
+                    "address": `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area}, ${chosenAddr.city}, ${chosenAddr.state} - ${chosenAddr.pincode}`
                 },
                 "theme": {
                     "color": "#116B32"
