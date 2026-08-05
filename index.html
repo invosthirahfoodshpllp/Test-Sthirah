@@ -1002,7 +1002,9 @@
                 <div class="form-group"><label>Door no *</label><input type="text" id="acc-addr-door" required placeholder="Flat, House no., Building" style="background:rgba(255,255,255,0.8);"></div>
                 <div class="form-group"><label>Street *</label><input type="text" id="acc-addr-street" required placeholder="Area, Street, Sector, Village" style="background:rgba(255,255,255,0.8);"></div>
                 <div class="form-group"><label>Area *</label><input type="text" id="acc-addr-area" required placeholder="Town/City Area" style="background:rgba(255,255,255,0.8);"></div>
-                <div class="form-group"><label>Pincode *</label><input type="text" id="acc-addr-pin" maxlength="6" required placeholder="6 digits [0-9] PIN code" style="background:rgba(255,255,255,0.8);"></div>
+                <div class="form-group"><label>Pincode *</label><input type="text" id="acc-addr-pin" maxlength="6" required placeholder="6 digits [0-9] PIN code" style="background:rgba(255,255,255,0.8);" oninput="autoDetectCityState(this.value)"></div>
+                <div class="form-group"><label>City *</label><input type="text" id="acc-addr-city" required placeholder="City auto-detected" style="background:rgba(240,240,240,0.8);" readonly></div>
+                <div class="form-group"><label>State *</label><input type="text" id="acc-addr-state" required placeholder="State auto-detected" style="background:rgba(240,240,240,0.8);" readonly></div>
 
                 <button class="btn-action" style="width:auto; padding:10px 25px; margin-top:10px;" onclick="saveAddressFromAccount()">Save Address</button>
             </div>
@@ -2812,6 +2814,8 @@
                     document.getElementById('acc-addr-street').value = addr.street;
                     document.getElementById('acc-addr-area').value = addr.area;
                     document.getElementById('acc-addr-pin').value = addr.pincode;
+                    document.getElementById('acc-addr-city').value = addr.city || '';
+                    document.getElementById('acc-addr-state').value = addr.state || '';
                 } else {
                     document.getElementById('form-mode-title').innerText = "Add New Address";
                     document.getElementById('edit-address-index').value = -1;
@@ -2822,9 +2826,41 @@
                     document.getElementById('acc-addr-street').value = "";
                     document.getElementById('acc-addr-area').value = "";
                     document.getElementById('acc-addr-pin').value = "";
+                    document.getElementById('acc-addr-city').value = "";
+                    document.getElementById('acc-addr-state').value = "";
                 }
             } else {
                 box.style.display = "none";
+            }
+        }
+
+        function autoDetectCityState(pincode) {
+            const pin = pincode.trim();
+            const cityInput = document.getElementById('acc-addr-city');
+            const stateInput = document.getElementById('acc-addr-state');
+            if(!cityInput || !stateInput) return;
+
+            if(pin.startsWith("63") || pin.startsWith("60") || pin.startsWith("64") || pin.startsWith("62")) {
+                cityInput.value = "Salem";
+                stateInput.value = "Tamil Nadu";
+            } else if(pin.startsWith("56") || pin.startsWith("57") || pin.startsWith("58")) {
+                cityInput.value = "Bangalore";
+                stateInput.value = "Karnataka";
+            } else if(pin.startsWith("67") || pin.startsWith("68") || pin.startsWith("69")) {
+                cityInput.value = "Kochi";
+                stateInput.value = "Kerala";
+            } else if(pin.startsWith("50") || pin.startsWith("51") || pin.startsWith("52") || pin.startsWith("53")) {
+                cityInput.value = "Hyderabad";
+                stateInput.value = "Andhra Pradesh";
+            } else if(pin.startsWith("40") || pin.startsWith("41") || pin.startsWith("42") || pin.startsWith("43")) {
+                cityInput.value = "Mumbai";
+                stateInput.value = "Maharashtra";
+            } else if(pin.length === 6) {
+                cityInput.value = "Other City";
+                stateInput.value = "Other States";
+            } else {
+                cityInput.value = "";
+                stateInput.value = "";
             }
         }
 
@@ -2837,8 +2873,10 @@
             const mobileVal = document.getElementById('acc-addr-mobile').value;
             const altVal = document.getElementById('acc-addr-alt').value;
             const pinVal = document.getElementById('acc-addr-pin').value;
+            const cityVal = document.getElementById('acc-addr-city').value;
+            const stateVal = document.getElementById('acc-addr-state').value;
 
-            if(!document.getElementById('acc-addr-name').value || !mobileVal || !altVal || !document.getElementById('acc-addr-door').value || !document.getElementById('acc-addr-street').value || !document.getElementById('acc-addr-area').value || !pinVal) {
+            if(!document.getElementById('acc-addr-name').value || !mobileVal || !altVal || !document.getElementById('acc-addr-door').value || !document.getElementById('acc-addr-street').value || !document.getElementById('acc-addr-area').value || !pinVal || !stateVal) {
                 alert("Please fill in all mandatory address fields.");
                 return;
             }
@@ -2860,7 +2898,9 @@
                 door: document.getElementById('acc-addr-door').value,
                 street: document.getElementById('acc-addr-street').value,
                 area: document.getElementById('acc-addr-area').value,
-                pincode: pinVal
+                pincode: pinVal,
+                city: cityVal || "Salem",
+                state: stateVal || "Tamil Nadu"
             };
 
             if(editIdx >= 0) {
@@ -2912,7 +2952,7 @@
                     <div style="background:rgba(255,255,255,0.7); border:1px solid var(--green-accent); padding:15px; border-radius:6px; margin-bottom:12px;">
                         <strong>Address #${idx + 1}: ${a.name}</strong><br>
                         Contact: ${a.mobile} (Alternate: ${a.altMobile})<br>
-                        Location: Door ${a.door}, ${a.street}, ${a.area} - ${a.pincode}<br>
+                        Location: Door ${a.door}, ${a.street}, ${a.area}, ${a.city || 'Salem'}, ${a.state || 'Tamil Nadu'} - ${a.pincode}<br>
                         <button class="btn-action" style="width:auto; padding:6px 14px; font-size:12px; margin-top:10px;" onclick="navigateTo('address-view'); toggleAddressForm(true, ${idx});">Edit Address</button>
                         <button class="cart-remove-btn" style="width:auto; padding:6px 14px; font-size:12px; margin-top:10px; margin-left:8px;" onclick="deleteAddress(${idx})">Delete</button>
                     </div>
@@ -2945,10 +2985,18 @@
         }
 
         function calculateShippingCost(totalWeightKg) {
-            const stateSelect = document.getElementById('state-select');
             let selectedStateName = "Other States";
-            if (stateSelect) {
-                selectedStateName = stateSelect.value;
+            if(currentUser && currentUser.addresses && currentUser.addresses.length > 0) {
+                const selectedAddrRadio = document.querySelector('input[name="selected_checkout_addr"]:checked');
+                const addrIdx = selectedAddrRadio ? parseInt(selectedAddrRadio.value) : 0;
+                if(currentUser.addresses[addrIdx] && currentUser.addresses[addrIdx].state) {
+                    selectedStateName = currentUser.addresses[addrIdx].state;
+                }
+            } else {
+                const stateSelect = document.getElementById('state-select');
+                if (stateSelect) {
+                    selectedStateName = stateSelect.value;
+                }
             }
             let matrixItem = shippingMatrix.find(s => s.name.toLowerCase() === selectedStateName.toLowerCase()) || shippingMatrix[shippingMatrix.length - 1];
             return matrixItem.rate1kg * totalWeightKg;
@@ -3043,9 +3091,9 @@
                     currentUser.addresses.forEach((addr, idx) => {
                         addHtml += `
                             <label style="display:block; background:rgba(255,255,255,0.7); border:1px solid var(--green-accent); padding:10px; border-radius:6px; margin-bottom:6px; cursor:pointer;">
-                                <input type="radio" name="selected_checkout_addr" value="${idx}" ${idx === 0 ? 'checked' : ''}>
+                                <input type="radio" name="selected_checkout_addr" value="${idx}" ${idx === 0 ? 'checked' : ''} onchange="renderCart()">
                                 <strong>${addr.name}</strong> (${addr.mobile})<br>
-                                Door ${addr.door}, ${addr.street}, ${addr.area} - ${addr.pincode}
+                                Door ${addr.door}, ${addr.street}, ${addr.area}, ${addr.city || 'Salem'}, ${addr.state || 'Tamil Nadu'} - ${addr.pincode}
                             </label>
                         `;
                     });
@@ -3108,7 +3156,7 @@
                     alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
                     
                     let summaryText = cart.map(i => `${i.qty}KG ${i.name}`).join(', ');
-                    let fullAddressText = `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area} - ${chosenAddr.pincode}`;
+                    let fullAddressText = `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area}, ${chosenAddr.city || 'Salem'}, ${chosenAddr.state || 'Tamil Nadu'} - ${chosenAddr.pincode}`;
                     
                     let newOrder = {
                         invoiceId: "STH/2026/" + Math.floor(100 + Math.random() * 900),
@@ -3137,7 +3185,7 @@
                     "contact": chosenAddr.mobile
                 },
                 "notes": {
-                    "address": `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area} - ${chosenAddr.pincode}`
+                    "address": `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area}, ${chosenAddr.city || 'Salem'}, ${chosenAddr.state || 'Tamil Nadu'} - ${chosenAddr.pincode}`
                 },
                 "theme": {
                     "color": "#116B32"
