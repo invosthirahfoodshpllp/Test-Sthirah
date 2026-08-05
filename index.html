@@ -987,9 +987,9 @@
     <main id="address-view" class="page-view">
         <div class="content-page">
             <h1 style="margin-bottom:6px;">My Saved Addresses</h1>
-            <p style="margin-bottom:12px;">Manage your delivery addresses securely. You can store up to 5 individual addresses for fast and seamless checkout.</p>
-            <p style="margin-bottom:15px;"></p>
-            <div id="subpage-addresses-container" style="margin-top:20px;"></div>
+            <p style="margin-bottom:6px;">Manage your delivery addresses securely. You can store up to 5 individual addresses for fast and seamless checkout.</p>
+            <br><br>
+            <div id="subpage-addresses-container" style="margin-top:10px;"></div>
 
             <div id="add-address-form-box" style="background:rgba(255,255,255,0.6); padding:20px; border-radius:8px; border:1px solid var(--green-accent); margin-top:20px; display:none;">
                 <h4 id="form-mode-title" style="margin-bottom:12px; color:var(--green-accent);">Add New Address</h4>
@@ -2777,7 +2777,7 @@
                     document.getElementById('user-profile').style.display = "none";
                     document.getElementById('login-box').style.display = "block";
                     const addrCont = document.getElementById('subpage-addresses-container');
-                    if(addrCont) addrCont.innerHTML = "<p>Please log in via Google to view and edit your saved delivery locations.</p>";
+                    if(addrCont) addrCont.innerHTML = "<p></p>";
                 }
             }
         }
@@ -3118,7 +3118,7 @@
             let totalAmount = Math.ceil(rawTotalAmount);
 
             const options = {
-                "key": "rzp_test_TM6x1vvlNh5oKd",
+                "key": "rzp_test_TM9D2mb6BUdPQ6",
                 "amount": Math.round(totalAmount * 100), 
                 "currency": "INR",
                 "name": "Sthirah",
