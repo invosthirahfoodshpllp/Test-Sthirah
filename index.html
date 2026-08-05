@@ -45,7 +45,7 @@
             transform: translateY(-2px); 
         }
 
-        /* Dropdown Menus with Hover Bridge to prevent premature closing */
+        /* Dropdown Menus with Hover Bridge & White Theme Matching Style */
         .user-dropdown-wrapper {
             position: relative;
             display: inline-block;
@@ -68,11 +68,11 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background: var(--white);
+            background: #FFFFFF;
             min-width: 180px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border-radius: 12px;
+            border: 2px solid var(--green-accent);
             z-index: 1000;
             overflow: hidden;
             padding-top: 6px;
@@ -97,6 +97,7 @@
             font-size: 13.5px;
             font-weight: 500;
             transition: background 0.2s, color 0.2s;
+            background: #FFFFFF;
         }
         .user-dropdown-menu a:hover {
             background: rgba(17, 107, 50, 0.08);
@@ -1016,6 +1017,7 @@
 
                 <div id="cart-summary-col" style="background:rgba(255,255,255,0.6); border:2px solid var(--green-accent); border-radius:12px; padding:25px; display:none;">
                     <h3 style="font-size:18px; font-weight:800; color:var(--text-dark); margin-bottom:12px;">Subtotal (<span id="cart-item-count-lbl">0</span> items): <span id="cart-subtotal-lbl" style="color:var(--green-accent);">₹0.00</span></h3>
+                    <p style="font-size:12px; color:#555; margin-bottom:5px;">Shipping: <span id="cart-shipping-lbl">₹0.00</span></p>
                     <p style="font-size:12px; color:#555; margin-bottom:20px;">(Incl. all taxes & shipping)</p>
                     
                     <div style="margin-bottom:20px;">
@@ -2909,6 +2911,16 @@
             box.innerHTML = html;
         }
 
+        function calculateShippingCost(totalWeightKg) {
+            const stateSelect = document.getElementById('state-select');
+            let selectedStateName = "Other States";
+            if (stateSelect) {
+                selectedStateName = stateSelect.value;
+            }
+            let matrixItem = shippingMatrix.find(s => s.name.toLowerCase() === selectedStateName.toLowerCase()) || shippingMatrix[shippingMatrix.length - 1];
+            return matrixItem.rate1kg * totalWeightKg;
+        }
+
         function renderCart() {
             try {
                 let cookieData = getCookie('sthirah_logged_customer');
@@ -2926,6 +2938,7 @@
             const summaryCol = document.getElementById('cart-summary-col');
             const itemCountLbl = document.getElementById('cart-item-count-lbl');
             const subtotalLbl = document.getElementById('cart-subtotal-lbl');
+            const shippingLbl = document.getElementById('cart-shipping-lbl');
 
             if(!list || !summaryCol) return;
 
@@ -2936,10 +2949,10 @@
             }
 
             let html = "";
-            let total = 0;
+            let itemTotal = 0;
             let totalItems = 0;
             cart.forEach((item, index) => {
-                total += parseInt(item.price);
+                itemTotal += parseInt(item.price);
                 totalItems += item.qty;
                 html += `
                     <div class="cart-item-row">
@@ -2971,8 +2984,12 @@
             });
             list.innerHTML = html;
 
+            let shippingCost = calculateShippingCost(totalItems);
+            let grandTotal = itemTotal + shippingCost;
+
             if(itemCountLbl) itemCountLbl.innerText = totalItems;
-            if(subtotalLbl) subtotalLbl.innerText = "₹" + total + ".00";
+            if(subtotalLbl) subtotalLbl.innerText = "₹" + grandTotal.toFixed(2);
+            if(shippingLbl) shippingLbl.innerText = "₹" + shippingCost.toFixed(2);
             summaryCol.style.display = "block";
 
             const addressSelectionBox = document.getElementById('checkout-saved-addresses-selection');
@@ -3036,14 +3053,18 @@
             const addrIdx = parseInt(selectedAddrRadio.value);
             const chosenAddr = currentUser.addresses[addrIdx];
 
-            let totalAmount = 0;
+            let totalItems = 0;
+            let itemTotal = 0;
             cart.forEach(item => {
-                totalAmount += parseInt(item.price);
+                totalItems += item.qty;
+                itemTotal += parseInt(item.price);
             });
+            let shippingCost = calculateShippingCost(totalItems);
+            let totalAmount = itemTotal + shippingCost;
 
             const options = {
                 "key": "rzp_test_TM6x1vvlNh5oKd",
-                "amount": totalAmount * 100, 
+                "amount": Math.round(totalAmount * 100), 
                 "currency": "INR",
                 "name": "Sthirah",
                 "description": "Cane Jaggery Powder Purchase",
@@ -3134,15 +3155,21 @@
                 item.size = item.qty + " KG";
                 item.price = item.qty * unitPricePerKg;
                 
-                const subtotalLbl = document.getElementById('cart-subtotal-lbl');
-                const itemCountLbl = document.getElementById('cart-item-count-lbl');
-                let total = 0;
                 let totalItems = 0;
+                let itemTotal = 0;
                 cart.forEach(i => {
-                    total += parseInt(i.price);
+                    itemTotal += parseInt(i.price);
                     totalItems += i.qty;
                 });
-                if(subtotalLbl) subtotalLbl.innerText = "₹" + total + ".00";
+                let shippingCost = calculateShippingCost(totalItems);
+                let grandTotal = itemTotal + shippingCost;
+
+                const subtotalLbl = document.getElementById('cart-subtotal-lbl');
+                const shippingLbl = document.getElementById('cart-shipping-lbl');
+                const itemCountLbl = document.getElementById('cart-item-count-lbl');
+
+                if(subtotalLbl) subtotalLbl.innerText = "₹" + grandTotal.toFixed(2);
+                if(shippingLbl) shippingLbl.innerText = "₹" + shippingCost.toFixed(2);
                 if(itemCountLbl) itemCountLbl.innerText = totalItems;
             }
             input.focus();
