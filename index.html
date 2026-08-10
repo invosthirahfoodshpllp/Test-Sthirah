@@ -24,6 +24,54 @@
         body { background-color: var(--bg-sage); color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; width: 100%; max-width: 100vw; }
         .clickable { cursor: pointer; }
 
+        /* Custom Modal Popup Overlay */
+        #custom-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+        #custom-modal-box {
+            background: #FFFFFF;
+            border: 2px solid var(--green-accent);
+            border-radius: 12px;
+            padding: 25px 30px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            text-align: left;
+            position: relative;
+        }
+        #custom-modal-msg {
+            font-size: 15px;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+        #custom-modal-btn {
+            background-color: var(--green-accent);
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            float: right;
+            transition: background 0.2s;
+        }
+        #custom-modal-btn:hover {
+            background-color: #0c4d24;
+        }
+
         /* Header Navbar */
         .navbar { position: relative; width: 100%; z-index: 100; padding: 15px 40px; background-color: var(--bg-sage); border-bottom: 1px solid var(--border-light); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%; }
@@ -240,7 +288,7 @@
         .benefits-list { text-align: left; font-size: 12.5px; line-height: 1.5; color: var(--text-dark); margin-bottom: 20px; padding-left: 18px; }
         .benefits-list li { margin-bottom: 6px; }
 
-        /* Custom Quantity Selector matching Amazon/Reference Image 3 Style with Capital KG/G and number centered without arrows */
+        /* Custom Quantity Selector matching Reference Image exactly */
         .quantity-stepper-box {
             display: flex;
             align-items: center;
@@ -681,6 +729,14 @@
 </head>
 <body>
 
+    <!-- Custom Modal Popup Overlay Container -->
+    <div id="custom-modal-overlay">
+        <div id="custom-modal-box">
+            <p id="custom-modal-msg">Message here</p>
+            <button id="custom-modal-btn" onclick="closeCustomModal()">OK</button>
+        </div>
+    </div>
+
     <!-- Header Navbar -->
     <header class="navbar">
         <div class="nav-container">
@@ -850,7 +906,16 @@
                     
                     <div class="product-details">
                         <h3 id="home-product-title" class="product-title-link clickable" onclick="openProductDetailView(0)" style="font-weight: 800;"><strong>Sthirah Cane Jaggery Powder</strong></h3>
-                        <p id="home-product-price" class="price">₹110.00 per KG</p>
+                        <div style="background: rgba(255, 255, 255, 0.6); border: 2px solid var(--green-accent); border-radius: 8px; padding: 12px 16px; margin-bottom: 15px; text-align: left; width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: 13.5px;">
+                                <span style="color: var(--text-muted); font-weight: 600;">Stock Status:</span>
+                                <span style="color: var(--green-accent); font-weight: 700;"><i class="fa-solid fa-boxes-stacked" style="margin-right: 4px;"></i><span id="home-stock-units-lbl">480</span> Units Available</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13.5px;">
+                                <span style="color: var(--text-muted); font-weight: 600;">Product Value:</span>
+                                <span id="home-product-price" style="color: var(--green-accent); font-weight: 800;">₹110.00 per KG</span>
+                            </div>
+                        </div>
                         
                         <ul class="benefits-list">
                             <li><strong>Rich Mineral Profile:</strong> Naturally contains essential iron, magnesium, and potassium.</li>
@@ -1028,7 +1093,7 @@
             <div style="margin: 25px 0; max-width: 500px;">
                 <div class="form-group"><label>Order ID / Invoice Number</label><input type="text" id="track-id" placeholder="e.g. STH/2026/101" style="background:rgba(255,255,255,0.7);"></div>
                 <div class="form-group"><label>Mobile number *</label><input type="tel" maxlength="10" placeholder="10-Digits" style="background:rgba(255,255,255,0.7);"></div>
-                <button class="btn-action" style="width:auto;" onclick="alert('Status: Package is safely in transit via our courier partner. Expected delivery within 2-3 business days.')">Track Order Status</button>
+                <button class="btn-action" style="width:auto;" onclick="showCustomModal('Status: Package is safely in transit via our courier partner. Expected delivery within 2-3 business days.')">Track Order Status</button>
             </div>
             <p style="font-size:13px; color:#555;">If you experience any delays or have questions regarding your delivery routing, please reach out directly to our customer care team at invosthirahfoodshpllp@gmail.com.</p>
         </div>
@@ -1163,7 +1228,6 @@
                 <div>
                     <div class="admin-sidebar-top-logo">
                         <img src="Logo 2.png" alt="Sthirah Logo">
-                        <span style="font-weight: 700; font-size: 16px; color: var(--green-accent);">STHIRAH</span>
                     </div>
 
                     <div class="admin-menu-section-title">Main menu</div>
@@ -1218,60 +1282,36 @@
                 </div>
 
                 <div id="tab-dash" class="admin-panel-tab active-tab">
-                    <div class="admin-stats-row">
-                        <div class="admin-stat-card">
-                            <h4>Total Sales</h4>
-                            <div class="stat-num">₹28,450 <span>↑ 10.4%</span></div>
-                            <p>Previous 7 days (₹25,200)</p>
+                    <div class="filter-bar-widget">
+                        <span style="font-size:14px; font-weight:600;">Filter by :</span>
+                        <select id="dash-filter-type" class="admin-input-sm" style="width:200px;" onchange="onDashboardFilterChange()">
+                            <option value="all_orders">All Orders</option>
+                            <option value="this_month" selected>This Month</option>
+                            <option value="last_month">Last Month</option>
+                            <option value="financial_year">Financial Year</option>
+                            <option value="custom">Custom Date</option>
+                        </select>
+
+                        <select id="dash-fy-select" class="admin-input-sm" style="width:140px; display:none;" onchange="onDashboardFilterChange()">
+                            <!-- Populated dynamically -->
+                        </select>
+
+                        <div id="dash-custom-date-box" style="display:none; align-items:center; gap:8px;">
+                            <input type="date" id="dash-from-date" class="admin-input-sm" style="width:130px;" onchange="onDashboardFilterChange()">
+                            <span>To</span>
+                            <input type="date" id="dash-to-date" class="admin-input-sm" style="width:130px;" onchange="onDashboardFilterChange()">
                         </div>
-                        <div class="admin-stat-card">
-                            <h4>Total Orders</h4>
-                            <div class="stat-num">124 <span>↑ 14.4%</span></div>
-                            <p>Previous 7 days (108)</p>
-                        </div>
-                        <div class="admin-stat-card">
-                            <h4>Pending & Canceled</h4>
-                            <div class="stat-num" style="font-size:20px;">3 <span>user 204</span></div>
-                            <p>Canceled: 1 (↑ 14.4%)</p>
+
+                        <div id="dash-pill-badge" style="background:#ECFDF5; border:1px solid #10B981; color:#065F46; padding:6px 14px; border-radius:20px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px;">
+                            <i class="fa-regular fa-calendar"></i> <span id="dash-pill-text">This Month</span>
                         </div>
                     </div>
 
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-bottom:25px;">
-                        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                                <h3 style="font-size:15px; font-weight:700;">Report for this week</h3>
-                                <div style="font-size:12px; background:#F1F5F9; padding:4px 8px; border-radius:6px; font-weight:600;">This week</div>
-                            </div>
-                            <div style="height:200px; display:flex; align-items:flex-end; justify-content:space-around; padding-top:20px; border-bottom:1px solid #E2E8F0;">
-                                <div style="background:#D2E3B8; width:25px; height:80px; border-radius:4px 4px 0 0;"></div>
-                                <div style="background:#D2E3B8; width:25px; height:120px; border-radius:4px 4px 0 0;"></div>
-                                <div style="background:#D2E3B8; width:25px; height:100px; border-radius:4px 4px 0 0;"></div>
-                                <div style="background:var(--green-accent); width:25px; height:170px; border-radius:4px 4px 0 0;"></div>
-                                <div style="background:#D2E3B8; width:25px; height:130px; border-radius:4px 4px 0 0;"></div>
-                                <div style="background:#D2E3B8; width:25px; height:150px; border-radius:4px 4px 0 0;"></div>
-                                <div style="background:#D2E3B8; width:25px; height:140px; border-radius:4px 4px 0 0;"></div>
-                            </div>
-                            <div style="display:flex; justify-content:space-around; font-size:12px; color:#64748B; margin-top:8px;">
-                                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-                            </div>
-                        </div>
-
-                        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:20px;">
-                            <h3 style="font-size:15px; font-weight:700; margin-bottom:15px;">Sales by State</h3>
-                            <div style="display:flex; flex-direction:column; gap:12px; font-size:13px;">
-                                <div>
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Tamil Nadu</span><strong>₹18,500</strong></div>
-                                    <div style="background:#F1F5F9; height:6px; border-radius:3px; overflow:hidden;"><div style="background:var(--green-accent); width:75%; height:100%;"></div></div>
-                                </div>
-                                <div>
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Karnataka</span><strong>₹6,200</strong></div>
-                                    <div style="background:#F1F5F9; height:6px; border-radius:3px; overflow:hidden;"><div style="background:var(--green-accent); width:40%; height:100%;"></div></div>
-                                </div>
-                                <div>
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Kerala</span><strong>₹3,750</strong></div>
-                                    <div style="background:#F1F5F9; height:6px; border-radius:3px; overflow:hidden;"><div style="background:var(--green-accent); width:25%; height:100%;"></div></div>
-                                </div>
-                            </div>
+                    <div class="admin-stats-row">
+                        <div class="admin-stat-card">
+                            <h4>Total Sales Amount</h4>
+                            <div id="dash-total-sales-val" class="stat-num">₹0.00</div>
+                            <p id="dash-stat-subtitle">Filtered records sum</p>
                         </div>
                     </div>
                 </div>
@@ -1281,20 +1321,22 @@
                         <div class="filter-bar-widget">
                             <span style="font-size:14px; font-weight:600;">Filter by :</span>
                             
-                            <select id="orders-preset-filter" class="admin-input-sm" style="width:230px;" onchange="onPresetFilterChange('orders')">
-                                <option value="this_month">This Month (1st to 30/31st)</option>
-                                <option value="last_month">Last Month (1st to 30/31st)</option>
-                                <option value="current_financial_year">Current Financial Year (1st April to Date)</option>
-                                <option value="last_financial_year">Last Financial Year (1st April to 31st March)</option>
-                                <option value="all_time">All Time (First Bill to Date)</option>
-                                <option value="custom">Custom Range</option>
+                            <select id="orders-filter-type" class="admin-input-sm" style="width:200px;" onchange="onOrdersFilterTypeChange()">
+                                <option value="all_orders">All Orders</option>
+                                <option value="this_month" selected>This Month</option>
+                                <option value="last_month">Last Month</option>
+                                <option value="financial_year">Financial Year</option>
+                                <option value="custom">Custom Date</option>
                             </select>
 
-                            <div style="display:flex; align-items:center; gap:8px; background:#F8FAFC; border:1px solid #CBD5E1; padding:6px 12px; border-radius:6px; flex-wrap:wrap;">
-                                <i class="fa-regular fa-calendar" style="color:#64748B;"></i>
-                                <input type="date" id="orders-from-date" class="admin-input-sm" style="border:none; background:transparent; width:120px;" onchange="onDateManualChange('orders')">
+                            <select id="orders-fy-select" class="admin-input-sm" style="width:140px; display:none;" onchange="filterAdminOrders()">
+                                <!-- Populated dynamically -->
+                            </select>
+
+                            <div id="orders-custom-date-box" style="display:none; align-items:center; gap:8px;">
+                                <input type="date" id="orders-from-date" class="admin-input-sm" style="width:130px;" onchange="filterAdminOrders()">
                                 <span>To</span>
-                                <input type="date" id="orders-to-date" class="admin-input-sm" style="border:none; background:transparent; width:120px;" onchange="onDateManualChange('orders')">
+                                <input type="date" id="orders-to-date" class="admin-input-sm" style="width:130px;" onchange="filterAdminOrders()">
                             </div>
 
                             <select id="admin-order-filter" class="admin-input-sm" style="width:130px;" onchange="filterAdminOrders()">
@@ -1356,6 +1398,7 @@
                                     <tr data-status="Processing" data-date="2026-07-15" data-amount="220">
                                         <td><input type="checkbox" class="order-select-chk"></td>
                                         <td>STH/2026/101</td>
+                                        <td>2026-07-15</td>
                                         <td>Ramesh Kumar<br><small>Mob: 9876543210</small></td>
                                         <td>Door 12, Main Street, Salem, TN - 636015</td>
                                         <td>2KG Jaggery Powder (₹220)</td>
@@ -1416,7 +1459,7 @@
                                         <td>Ramesh Kumar (ramesh@gmail.com)</td>
                                         <td>1 Address</td>
                                         <td>1 Order</td>
-                                        <td><button class="btn-action" style="padding:4px 8px; font-size:11px; width:auto;" onclick="alert('Viewing customer profile details.')">View Profile</button></td>
+                                        <td><button class="btn-action" style="padding:4px 8px; font-size:11px; width:auto;" onclick="showCustomModal('Viewing customer profile details.')">View Profile</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1600,7 +1643,7 @@
                         <div class="form-group"><label>Admin Name</label><input type="text" value="Pradheep"></div>
                         <div class="form-group"><label>Email Address</label><input type="email" value="invosthirahfoodshpllp@gmail.com"></div>
                         <div class="form-group"><label>Phone Number</label><input type="text" value="+91 93637 02560"></div>
-                        <button class="btn-action" onclick="alert('Admin profile updated successfully!')">Save Changes</button>
+                        <button class="btn-action" onclick="showCustomModal('Admin profile updated successfully!')">Save Changes</button>
                     </div>
                 </div>
 
@@ -1611,20 +1654,22 @@
                         <div class="filter-bar-widget">
                             <span style="font-size:14px; font-weight:600;">Filter by :</span>
                             
-                            <select id="reports-preset-filter" class="admin-input-sm" style="width:230px;" onchange="onPresetFilterChange('reports')">
-                                <option value="this_month">This Month (1st to 30/31st)</option>
-                                <option value="last_month">Last Month (1st to 30/31st)</option>
-                                <option value="current_financial_year">Current Financial Year (1st April to Date)</option>
-                                <option value="last_financial_year">Last Financial Year (1st April to 31st March)</option>
-                                <option value="all_time">All Time (First Bill to Date)</option>
-                                <option value="custom">Custom Range</option>
+                            <select id="reports-filter-type" class="admin-input-sm" style="width:200px;" onchange="onReportsFilterTypeChange()">
+                                <option value="all_orders">All Orders</option>
+                                <option value="this_month" selected>This Month</option>
+                                <option value="last_month">Last Month</option>
+                                <option value="financial_year">Financial Year</option>
+                                <option value="custom">Custom Date</option>
                             </select>
 
-                            <div style="display:flex; align-items:center; gap:8px; background:#F8FAFC; border:1px solid #CBD5E1; padding:6px 12px; border-radius:6px; flex-wrap:wrap;">
-                                <i class="fa-regular fa-calendar" style="color:#64748B;"></i>
-                                <input type="date" id="reports-from-date" class="admin-input-sm" style="border:none; background:transparent; width:120px;" onchange="onDateManualChange('reports')">
+                            <select id="reports-fy-select" class="admin-input-sm" style="width:140px; display:none;" onchange="filterAndPrintReport()">
+                                <!-- Populated dynamically -->
+                            </select>
+
+                            <div id="reports-custom-date-box" style="display:none; align-items:center; gap:8px;">
+                                <input type="date" id="reports-from-date" class="admin-input-sm" style="width:130px;" onchange="filterAndPrintReport()">
                                 <span>To</span>
-                                <input type="date" id="reports-to-date" class="admin-input-sm" style="border:none; background:transparent; width:120px;" onchange="onDateManualChange('reports')">
+                                <input type="date" id="reports-to-date" class="admin-input-sm" style="width:130px;" onchange="filterAndPrintReport()">
                             </div>
                         </div>
 
@@ -1747,7 +1792,6 @@
                     <div class="social-icons-row">
                         <a href="https://www.facebook.com/invosthirahfoodshpllp" target="_blank" title="Sthirah | Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/invosthirahfoodshpllp" target="_blank" title="Sthirah | Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="mailto:invosthirahfoodshpllp@gmail.com" title="invosthirahfoodshpllp@gmail.com"><i class="fa-regular fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
@@ -1802,7 +1846,7 @@
                 })
                 .catch((error) => {
                     console.error("Firebase Login Error:", error);
-                    alert("Google Login failed: " + error.message);
+                    showCustomModal("Google Login failed: " + error.message);
                 });
         };
 
@@ -1843,6 +1887,22 @@
 
     <!-- JavaScript Application Logic -->
     <script>
+        // Custom Modal Alert replacement for window.alert
+        function showCustomModal(msg) {
+            const overlay = document.getElementById('custom-modal-overlay');
+            const msgEl = document.getElementById('custom-modal-msg');
+            if(overlay && msgEl) {
+                msgEl.innerText = msg;
+                overlay.style.display = "flex";
+            } else {
+                alert(msg);
+            }
+        }
+        function closeCustomModal() {
+            const overlay = document.getElementById('custom-modal-overlay');
+            if(overlay) overlay.style.display = "none";
+        }
+
         // Cookie Helpers for persistent login
         function saveCookie(name, value, days) {
             let expires = "";
@@ -1954,7 +2014,7 @@
         function batchSaveSelectedShipping() {
             const selectedChks = document.querySelectorAll('.shipping-select-chk:checked');
             if(selectedChks.length === 0) {
-                alert("Please select at least one state using the checkboxes.");
+                showCustomModal("Please select at least one state using the checkboxes.");
                 return;
             }
             selectedChks.forEach(chk => {
@@ -1968,7 +2028,7 @@
             });
             localStorage.setItem('sthirah_shipping_matrix', JSON.stringify(shippingMatrix));
             populateAdminShippingTable();
-            alert("Selected shipping rates updated successfully!");
+            showCustomModal("Selected shipping rates updated successfully!");
         }
 
         function populateStorefrontShippingDropdown() {
@@ -2040,13 +2100,13 @@
         function addNewCategoryFromTab() {
             const name = document.getElementById('new-cat-name').value.trim();
             const desc = document.getElementById('new-cat-desc').value.trim();
-            if(!name) { alert("Please enter category name."); return; }
+            if(!name) { showCustomModal("Please enter category name."); return; }
             categories.push({ name, description: desc });
             localStorage.setItem('sthirah_categories', JSON.stringify(categories));
             document.getElementById('new-cat-name').value = "";
             document.getElementById('new-cat-desc').value = "";
             renderCategoriesDropdownAndList();
-            alert("Category added successfully!");
+            showCustomModal("Category added successfully!");
         }
 
         function deleteCategory(idx) {
@@ -2077,11 +2137,11 @@
             const uInput = document.getElementById('new-admin-user').value.trim();
             const pInput = document.getElementById('new-admin-pass').value.trim();
             if(!uInput || !pInput) {
-                alert("Please enter both username and password for the new admin.");
+                showCustomModal("Please enter both username and password for the new admin.");
                 return;
             }
             if(authorizedAdmins.some(a => a.user === uInput)) {
-                alert("An admin with this username already exists.");
+                showCustomModal("An admin with this username already exists.");
                 return;
             }
             authorizedAdmins.push({ user: uInput, pass: pInput });
@@ -2089,12 +2149,12 @@
             document.getElementById('new-admin-user').value = "";
             document.getElementById('new-admin-pass').value = "";
             renderAdminUsersTable();
-            alert("New authorized admin user added successfully!");
+            showCustomModal("New authorized admin user added successfully!");
         }
 
         function removeAdminUser(idx) {
             if(idx === 0) {
-                alert("Cannot remove the primary super admin.");
+                showCustomModal("Cannot remove the primary super admin.");
                 return;
             }
             if(confirm("Are you sure you want to revoke admin access for this user?")) {
@@ -2147,7 +2207,16 @@
                                     <h3 style="font-size:18px; font-weight:700; color:var(--text-dark); margin:10px 0 6px 0;">${prod.name}</h3>
                                 </div>
                                 <div>
-                                    <div style="font-size:20px; font-weight:800; color:var(--green-accent); margin-bottom:12px;">₹${prod.price}.00 per KG</div>
+                                    <div style="background: rgba(255, 255, 255, 0.6); border: 2px solid var(--green-accent); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; text-align: left; width: 100%;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: 13px;">
+                                            <span style="color: var(--text-muted); font-weight: 600;">Stock Status:</span>
+                                            <span style="color: var(--green-accent); font-weight: 700;"><i class="fa-solid fa-boxes-stacked" style="margin-right: 4px;"></i>${prod.stock} Units Available</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+                                            <span style="color: var(--text-muted); font-weight: 600;">Product Value:</span>
+                                            <span style="color: var(--green-accent); font-weight: 800;">₹${prod.price}.00 per KG</span>
+                                        </div>
+                                    </div>
                                     <button class="btn-action" style="padding:10px;" onclick="event.stopPropagation(); openProductDetailView(${originalIndex});">VIEW PRODUCT</button>
                                 </div>
                             </div>
@@ -2195,6 +2264,18 @@
                 });
                 adminTbody.innerHTML = adminHtml;
             }
+
+            const homeStockLbl = document.getElementById('home-stock-units-lbl');
+            if(homeStockLbl && productCatalog.length > 0) {
+                homeStockLbl.innerText = productCatalog[0].stock;
+            }
+
+            const homeMainImg = document.getElementById('home-main-product-img');
+            if(homeMainImg && productCatalog.length > 0) {
+                let defaultImgToUse = (productCatalog[0].images && productCatalog[0].images.length > 0) ? productCatalog[0].images[0] : (productCatalog[0].img || defaultProductImg);
+                homeMainImg.src = defaultImgToUse;
+            }
+
             renderCategoriesDropdownAndList();
             populateAdminShippingTable();
         }
@@ -2208,7 +2289,7 @@
         function batchSaveSelectedProducts() {
             const selectedChks = document.querySelectorAll('.product-select-chk:checked');
             if(selectedChks.length === 0) {
-                alert("Please select at least one product using the checkboxes.");
+                showCustomModal("Please select at least one product using the checkboxes.");
                 return;
             }
             selectedChks.forEach(chk => {
@@ -2225,13 +2306,13 @@
             });
             localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
             renderStorefrontCatalog();
-            alert("Selected products updated successfully!");
+            showCustomModal("Selected products updated successfully!");
         }
 
         function batchHideSelectedProducts() {
             const selectedChks = document.querySelectorAll('.product-select-chk:checked');
             if(selectedChks.length === 0) {
-                alert("Please select at least one product using the checkboxes.");
+                showCustomModal("Please select at least one product using the checkboxes.");
                 return;
             }
             selectedChks.forEach(chk => {
@@ -2240,13 +2321,13 @@
             });
             localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
             renderStorefrontCatalog();
-            alert("Selected products hide/unhide status toggled successfully!");
+            showCustomModal("Selected products hide/unhide status toggled successfully!");
         }
 
         function batchDeleteSelectedProducts() {
             const selectedChks = document.querySelectorAll('.product-select-chk:checked');
             if(selectedChks.length === 0) {
-                alert("Please select at least one product using the checkboxes.");
+                showCustomModal("Please select at least one product using the checkboxes.");
                 return;
             }
             if(confirm("Are you sure you want to delete the selected products?")) {
@@ -2256,7 +2337,7 @@
                 });
                 localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
                 renderStorefrontCatalog();
-                alert("Selected products deleted successfully.");
+                showCustomModal("Selected products deleted successfully.");
             }
         }
 
@@ -2271,6 +2352,12 @@
             let thumbsHtml = "";
             imgs.forEach((im, i) => {
                 thumbsHtml += `<img src="${im}" class="side-thumb ${i === 0 ? 'active-thumb' : ''}" onmouseover="changeDetailShopImage(this, '${im}')" onclick="changeDetailShopImage(this, '${im}')">`;
+            });
+
+            // Populate Shipping State Options
+            let shippingOptionsHtml = "";
+            shippingMatrix.forEach(st => {
+                shippingOptionsHtml += `<option value="${st.name}" data-rate="${st.rate1kg}" data-days="${st.days}">${st.name} (${st.zone} - ₹${st.rate1kg.toFixed(2)} for 1KG)</option>`;
             });
 
             shopContainer.innerHTML = `
@@ -2297,8 +2384,18 @@
                                 <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                                 <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
                             </div>
-                            <p style="color:var(--green-accent); font-weight:800; font-size:24px; margin: 10px 0 16px 0;">₹${prod.price}.00</p>
                             
+                            <div style="background: rgba(255, 255, 255, 0.6); border: 2px solid var(--green-accent); border-radius: 8px; padding: 12px 16px; margin: 15px 0; text-align: left; width: 100%;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: 13.5px;">
+                                    <span style="color: var(--text-muted); font-weight: 600;">Stock Status:</span>
+                                    <span style="color: var(--green-accent); font-weight: 700;"><i class="fa-solid fa-boxes-stacked" style="margin-right: 4px;"></i>${prod.stock} Units Available</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13.5px;">
+                                    <span style="color: var(--text-muted); font-weight: 600;">Product Value:</span>
+                                    <span id="detail-product-price" style="color: var(--green-accent); font-weight: 800;">₹${prod.price}.00 per KG</span>
+                                </div>
+                            </div>
+
                             <p style="font-size:14.5px; line-height:1.6; color:#222; margin-bottom:18px;">
                                 ${prod.description}
                             </p>
@@ -2328,11 +2425,20 @@
                             <div class="quantity-stepper-box">
                                 <label>Quantity (KG):</label>
                                 <div class="stepper-controls">
-                                    <button type="button" class="stepper-btn" onclick="adjustDetailQty(-1)">-</button>
-                                    <input type="number" id="detail-qty-input" class="stepper-input" value="1" min="1" max="99" maxlength="3" oninput="onQtyInput(this)" onblur="onQtyBlur(this)">
-                                    <button type="button" class="stepper-btn" onclick="adjustDetailQty(1)">+</button>
+                                    <button type="button" class="stepper-btn" onclick="adjustDetailQty(${prod.price}, -1)">-</button>
+                                    <input type="number" id="detail-qty-input" class="stepper-input" value="1" min="1" max="99" maxlength="3" oninput="onDetailQtyInput(${prod.price}, this)" onblur="onDetailQtyBlur(${prod.price}, this)">
+                                    <button type="button" class="stepper-btn" onclick="adjustDetailQty(${prod.price}, 1)">+</button>
                                 </div>
                             </div>
+
+                            <div class="form-group" style="margin-bottom:8px;">
+                                <label>Delivery State & Shipping Zone:</label>
+                                <select id="detail-state-select" onchange="calculateDetailShippingState(${prod.price})">
+                                    ${shippingOptionsHtml}
+                                </select>
+                            </div>
+
+                            <p id="detail-delivery-estimate-tag" style="font-size:12px; font-weight:600; color:var(--green-accent); margin-bottom:15px; text-align:center;">Estimated Delivery: 2-3 Days</p>
 
                             <button class="btn-action" onclick="addCatalogItemToCartFromDetail(${idx})">ADD TO CART</button>
                         </div>
@@ -2363,6 +2469,7 @@
                     </div>
                 </div>
             `;
+            calculateDetailShippingState(prod.price);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -2378,7 +2485,7 @@
             thumbEl.classList.add('active-thumb');
         }
 
-        function adjustDetailQty(val) {
+        function adjustDetailQty(basePrice, val) {
             const input = document.getElementById('detail-qty-input');
             if(!input) return;
             let cur = parseInt(input.value) || 1;
@@ -2386,6 +2493,58 @@
             if(cur < 1) cur = 1;
             if(cur > 99) cur = 99;
             input.value = cur;
+            updateDetailDynamicValues(basePrice);
+        }
+
+        function onDetailQtyInput(basePrice, input) {
+            let valStr = input.value;
+            if(valStr.length >= 3) {
+                let cur = parseInt(valStr);
+                if(cur >= 100) input.value = "99";
+            }
+            let cur = parseInt(input.value);
+            if(!isNaN(cur)) {
+                if(cur > 99) input.value = "99";
+                if(cur < 1) input.value = "1";
+            }
+            updateDetailDynamicValues(basePrice);
+        }
+
+        function onDetailQtyBlur(basePrice, input) {
+            let cur = parseInt(input.value);
+            if(isNaN(cur) || cur < 1) input.value = "1";
+            else if(cur > 99) input.value = "99";
+            updateDetailDynamicValues(basePrice);
+        }
+
+        function updateDetailDynamicValues(basePrice) {
+            const input = document.getElementById('detail-qty-input');
+            const priceEl = document.getElementById('detail-product-price');
+            if(!input || !priceEl) return;
+            let qty = parseInt(input.value) || 1;
+            priceEl.innerText = `₹${qty * basePrice}.00 per KG`;
+            
+            const selectEl = document.getElementById('detail-state-select');
+            if(!selectEl) return;
+            let currentSelectedVal = selectEl.value;
+            let html = "";
+            shippingMatrix.forEach(st => {
+                let calculatedRate = (st.rate1kg * qty).toFixed(2);
+                html += `<option value="${st.name}" data-rate="${calculatedRate}" data-days="${st.days}" ${st.name === currentSelectedVal ? 'selected' : ''}>${st.name} (${st.zone} - ₹${calculatedRate} for ${qty}KG)</option>`;
+            });
+            selectEl.innerHTML = html;
+            calculateDetailShippingState(basePrice);
+        }
+
+        function calculateDetailShippingState(basePrice) {
+            const selectEl = document.getElementById('detail-state-select');
+            const estTag = document.getElementById('detail-delivery-estimate-tag');
+            if(!selectEl || !estTag) return;
+            const selectedOpt = selectEl.options[selectEl.selectedIndex];
+            if(selectedOpt) {
+                const days = selectedOpt.getAttribute('data-days');
+                estTag.innerText = `Estimated Delivery: ${days}`;
+            }
         }
 
         function addCatalogItemToCartFromDetail(idx) {
@@ -2419,7 +2578,7 @@
                     input.value = "1";
                 }
                 if(input.id === 'home-qty-input') {
-                    document.getElementById('home-product-price').innerText = `₹${parseInt(input.value) * unitPricePerKg}.00 (${input.value} KG)`;
+                    document.getElementById('home-product-price').innerText = `₹${parseInt(input.value) * unitPricePerKg}.00 per KG`;
                     populateStorefrontShippingDropdown();
                 }
             }
@@ -2433,7 +2592,7 @@
                 input.value = "99";
             }
             if(input.id === 'home-qty-input') {
-                document.getElementById('home-product-price').innerText = `₹${parseInt(input.value) * unitPricePerKg}.00 (${input.value} KG)`;
+                document.getElementById('home-product-price').innerText = `₹${parseInt(input.value) * unitPricePerKg}.00 per KG`;
                 populateStorefrontShippingDropdown();
             }
         }
@@ -2446,7 +2605,7 @@
             if(cur < 1) cur = 1;
             if(cur > 99) cur = 99;
             input.value = cur;
-            document.getElementById('home-product-price').innerText = `₹${cur * unitPricePerKg}.00 (${cur} KG)`;
+            document.getElementById('home-product-price').innerText = `₹${cur * unitPricePerKg}.00 per KG`;
             populateStorefrontShippingDropdown();
         }
 
@@ -2504,7 +2663,7 @@
             
             const existingMatch = productCatalog.find(p => p.name.toLowerCase() === name.toLowerCase());
             if(existingMatch) {
-                alert("Reminder: A product with this name already exists in your catalog!");
+                showCustomModal("Reminder: A product with this name already exists in your catalog!");
             }
 
             const fileInput = document.getElementById('new-prod-images-files');
@@ -2527,7 +2686,7 @@
                             });
                             localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
                             renderStorefrontCatalog();
-                            alert("New product published successfully and synced to Shop page!");
+                            showCustomModal("New product published successfully and synced to Shop page!");
                             switchAdminTab('tab-products', document.querySelector('[onclick*=\'tab-products\']'));
                         }
                     };
@@ -2544,142 +2703,152 @@
                 });
                 localStorage.setItem('sthirah_product_catalog', JSON.stringify(productCatalog));
                 renderStorefrontCatalog();
-                alert("New product published successfully and synced to Shop page!");
+                showCustomModal("New product published successfully and synced to Shop page!");
                 switchAdminTab('tab-products', document.querySelector('[onclick*=\'tab-products\']'));
             }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            initFinancialYearDropdowns();
             renderStorefrontCatalog();
-            setDatesByPreset('orders');
-            setDatesByPreset('reports');
-            filterAdminOrders();
+            onDashboardFilterChange();
+            onOrdersFilterTypeChange();
             filterAndPrintReport();
         });
 
-        function changeMainImage(thumbEl, imgPath) {
-            const img = document.getElementById('main-product-img');
-            if(!img) return;
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = imgPath;
-                img.style.opacity = 1;
-            }, 250);
-            document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active-thumb'));
-            thumbEl.classList.add('active-thumb');
-        }
+        function initFinancialYearDropdowns() {
+            const now = new Date();
+            const curYear = now.getFullYear();
+            const curMonth = now.getMonth(); // 0-indexed (3 is April)
+            const currentFyStart = curMonth >= 3 ? curYear : curYear - 1;
 
-        function changeHomeImage(thumbEl, imgPath) {
-            const img = document.getElementById('home-main-product-img');
-            if(!img) return;
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = imgPath;
-                img.style.opacity = 1;
-            }, 250);
-            thumbEl.parentElement.querySelectorAll('.side-thumb').forEach(t => t.classList.remove('active-thumb'));
-            thumbEl.classList.add('active-thumb');
-        }
-
-        function showZoom(resultId) {
-            const el = document.getElementById(resultId);
-            if(el) el.style.display = "block";
-        }
-
-        function hideZoom(resultId) {
-            const el = document.getElementById(resultId);
-            if(el) el.style.display = "none";
-        }
-
-        function imageZoom(imgId, resultId, e) {
-            const img = document.getElementById(imgId);
-            const result = document.getElementById(resultId);
-            if(!img || !result) return;
-            result.style.backgroundImage = `url('${img.src}')`;
-            let zoomFactor = 1.8;
-            result.style.backgroundSize = (img.width * zoomFactor) + "px " + (img.height * zoomFactor) + "px";
-            let rect = img.getBoundingClientRect();
-            let x = e.clientX - rect.left;
-            let y = e.clientY - rect.top;
-            let xPercent = (x / img.width) * 100;
-            let yPercent = (y / img.height) * 100;
-            if (xPercent > 100) xPercent = 100;
-            if (xPercent < 0) xPercent = 0;
-            if (yPercent > 100) yPercent = 100;
-            if (yPercent < 0) yPercent = 0;
-            result.style.backgroundPosition = xPercent + "% " + yPercent + "%";
-        }
-
-        function checkOrderCancellationRule(selectEl) {
-            if(selectEl.value === "Cancelled") {
-                alert("Restriction: Orders cannot be cancelled after shipping, and food product returns are not accepted.");
-                selectEl.value = "Dispatched";
+            let fyList = [];
+            for(let y = currentFyStart - 2; y <= currentFyStart + 2; y++) {
+                fyList.push(`${y}-${y+1}`);
             }
+
+            ['dash-fy-select', 'orders-fy-select', 'reports-fy-select'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    let html = "";
+                    fyList.forEach(fy => {
+                        html += `<option value="${fy}" ${fy === `${currentFyStart}-${currentFyStart+1}` ? 'selected' : ''}>FY ${fy}</option>`;
+                    });
+                    el.innerHTML = html;
+                }
+            });
         }
 
-        function setDatesByPreset(prefix) {
-            const presetEl = document.getElementById(prefix + '-preset-filter');
-            if(!presetEl) return;
-            const preset = presetEl.value;
-            if(preset === 'custom') return;
-
+        function getDateRangeForFilter(filterType, fySelectId, fromDateId, toDateId) {
             const now = new Date();
             let from = new Date();
             let to = new Date();
 
-            if(preset === 'this_month') {
+            if(filterType === 'all_orders') {
+                from = new Date(2020, 0, 1);
+                to = new Date(2100, 11, 31);
+            } else if(filterType === 'this_month') {
                 from = new Date(now.getFullYear(), now.getMonth(), 1);
                 to = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-            } else if(preset === 'last_month') {
+            } else if(filterType === 'last_month') {
                 from = new Date(now.getFullYear(), now.getMonth() - 1, 1);
                 to = new Date(now.getFullYear(), now.getMonth(), 0);
-            } else if(preset === 'current_financial_year') {
-                const curYear = now.getFullYear();
-                const curMonth = now.getMonth();
-                const fyStartYear = curMonth >= 3 ? curYear : curYear - 1;
-                from = new Date(fyStartYear, 3, 1);
-                to = new Date();
-            } else if(preset === 'last_financial_year') {
-                const curYear = now.getFullYear();
-                const curMonth = now.getMonth();
-                const fyStartYear = curMonth >= 3 ? curYear - 1 : curYear - 2;
-                from = new Date(fyStartYear, 3, 1);
-                to = new Date(fyStartYear + 1, 2, 31);
-            } else if(preset === 'all_time') {
-                from = new Date(2026, 0, 1);
-                to = new Date();
+            } else if(filterType === 'financial_year') {
+                const fyEl = document.getElementById(fySelectId);
+                let fyVal = fyEl ? fyEl.value : "2026-2027";
+                let startY = parseInt(fyVal.split('-')[0]);
+                from = new Date(startY, 3, 1); // April 1st
+                to = new Date(startY + 1, 2, 31); // March 31st
+            } else if(filterType === 'custom') {
+                const fEl = document.getElementById(fromDateId);
+                const tEl = document.getElementById(toDateId);
+                from = fEl && fEl.value ? new Date(fEl.value) : new Date(2026, 0, 1);
+                to = tEl && tEl.value ? new Date(tEl.value) : new Date();
             }
 
-            const fromDateEl = document.getElementById(prefix + '-from-date');
-            const toDateEl = document.getElementById(prefix + '-to-date');
-            if(fromDateEl) fromDateEl.value = from.toISOString().split('T')[0];
-            if(toDateEl) toDateEl.value = to.toISOString().split('T')[0];
+            return {
+                fromStr: from.toISOString().split('T')[0],
+                toStr: to.toISOString().split('T')[0]
+            };
         }
 
-        function onPresetFilterChange(prefix) {
-            setDatesByPreset(prefix);
-            if(prefix === 'orders') {
-                filterAdminOrders();
+        function onDashboardFilterChange() {
+            const type = document.getElementById('dash-filter-type').value;
+            const fyBox = document.getElementById('dash-fy-select');
+            const customBox = document.getElementById('dash-custom-date-box');
+            const pillText = document.getElementById('dash-pill-text');
+
+            if(type === 'financial_year') {
+                fyBox.style.display = "inline-block";
+                customBox.style.display = "none";
+                pillText.innerText = `Financial Year (${fyBox.value})`;
+            } else if(type === 'custom') {
+                fyBox.style.display = "none";
+                customBox.style.display = "flex";
+                pillText.innerText = "Custom Date Range";
             } else {
-                filterAndPrintReport();
+                fyBox.style.display = "none";
+                customBox.style.display = "none";
+                if(type === 'all_orders') pillText.innerText = "All Lifetime Orders";
+                else if(type === 'this_month') pillText.innerText = "This Month";
+                else if(type === 'last_month') pillText.innerText = "Last Month";
             }
+
+            const range = getDateRangeForFilter(type, 'dash-fy-select', 'dash-from-date', 'dash-to-date');
+            
+            const rows = document.querySelectorAll('#admin-orders-table-body tr');
+            let totalSales = 0;
+            rows.forEach(row => {
+                const rowDate = row.getAttribute('data-date');
+                const amount = parseFloat(row.getAttribute('data-amount') || 0);
+                if(rowDate >= range.fromStr && rowDate <= range.toStr) {
+                    totalSales += amount;
+                }
+            });
+
+            const salesValEl = document.getElementById('dash-total-sales-val');
+            if(salesValEl) salesValEl.innerText = "₹" + totalSales.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         }
 
-        function onDateManualChange(prefix) {
-            const presetEl = document.getElementById(prefix + '-preset-filter');
-            if(presetEl) presetEl.value = 'custom';
-            if(prefix === 'orders') {
-                filterAdminOrders();
+        function onOrdersFilterTypeChange() {
+            const type = document.getElementById('orders-filter-type').value;
+            const fyBox = document.getElementById('orders-fy-select');
+            const customBox = document.getElementById('orders-custom-date-box');
+
+            if(type === 'financial_year') {
+                fyBox.style.display = "inline-block";
+                customBox.style.display = "none";
+            } else if(type === 'custom') {
+                fyBox.style.display = "none";
+                customBox.style.display = "flex";
             } else {
-                filterAndPrintReport();
+                fyBox.style.display = "none";
+                customBox.style.display = "none";
             }
+            filterAdminOrders();
+        }
+
+        function onReportsFilterTypeChange() {
+            const type = document.getElementById('reports-filter-type').value;
+            const fyBox = document.getElementById('reports-fy-select');
+            const customBox = document.getElementById('reports-custom-date-box');
+
+            if(type === 'financial_year') {
+                fyBox.style.display = "inline-block";
+                customBox.style.display = "none";
+            } else if(type === 'custom') {
+                fyBox.style.display = "none";
+                customBox.style.display = "flex";
+            } else {
+                fyBox.style.display = "none";
+                customBox.style.display = "none";
+            }
+            filterAndPrintReport();
         }
 
         function filterAdminOrders() {
-            const fromDateEl = document.getElementById('orders-from-date');
-            const toDateEl = document.getElementById('orders-to-date');
-            const fromDate = fromDateEl ? fromDateEl.value : '';
-            const toDate = toDateEl ? toDateEl.value : '';
+            const type = document.getElementById('orders-filter-type').value;
+            const range = getDateRangeForFilter(type, 'orders-fy-select', 'orders-from-date', 'orders-to-date');
             const filterEl = document.getElementById('admin-order-filter');
             const filterVal = filterEl ? filterEl.value : 'ALL';
             const rows = document.querySelectorAll('#admin-orders-table-body tr');
@@ -2690,11 +2859,10 @@
                 const amount = parseFloat(row.getAttribute('data-amount') || 0);
                 const status = row.getAttribute('data-status') || row.querySelector('select').value;
                 
-                const matchesFrom = !fromDate || rowDate >= fromDate;
-                const matchesTo = !toDate || rowDate <= toDate;
+                const matchesDate = rowDate >= range.fromStr && rowDate <= range.toStr;
                 const matchesStatus = filterVal === "ALL" || status === filterVal;
 
-                if(matchesFrom && matchesTo && matchesStatus) {
+                if(matchesDate && matchesStatus) {
                     row.style.display = "";
                     totalSales += amount;
                 } else {
@@ -2707,18 +2875,15 @@
         }
 
         function filterAndPrintReport() {
-            setDatesByPreset('reports');
-            const fromEl = document.getElementById('reports-from-date');
-            const toEl = document.getElementById('reports-to-date');
-            const from = fromEl ? fromEl.value : '';
-            const to = toEl ? toEl.value : '';
+            const type = document.getElementById('reports-filter-type').value;
+            const range = getDateRangeForFilter(type, 'reports-fy-select', 'reports-from-date', 'reports-to-date');
 
             const rows = document.querySelectorAll('#admin-orders-table-body tr');
             let sales = 0;
             rows.forEach(r => {
                 const d = r.getAttribute('data-date');
                 const amt = parseFloat(r.getAttribute('data-amount') || 0);
-                if(d >= from && d <= to) {
+                if(d >= range.fromStr && d <= range.toStr) {
                     sales += amt;
                 }
             });
@@ -2788,7 +2953,7 @@
             if(!currentUser) return;
             const mob = document.getElementById('edit-profile-mobile').value;
             if(mob && mob.length !== 10) {
-                alert("Mobile number must be exactly 10-Digits.");
+                showCustomModal("Mobile number must be exactly 10-Digits.");
                 return;
             }
             currentUser.name = document.getElementById('edit-profile-name').value;
@@ -2796,7 +2961,7 @@
             saveCookie('sthirah_logged_customer', JSON.stringify(currentUser), 365);
             localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
             window.currentUser = currentUser;
-            alert("Profile details updated successfully!");
+            showCustomModal("Profile details updated successfully!");
             navigateTo('account-view');
             updateCustomerNav();
         }
@@ -2854,7 +3019,7 @@
 
         function saveAddressFromAccount() {
             currentUser = window.currentUser || JSON.parse(localStorage.getItem('sthirah_logged_customer')) || null;
-            if(!currentUser) { alert("Please log in first via Google."); return; }
+            if(!currentUser) { showCustomModal("Please log in first via Google."); return; }
             if(!currentUser.addresses) currentUser.addresses = [];
             const editIdx = parseInt(document.getElementById('edit-address-index').value);
 
@@ -2866,22 +3031,22 @@
             const landmarkVal = document.getElementById('acc-addr-landmark').value;
 
             if(!document.getElementById('acc-addr-name').value || !mobileVal || !document.getElementById('acc-addr-door').value || !document.getElementById('acc-addr-street').value || !document.getElementById('acc-addr-area').value || !pinVal || !cityVal || !stateVal) {
-                alert("Please fill in all mandatory address fields.");
+                showCustomModal("Please fill in all mandatory address fields.");
                 return;
             }
 
             if(mobileVal.length !== 10) {
-                alert("Mobile number must be exactly 10-Digits.");
+                showCustomModal("Mobile number must be exactly 10-Digits.");
                 return;
             }
 
             if(altVal && altVal.length !== 10) {
-                alert("Alternative mobile number must be exactly 10-Digits if provided.");
+                showCustomModal("Alternative mobile number must be exactly 10-Digits if provided.");
                 return;
             }
 
             if(pinVal.length !== 6 || !/^\d{6}$/.test(pinVal)) {
-                alert("Pincode must be exactly 6 digits.");
+                showCustomModal("Pincode must be exactly 6 digits.");
                 return;
             }
 
@@ -2902,7 +3067,7 @@
                 currentUser.addresses[editIdx] = newAddr;
             } else {
                 if(currentUser.addresses.length >= 5) {
-                    alert("You can store a maximum of 5 addresses.");
+                    showCustomModal("You can store a maximum of 5 addresses.");
                     return;
                 }
                 currentUser.addresses.push(newAddr);
@@ -2914,7 +3079,7 @@
             toggleAddressForm(false);
             renderSavedAddressesInAccount();
             renderCart();
-            alert("Address saved successfully!");
+            showCustomModal("Address saved successfully!");
         }
 
         function deleteAddress(idx) {
@@ -3087,20 +3252,20 @@
             }
 
             if (!currentUser || !currentUser.email) {
-                alert("LOGIN TO PROCEED");
+                showCustomModal("LOGIN TO PROCEED");
                 navigateTo('account-view');
                 return;
             }
 
             if (!currentUser.addresses || currentUser.addresses.length === 0) {
-                alert("select address");
+                showCustomModal("select address");
                 navigateTo('address-view');
                 return;
             }
 
             const selectedAddrRadio = document.querySelector('input[name="selected_checkout_addr"]:checked');
             if(!selectedAddrRadio) {
-                alert("select address");
+                showCustomModal("select address");
                 return;
             }
 
@@ -3125,7 +3290,7 @@
                 "description": "Cane Jaggery Powder Purchase",
                 "image": "Logo 2.png",
                 "handler": function (response){
-                    alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+                    showCustomModal("Payment successful! Payment ID: " + response.razorpay_payment_id);
                     
                     let summaryText = cart.map(i => `${i.qty}KG ${i.name}`).join(', ');
                     let fullAddressText = `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area}, ${chosenAddr.city}, ${chosenAddr.state} - ${chosenAddr.pincode}`;
@@ -3291,7 +3456,7 @@
                 startAdminInactivityTimer();
                 renderCategoriesDropdownAndList();
             } else {
-                alert("Access Denied: Invalid admin credentials or user is not authorized in User Management.");
+                showCustomModal("Access Denied: Invalid admin credentials or user is not authorized in User Management.");
             }
         }
 
@@ -3316,7 +3481,7 @@
         }
 
         function adminAutoLogout() {
-            alert("Admin session expired due to 10 minutes of inactivity. Please re-login.");
+            showCustomModal("Admin session expired due to 10 minutes of inactivity. Please re-login.");
             adminLogoutManual();
         }
 
@@ -3347,6 +3512,50 @@
                 renderCategoriesDropdownAndList();
                 populateAdminShippingTable();
             }
+        }
+
+        // Helper functions for image changing and zooming on Home Page
+        function changeHomeImage(thumbEl, imgPath) {
+            const img = document.getElementById('home-main-product-img');
+            if(!img) return;
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = imgPath;
+                img.style.opacity = 1;
+            }, 250);
+            if(thumbEl && thumbEl.parentElement) {
+                thumbEl.parentElement.querySelectorAll('.side-thumb').forEach(t => t.classList.remove('active-thumb'));
+                thumbEl.classList.add('active-thumb');
+            }
+        }
+
+        function showZoom(resultId) {
+            const el = document.getElementById(resultId);
+            if(el) el.style.display = "block";
+        }
+
+        function hideZoom(resultId) {
+            const el = document.getElementById(resultId);
+            if(el) el.style.display = "none";
+        }
+
+        function imageZoom(imgId, resultId, e) {
+            const img = document.getElementById(imgId);
+            const result = document.getElementById(resultId);
+            if(!img || !result) return;
+            result.style.backgroundImage = `url('${img.src}')`;
+            let zoomFactor = 1.8;
+            result.style.backgroundSize = (img.width * zoomFactor) + "px " + (img.height * zoomFactor) + "px";
+            let rect = img.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+            let xPercent = (x / img.width) * 100;
+            let yPercent = (y / img.height) * 100;
+            if (xPercent > 100) xPercent = 100;
+            if (xPercent < 0) xPercent = 0;
+            if (yPercent > 100) yPercent = 100;
+            if (yPercent < 0) yPercent = 0;
+            result.style.backgroundPosition = xPercent + "% " + yPercent + "%";
         }
     </script>
 </body>
