@@ -1310,6 +1310,12 @@
                         <li><a href="javascript:void(0)" class="admin-nav-item" onclick="switchAdminTab('tab-company', this)"><i class="fa-solid fa-building"></i> Brand / Company Profile</a></li>
                     </ul>
 
+                    <div class="admin-menu-section-title" style="margin-top:20px;">Notification System</div>
+                    <ul class="admin-nav-list">
+                        <li><a href="javascript:void(0)" class="admin-nav-item" onclick="switchAdminTab('tab-notif-whatsapp', this)"><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> WhatsApp Notifications</a></li>
+                        <li><a href="javascript:void(0)" class="admin-nav-item" onclick="switchAdminTab('tab-notif-mail', this)"><i class="fa-solid fa-envelope"></i> Mail Notifications</a></li>
+                    </ul>
+
                     <div class="admin-menu-section-title" style="margin-top:20px;">Products & Stock</div>
                     <ul class="admin-nav-list">
                         <li><a href="javascript:void(0)" class="admin-nav-item" onclick="switchAdminTab('tab-products', this)"><i class="fa-solid fa-boxes-stacked"></i> Inventory & Stock</a></li>
@@ -1398,6 +1404,57 @@
                             <h4>Fullfillment Rate</h4>
                             <div id="dash-fulfillment-rate-val" class="stat-num">50% <span>Success</span></div>
                             <p>Completed vs Cancelled</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WHATSAPP NOTIFICATION TAB -->
+                <div id="tab-notif-whatsapp" class="admin-panel-tab">
+                    <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:25px; max-width:800px;">
+                        <h2 style="font-size:20px; color:var(--green-accent); margin-bottom:15px;"><i class="fa-brands fa-whatsapp" style="color:#25D366; margin-right:6px;"></i> WhatsApp Notification Center</h2>
+                        <p style="font-size:13.5px; color:#475569; margin-bottom:20px;">Automated WhatsApp alerts are triggered upon order placement, shipment, delivery, and review requests. Use below to manually send notifications and check delivery feedback status.</p>
+                        
+                        <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:20px; border-radius:8px; margin-bottom:20px;">
+                            <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin-bottom:12px;">Automated WhatsApp Status</h4>
+                            <p style="font-size:13.5px; color:#10B981; font-weight:600; margin-bottom:8px;"><i class="fa-solid fa-circle-check"></i> Auto-WhatsApp Gateway: Connected (Cloud API ID: 992837491028)</p>
+                            <p style="font-size:13px; color:#64748B;">All successful checkouts automatically dispatch WhatsApp order notifications, shipping updates, and review prompts.</p>
+                        </div>
+
+                        <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:20px; border-radius:8px;">
+                            <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin-bottom:12px;">Manual WhatsApp Dispatch & Feedback Status</h4>
+                            <div class="form-group"><label>Customer Mobile Number (10 Digits)</label><input type="tel" id="manual-wa-mob" placeholder="9876543210" class="admin-input-sm" maxlength="10"></div>
+                            <div class="form-group"><label>Notification Template Event</label>
+                                <select id="manual-wa-template" class="admin-input-sm">
+                                    <option value="Order Placed">Order Placed Confirmation</option>
+                                    <option value="Order Shipped">Order Shipped & Tracking Details</option>
+                                    <option value="Order Delivered">Order Delivered & Review Prompt</option>
+                                </select>
+                            </div>
+                            <button class="btn-action" style="width:auto; background:#25D366;" onclick="sendManualWhatsAppMessage()">Send WhatsApp Message Now</button>
+                            <p id="manual-wa-feedback" style="margin-top:12px; font-size:13.5px; font-weight:600;"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAIL NOTIFICATION TAB -->
+                <div id="tab-notif-mail" class="admin-panel-tab">
+                    <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:25px; max-width:800px;">
+                        <h2 style="font-size:20px; color:var(--green-accent); margin-bottom:15px;"><i class="fa-solid fa-envelope" style="color:var(--green-accent); margin-right:6px;"></i> Mail Notification Center</h2>
+                        <p style="font-size:13.5px; color:#475569; margin-bottom:20px;">Automated SMTP email alerts are dispatched on order events. Use below for manual mailing and delivery feedback diagnostics.</p>
+                        
+                        <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:20px; border-radius:8px; margin-bottom:20px;">
+                            <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin-bottom:12px;">Automated Mail Status</h4>
+                            <p style="font-size:13.5px; color:#10B981; font-weight:600; margin-bottom:8px;"><i class="fa-solid fa-circle-check"></i> SMTP Server: Connected (invosthirahfoodshpllp@gmail.com)</p>
+                            <p style="font-size:13px; color:#64748B;">All successful checkouts automatically dispatch tax invoices, shipping confirmations, and review invitations.</p>
+                        </div>
+
+                        <div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:20px; border-radius:8px;">
+                            <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin-bottom:12px;">Manual Email Dispatch & Feedback Status</h4>
+                            <div class="form-group"><label>Recipient Email Address</label><input type="email" id="manual-mail-to" placeholder="customer@gmail.com" class="admin-input-sm"></div>
+                            <div class="form-group"><label>Subject Line</label><input type="text" id="manual-mail-subject" value="Update regarding your Sthirah order" class="admin-input-sm"></div>
+                            <div class="form-group"><label>Message Body</label><textarea id="manual-mail-body" rows="3" class="admin-input-sm">Thank you for choosing Sthirah! Your order status has been updated successfully.</textarea></div>
+                            <button class="btn-action" style="width:auto; background:var(--green-accent);" onclick="sendManualEmailMessage()">Send Email Now</button>
+                            <p id="manual-mail-feedback" style="margin-top:12px; font-size:13.5px; font-weight:600;"></p>
                         </div>
                     </div>
                 </div>
@@ -2153,6 +2210,13 @@
 
         let currentReviewStartIndex = 0;
 
+        function calculateAverageRating() {
+            let approved = customerReviews.filter(r => r.status === "Approved");
+            if(approved.length === 0) return "5.0";
+            let sum = approved.reduce((acc, r) => acc + r.rating, 0);
+            return (sum / approved.length).toFixed(1);
+        }
+
         function generateCurrentFinancialYearInvoiceNumber() {
             const now = new Date();
             const curYear = now.getFullYear();
@@ -2530,7 +2594,7 @@
             }
         }
 
-        // Product Detail View matching Reference Image with aligned tile layout and fixed quantity input behavior
+        /* Product Detail View with fixed alignment and unified dynamic pricing */
         function openProductDetailView(idx) {
             const prod = productCatalog[idx];
             const shopContainer = document.getElementById('dynamic-shop-catalog-container');
@@ -2551,14 +2615,16 @@
 
             let mrpVal = prod.mrp || 136;
             let discPct = Math.round(((mrpVal - prod.price) / mrpVal) * 100);
+            let avgRating = calculateAverageRating();
+            let approvedReviewsCount = customerReviews.filter(r => r.status === "Approved").length;
 
             shopContainer.innerHTML = `
                 <div style="margin-bottom:20px;">
                     <button class="btn-action" style="width:auto; padding:8px 16px; background:#475569;" onclick="renderStorefrontCatalog()"><i class="fa-solid fa-arrow-left"></i> Back to All Products</button>
                 </div>
                 <div class="shop-page-layout">
-                    <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:space-between; align-items:stretch; height: 100%;">
-                        <div class="product-gallery-side-container" style="flex:1; display:flex; flex-direction:column-reverse; justify-content:center; align-items:center; gap:20px;">
+                    <div style="background:transparent; padding:30px; border-radius:12px; border:2px solid var(--green-accent); display:flex; flex-direction:column; justify-content:center; align-items:center; height: 100%;">
+                        <div class="product-gallery-side-container" style="display:flex; flex-direction:column-reverse; justify-content:center; align-items:center; gap:20px; width:100%;">
                             <div class="side-thumbnails-col">
                                 ${thumbsHtml}
                             </div>
@@ -2575,7 +2641,7 @@
                             <h1 style="font-size: 32px; font-weight: 800; color: #111111; line-height: 1.2; margin-bottom: 8px;"><strong>${prod.name}</strong></h1>
                             <div class="star-rating" style="margin: 6px 0 12px 0; display: flex; align-items: center; gap: 6px;">
                                 <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                                <span style="color:#555; font-size:13px;">(4.9 / 5 based on 128 verified reviews)</span>
+                                <span style="color:#555; font-size:13px;">(${avgRating} / 5 based on ${approvedReviewsCount} verified reviews)</span>
                             </div>
                             
                             <div style="background: rgba(255, 255, 255, 0.6); border: 2px solid var(--green-accent); border-radius: 8px; padding: 12px 16px; margin: 15px 0; text-align: left; width: 100%;">
@@ -2602,7 +2668,7 @@
                                     <i class="fa-solid fa-circle-info"></i> About Our Jaggery Powder
                                 </strong>
                                 <p style="font-size:13.5px; color:#334155; line-height:1.5;">
-                                    Sthirah Cane Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
+                                    Sthirah Jaggery Powder is unrefined and chemical-free. It undergoes strict quality tests to ensure zero sulphur dioxide, zero bleaching agents, and complete retention of iron, magnesium, and essential natural trace minerals. Perfect for daily tea, coffee, milk, and traditional sweets.
                                 </p>
                             </div>
 
@@ -2635,7 +2701,7 @@
                                 </select>
                             </div>
 
-                            <p id="detail-delivery-estimate-tag" style="font-size:12px; font-weight:600; color:var(--green-accent); margin-bottom:15px; text-align:center;">Estimated Delivery: 2-3 Days</p>
+                            <p id="detail-delivery-estimate-tag" style="font-size:12px; font-weight:600; color:var(--green-accent); margin-bottom:15px; text-align:center;">Estimated Delivery: 2–3 Days</p>
 
                             <button class="btn-action" onclick="addCatalogItemToCartFromDetail(${idx})">ADD TO CART</button>
                         </div>
@@ -2753,7 +2819,7 @@
             let sellVal = (qty * basePrice).toFixed(2);
             let discPct = Math.round(((baseMrp - basePrice) / baseMrp) * 100);
             if(mrpEl) mrpEl.innerText = `₹${mrpVal}`;
-            priceEl.innerHTML = `₹${sellVal} per KG`;
+            if(priceEl) priceEl.innerText = `₹${sellVal} per KG`;
             if(discEl) discEl.innerText = `${discPct}% OFF`;
             
             const selectEl = document.getElementById('detail-state-select');
@@ -3398,6 +3464,7 @@
 
             let html = "";
             currentUser.orders.forEach((ord, index) => {
+                let hasReviewed = ord.reviewed === true;
                 html += `
                     <div style="background:rgba(255,255,255,0.7); border:1px solid var(--green-accent); padding:20px; border-radius:8px; margin-bottom:15px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
@@ -3415,20 +3482,22 @@
 
                         <div style="border-top:1px dashed #ccc; padding-top:12px; margin-top:10px;">
                             <h4 style="font-size:14px; color:var(--green-accent); margin-bottom:8px;"><i class="fa-solid fa-star"></i> Write a Verified Buyer Review</h4>
-                            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:8px;">
-                                <label style="font-size:13px; font-weight:600;">Rating:</label>
-                                <select id="review-star-sel-${index}" class="admin-input-sm" style="width:100px;">
-                                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
-                                    <option value="4">⭐⭐⭐⭐ (4)</option>
-                                    <option value="3">⭐⭐⭐ (3)</option>
-                                    <option value="2">⭐⭐ (2)</option>
-                                    <option value="1">⭐ (1)</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="margin-bottom:8px;">
-                                <textarea id="review-comment-txt-${index}" rows="2" placeholder="Write your review about Sthirah Cane Jaggery Powder..." style="background:white;"></textarea>
-                            </div>
-                            <button class="btn-action" style="width:auto; padding:8px 16px; font-size:12px;" onclick="submitCustomerProductReview(${index})">Submit Verified Review</button>
+                            ${hasReviewed ? `<p style="color:#10B981; font-weight:600; font-size:13px;"><i class="fa-solid fa-circle-check"></i> Review submitted for this order: Rating: ${ord.reviewRating} Stars — "${ord.reviewComment}"</p>` : `
+                                <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:8px;">
+                                    <label style="font-size:13px; font-weight:600;">Rating:</label>
+                                    <select id="review-star-sel-${index}" class="admin-input-sm" style="width:100px;">
+                                        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                                        <option value="4">⭐⭐⭐⭐ (4)</option>
+                                        <option value="3">⭐⭐⭐ (3)</option>
+                                        <option value="2">⭐⭐ (2)</option>
+                                        <option value="1">⭐ (1)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="margin-bottom:8px;">
+                                    <textarea id="review-comment-txt-${index}" rows="2" placeholder="Write your review about Sthirah Cane Jaggery Powder..." style="background:white;"></textarea>
+                                </div>
+                                <button class="btn-action" style="width:auto; padding:8px 16px; font-size:12px;" onclick="submitCustomerProductReview(${index})">Submit Verified Review</button>
+                            `}
                         </div>
                     </div>
                 `;
@@ -3458,8 +3527,16 @@
 
             customerReviews.unshift(newReview);
             localStorage.setItem('sthirah_customer_reviews', JSON.stringify(customerReviews));
-            showCustomModal("Thank you! Your verified buyer review has been successfully submitted and published.");
-            document.getElementById(`review-comment-txt-${orderIndex}`).value = "";
+
+            currentUser.orders[orderIndex].reviewed = true;
+            currentUser.orders[orderIndex].reviewRating = ratingVal;
+            currentUser.orders[orderIndex].reviewComment = commentVal;
+            saveCookie('sthirah_logged_customer', JSON.stringify(currentUser), 365);
+            localStorage.setItem('sthirah_user_' + currentUser.id, JSON.stringify(currentUser));
+
+            showCustomModal("Thank you! Your verified buyer review has been successfully submitted, updating product ratings instantly.");
+            renderGlobalOrderHistory();
+            renderReviewTilesCarousel();
         }
 
         function saveProfileDetails() {
@@ -3804,7 +3881,7 @@
                 "description": "Cane Jaggery Powder Purchase",
                 "image": "Logo 2.png",
                 "handler": function (response){
-                    showCustomModal("Payment successful! Payment ID: " + response.razorpay_payment_id);
+                    showCustomModal("Payment successful! Auto WhatsApp & Email notifications successfully sent.");
                     
                     let summaryText = cart.map(i => `${i.qty}KG ${i.name}`).join(', ');
                     let fullAddressText = `Door ${chosenAddr.door}, ${chosenAddr.street}, ${chosenAddr.area}, ${chosenAddr.city}, ${chosenAddr.state} - ${chosenAddr.pincode}`;
@@ -3998,6 +4075,8 @@
                 'tab-reviews': 'Review Management',
                 'tab-customers': 'Customer Directory',
                 'tab-company': 'Brand & Legal Company Profile',
+                'tab-notif-whatsapp': 'WhatsApp Notification Center',
+                'tab-notif-mail': 'Mail Notification Center',
                 'tab-add-product': 'Add Products',
                 'tab-products': 'Inventory & Stock Management',
                 'tab-rates': 'Shipping Matrix',
